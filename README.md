@@ -29,15 +29,23 @@ name a hotfix branch - bug/{bugName} OR fix/{issueName} depending on if its an u
 ---
 #### Core Routes
 Main App - see tournament states below
+
 Archive - link to past tournaments
+
 Account Management - passwords, league account linking, smurf settings
 
 ---
 #### Tournament States
 No Tournament
+
 Tournament Sign Ups
+
 Finalized Draft List
+
 Draft App
+
 Pre-Season
+
 Regular Season
+
 Post Season

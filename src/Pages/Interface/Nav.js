@@ -10,11 +10,10 @@ class Nav extends Component<Props> {
 
     return (
       <div id='navBar'>
-        <NavLink className='navLink' activeClassName='selected' to={'/home'}>Profile</NavLink>
-        <NavLink className='navLink' activeClassName='selected' to={'/home'}>Schedule</NavLink>
+        <NavLink className='navLink' activeClassName='selected' to={'/user'}>User</NavLink>
+        <NavLink className='navLink' activeClassName='selected' to={'/archive'}>Archive</NavLink>
         <NavLink className='navLink' activeClassName='selected' to={'/home'}>Home</NavLink>
-        <NavLink className='navLink' activeClassName='selected' to={'/home'}>Stats</NavLink>
-        <NavLink className='navLink' activeClassName='selected' to={'/home'}>Tournament</NavLink>
+        <NavLink className='navLink' activeClassName='selected' to={'/draft'}>Draft</NavLink>
       </div>
     )
   }

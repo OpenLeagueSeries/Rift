@@ -1,2 +1,12 @@
-#navBar {
-  margin-left: 50px; }
+.pageDisplay {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center; }
+  .pageDisplay .navBar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; }
+    .pageDisplay .navBar .navLink {
+      font-size: 20px; }

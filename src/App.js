@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
+import MediaQuery from 'react-responsive';
 
+import Nav from './Pages/Interface/Nav'
+import MobileNav from './Pages/Interface/MobileNav'
 import Home from './Pages/Home'
 import Archive from './Pages/Archive'
 import User from './Pages/User'
@@ -13,10 +16,19 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
+          {/* WEB */}
+          <MediaQuery minDeviceWidth={1224}>
+            <Nav />
+          </MediaQuery>
           <Route path='/' component={Home} />
           <Route path='/archive' component={Archive} />
           <Route path='/user' component={User} />
           <Route path='/draft' component={Draft} />
+
+          {/* MOBILE */}
+          <MediaQuery maxDeviceWidth={1224}>
+            <MobileNav />
+          </MediaQuery>
         </div>
       </BrowserRouter>
     )

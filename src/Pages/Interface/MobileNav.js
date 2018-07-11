@@ -11,13 +11,11 @@ class MobileNav extends Component {
   handleChange = (event, value) => {
     this.setState({ value })
   }
-  
+
   render () {
     return (
       <BottomNavigation value={this.state.value} onChange={this.handleChange} showLabels >
-        <Link to={'/user'}>
-          <BottomNavigationAction label='Account' icon={<UserIcon />} />
-        </Link>
+          <BottomNavigationAction label='Account' icon={<UserIcon />} component={Link} to={'/user'} />
       </BottomNavigation>
     )
   }

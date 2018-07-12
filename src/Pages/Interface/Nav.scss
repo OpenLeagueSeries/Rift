@@ -1,0 +1,8 @@
+.navBar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  .navLink {
+    font-size: 20px;
+  }
+}

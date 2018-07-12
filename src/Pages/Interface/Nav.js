@@ -9,13 +9,10 @@ class Nav extends Component {
     const { location } = this.props
 
     return (
-      <div className='pageDisplay'>
-        <div className='navBar'>
-          <NavLink className='navLink' activeClassName='selected' to={'/user'}>User</NavLink>
-          <NavLink className='navLink' activeClassName='selected' to={'/archive'}>Archive</NavLink>
-          <NavLink className='navLink' activeClassName='selected' to={'/home'}>Home</NavLink>
-          <NavLink className='navLink' activeClassName='selected' to={'/draft'}>Draft</NavLink>
-        </div>
+      <div className='navBar'>
+        <NavLink className='navLink' activeClassName='selected' to={'/user'}>User</NavLink>
+        <NavLink className='navLink' activeClassName='selected' to={'/home'}>Tournament</NavLink>
+        <NavLink className='navLink' activeClassName='selected' to={'/archive'}>Archive</NavLink>
       </div>
     )
   }

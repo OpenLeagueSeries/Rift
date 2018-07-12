@@ -1,15 +1,8 @@
-.pageDisplay {
-  height: 100vh;
-  width: 100vw;
+.navBar {
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  .navBar {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    .navLink {
-      font-size: 20px;
-    }
+  flex-wrap: wrap;
+  justify-content: space-around;
+  .navLink {
+    font-size: 20px;
   }
 }

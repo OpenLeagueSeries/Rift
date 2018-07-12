@@ -1,12 +1,6 @@
-.pageDisplay {
-  height: 100vh;
-  width: 100vw;
+.navBar {
   display: flex;
-  align-items: flex-end;
-  justify-content: center; }
-  .pageDisplay .navBar {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around; }
-    .pageDisplay .navBar .navLink {
-      font-size: 20px; }
+  flex-wrap: wrap;
+  justify-content: space-around; }
+  .navBar .navLink {
+    font-size: 20px; }

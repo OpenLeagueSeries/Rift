@@ -1,5 +1,5 @@
-#main {
+.main {
   display: flex;
-  justify-content: space-around; }
-  #main img {
+  justify-content: center; }
+  .main img {
     margin-left: 0.1em; }

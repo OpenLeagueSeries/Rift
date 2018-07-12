@@ -20,7 +20,7 @@ class App extends Component {
           <MediaQuery minDeviceWidth={1224}>
             <Nav />
           </MediaQuery>
-          <Route path='/' component={Home} />
+          <Route path='/home' component={Home} />
           <Route path='/archive' component={Archive} />
           <Route path='/user' component={User} />
           <Route path='/draft' component={Draft} />

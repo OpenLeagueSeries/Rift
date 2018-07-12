@@ -9,7 +9,7 @@ import './Pages.css'
 class Home extends Component<Props> {
   render () {
     return (
-      <div id='main'>
+      <div className='main'>
         <img src={ lolPittLogo } />
       </div>
     )

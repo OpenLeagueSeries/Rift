@@ -8,7 +8,7 @@ class Home extends Component {
   render () {
     return (
       <div className='main'>
-        <img src={ lolPittLogo } />
+        <img src={ lolPittLogo } alt='lol@Pitt Logo' />
       </div>
     )
   }

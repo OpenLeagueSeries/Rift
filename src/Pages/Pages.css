@@ -3,3 +3,11 @@
   justify-content: center; }
   .main img {
     margin-left: 0.1em; }
+
+.registrationSteps {
+  margin-left: 1em; }
+  .registrationSteps .actionsContainer {
+    margin-top: 20px; }
+
+.CompletionDisplay {
+  margin-left: 1em; }

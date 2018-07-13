@@ -8,27 +8,19 @@ import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
+import TextField from '@material-ui/core/TextField'
+import MenuItem from '@material-ui/core/MenuItem'
+
+import RegisterForm from './Data/RegisterForm'
+
 import lolPittLogo from '../../src/assets/banner.png'
 
 import './Pages.css'
 
-function registerSteps () {
-  return ['Tell us your name summoner!', 'What is your email address?']
-}
-
-function registerContent (step) {
-  switch (step) {
-    case 0:
-      return ''
-    case 1:
-      return ''
-    default:
-      return 'Something went wrong with your registration'
-  }
-}
-
 class Register extends Component {
-  state = { activeStep: 0 }
+  state = {
+    activeStep: 0,
+  }
 
   handleNext = () => {
     this.setState(state => ({
@@ -48,47 +40,60 @@ class Register extends Component {
     }))
   }
 
+  handleChange = event => {
+    this.setState({ name: event.target.value });
+  };
+
   render () {
-    const steps = registerSteps()
+    const steps = [
+      'Tell us your name!',
+      'What is your summoner name?',
+      'What is your current Elo?',
+      'What is your email address?'
+    ]
     const { activeStep } = this.state
 
     return (
       <div>
         <div className='main'>
-          <img src={ lolPittLogo } />
+          <img src={ lolPittLogo } alt='lol@Pitt Logo' />
         </div>
-        <Stepper activeStep={activeStep} orientation='vertical'>
-          {steps.map((label, index) => {
-            return (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-                <StepContent>
-                  <Typography>{registerContent(index)}</Typography>
-                  <div className='actionsContainer'>
-                    <div>
-                      <Button
-                        disabled={activeStep === 0}
-                        onClick={this.handleBack}
-                      >
-                        Back
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={this.handleNext}
-                      >
-                        {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                      </Button>
+        <div className='registrationSteps'>
+          <Stepper activeStep={activeStep} orientation='vertical'>
+            {steps.map((label, index) => {
+              return (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                  <StepContent>
+                    <Typography>
+                      <RegisterForm />
+                    </Typography>
+                    <div className='actionsContainer'>
+                      <div>
+                        <Button
+                          disabled={activeStep === 0}
+                          onClick={this.handleBack}
+                        >
+                          Back
+                        </Button>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={this.handleNext}
+                        >
+                          {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                </StepContent>
-              </Step>
-            )
-          })}
-        </Stepper>
+                  </StepContent>
+                </Step>
+              )
+            })}
+          </Stepper>
+        </div>
         {activeStep === steps.length && (
-          <Paper square elevation={0}>
-            <Typography>All steps completed - you're finished</Typography>
+          <Paper square elevation={0} className='CompletionDisplay'>
+            <Typography>Successfully completed - Go check your email!</Typography>
             <Button onClick={this.handleReset}>
               Reset
             </Button>

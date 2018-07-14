@@ -8,9 +8,6 @@ import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
-import TextField from '@material-ui/core/TextField'
-import MenuItem from '@material-ui/core/MenuItem'
-
 import RegisterForm from './Data/RegisterForm'
 
 import lolPittLogo from '../../src/assets/banner.png'
@@ -40,10 +37,6 @@ class Register extends Component {
     }))
   }
 
-  handleChange = event => {
-    this.setState({ name: event.target.value });
-  };
-
   render () {
     const steps = [
       'Tell us your name!',
@@ -66,7 +59,7 @@ class Register extends Component {
                   <StepLabel>{label}</StepLabel>
                   <StepContent>
                     <Typography>
-                      <RegisterForm />
+                      <RegisterForm step={ activeStep } />
                     </Typography>
                     <div className='actionsContainer'>
                       <div>

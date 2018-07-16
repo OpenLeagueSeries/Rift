@@ -63,7 +63,7 @@ class Register extends Component {
     const { activeStep } = this.state
 
     return (
-      <div>
+      <div className='registerDisplay'>
         <div className='main'>
           <img src={ lolPittLogo } alt='lol@Pitt Logo' />
         </div>
@@ -96,7 +96,7 @@ class Register extends Component {
                             variant='contained'
                             color='primary'
                             onClick={this.handleNext}
-                            disabled={this.state.name === '' || validator.contains(this.state.name, /^[a-z ,.'-]+$/i)}
+                            disabled={this.state.name === '' || !validator.contains(this.state.name, )}
                           >
                             {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                           </Button>
@@ -116,7 +116,7 @@ class Register extends Component {
                               placeholder='Imaqtpie'
                               helperText='IGN'
                               value={this.state.ign}
-                              onChange={this.handleChange('ign') || !validator.isAlphanumeric(this.state.ign)}
+                              onChange={this.handleChange('ign')}
                             />
                           </form>
                         </Typography>
@@ -131,7 +131,7 @@ class Register extends Component {
                             variant='contained'
                             color='primary'
                             onClick={this.handleNext}
-                            disabled={this.state.ign === ''}
+                            disabled={this.state.ign === '' || !validator.isAlphanumeric(this.state.ign)}
                           >
                             {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                           </Button>

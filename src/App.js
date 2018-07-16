@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Redirect } from 'react-router-dom'
 import MediaQuery from 'react-responsive'
 
 import Nav from './Pages/Interface/Nav'
@@ -13,10 +13,32 @@ import Register from './Pages/Register'
 import './App.css';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import blue from '@material-ui/core/colors/blue'
 
 const theme = createMuiTheme({
   palette: {
-    type: 'dark', // Switching the dark mode on is a single property value change.
+    type: 'dark',
+    primary: { main: '#07a7af' },
+    secondary: { main: '#c89b3c' },
+  },
+  overrides: {
+    MuiBottomNavigation: {
+      root: {
+        background: 'linear-gradient(#17252E, #0E171E)',
+      },
+    },
+    MuiBottomNavigationAction: {
+      root: {
+        '&$selected': {
+          color: '#c89b3c',
+        },
+      }
+    },
+    MuiPaper: {
+      root: {
+        backgroundColor: 'transparent',
+      },
+    },
   },
 });
 
@@ -35,6 +57,9 @@ class App extends Component {
             <Route path='/user' component={User} />
             <Route path='/draft' component={Draft} />
             <Route path='/register' component={Register} />
+            <Route exact path='/' render={() => (
+              <Redirect to='/register' />
+            )} />
 
             {/* MOBILE */}
             <MediaQuery maxDeviceWidth={1224}>

@@ -1,17 +1,24 @@
-.main {
+.registerDisplay {
   display: flex;
-  justify-content: center; }
-  .main img {
-    margin-left: 0.1em; }
-
-.registrationSteps {
-  margin-left: 1em;
-  margin-top: 1em; }
-  .registrationSteps .MuiPaper-root-5 {
-    background-color: transparent; }
-  .registrationSteps .actionsContainer {
-    margin-top: 2em; }
-
-.CompletionDisplay {
-  display: flex;
-  justify-content: center; }
+  flex-direction: column;
+  justify-content: space-evenly; }
+  .registerDisplay .main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100vw; }
+    .registerDisplay .main img {
+      margin-left: 0.1em;
+      width: 100vw;
+      object-fit: scale-down; }
+  .registerDisplay .registrationSteps {
+    margin-left: 10%;
+    margin-top: 1em; }
+    .registerDisplay .registrationSteps .actionsContainer {
+      margin-top: 2em; }
+  .registerDisplay .CompletionDisplay {
+    display: flex;
+    justify-content: center;
+    width: 100%; }
+    .registerDisplay .CompletionDisplay div {
+      width: 80%; }

@@ -4,3 +4,7 @@
   width: 100%;
   display: flex;
   justify-content: space-evenly; }
+  .NavDisplay .MuiBottomNavigation-root-155 {
+    background: linear-gradient(#17252E, #0E171E); }
+  .NavDisplay .MuiBottomNavigationAction-root-156.MuiBottomNavigationAction-selected-157 {
+    color: #ffcd38; }

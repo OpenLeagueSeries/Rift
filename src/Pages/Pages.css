@@ -7,6 +7,8 @@
 .registrationSteps {
   margin-left: 1em;
   margin-top: 1em; }
+  .registrationSteps .MuiPaper-root-5 {
+    background-color: transparent; }
   .registrationSteps .actionsContainer {
     margin-top: 2em; }
 

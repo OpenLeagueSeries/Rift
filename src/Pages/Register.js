@@ -9,6 +9,8 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 
+import validator from 'validator';
+
 import lolPittLogo from '../../src/assets/banner.png'
 
 import './Pages.css'
@@ -37,6 +39,9 @@ class Register extends Component {
     this.setState({
       [name]: event.target.value,
     })
+    if (event.key === 'Enter'){
+      console.log('do validate')
+    }
   }
 
   handleReset = () => {
@@ -86,26 +91,15 @@ class Register extends Component {
                           <Button
                             disabled={activeStep === 0}
                             onClick={this.handleBack}
+                          />
+                          <Button
+                            variant='contained'
+                            color='primary'
+                            onClick={this.handleNext}
+                            disabled={this.state.name === '' || validator.contains(this.state.name, /^[a-z ,.'-]+$/i)}
                           >
-                            Back
+                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                           </Button>
-                          {
-                            this.state.name !== ''
-                            ? <Button
-                              variant="contained"
-                              color="primary"
-                              onClick={this.handleNext}
-                            >
-                              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                              </Button>
-                            : <Button
-                              variant="contained"
-                              color="primary"
-                              disabled
-                            >
-                              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                              </Button>
-                          }
                         </div>
                       </StepContent>
                     </Step>
@@ -122,34 +116,25 @@ class Register extends Component {
                               placeholder='Imaqtpie'
                               helperText='IGN'
                               value={this.state.ign}
-                              onChange={this.handleChange('ign')}
+                              onChange={this.handleChange('ign') || !validator.isAlphanumeric(this.state.ign)}
                             />
                           </form>
                         </Typography>
                         <div className='actionsContainer'>
                           <Button
-                            disabled={activeStep === 0}
+                            color='secondary'
                             onClick={this.handleBack}
                           >
                             Back
                           </Button>
-                          {
-                            this.state.ign !== ''
-                            ? <Button
-                              variant="contained"
-                              color="primary"
-                              onClick={this.handleNext}
-                            >
-                              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                              </Button>
-                            : <Button
-                              variant="contained"
-                              color="primary"
-                              disabled
-                            >
-                              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                              </Button>
-                          }
+                          <Button
+                            variant='contained'
+                            color='primary'
+                            onClick={this.handleNext}
+                            disabled={this.state.ign === ''}
+                          >
+                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                          </Button>
                         </div>
                       </StepContent>
                     </Step>
@@ -173,28 +158,19 @@ class Register extends Component {
                         </Typography>
                         <div className='actionsContainer'>
                           <Button
-                            disabled={activeStep === 0}
+                            color='secondary'
                             onClick={this.handleBack}
                           >
                             Back
                           </Button>
-                          {
-                            this.state.email !== ''
-                            ? <Button
-                              variant="contained"
-                              color="primary"
-                              onClick={this.handleNext}
-                            >
-                              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                              </Button>
-                            : <Button
-                              variant="contained"
-                              color="primary"
-                              disabled
-                            >
-                              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                              </Button>
-                          }
+                          <Button
+                            variant='contained'
+                            color='primary'
+                            onClick={this.handleNext}
+                            disabled={this.state.email === '' || !validator.isEmail(this.state.email)}
+                          >
+                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                          </Button>
                         </div>
                       </StepContent>
                     </Step>
@@ -208,9 +184,12 @@ class Register extends Component {
         {activeStep === steps.length && (
           <Paper square elevation={0} className='CompletionDisplay'>
             <div>
-              <Typography>Successfully completed - Go check your email!</Typography>
+              <Typography>Successfully completed - Click to send your confirmation email!</Typography>
               <Button onClick={this.handleReset} color='secondary'>
                 Review Information
+              </Button>
+              <Button onClick={this.handleReset} color='secondary'>
+                Send Email
               </Button>
             </div>
           </Paper>

@@ -5,9 +5,11 @@
     margin-left: 0.1em; }
 
 .registrationSteps {
-  margin-left: 1em; }
+  margin-left: 1em;
+  margin-top: 1em; }
   .registrationSteps .actionsContainer {
-    margin-top: 20px; }
+    margin-top: 2em; }
 
 .CompletionDisplay {
-  margin-left: 1em; }
+  display: flex;
+  justify-content: center; }

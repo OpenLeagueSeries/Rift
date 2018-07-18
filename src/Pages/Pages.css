@@ -16,9 +16,21 @@
     margin-top: 1em; }
     .registerDisplay .registrationSteps .actionsContainer {
       margin-top: 2em; }
+      .registerDisplay .registrationSteps .actionsContainer .disappear {
+        opacity: 0; }
   .registerDisplay .CompletionDisplay {
     display: flex;
     justify-content: center;
     width: 100%; }
     .registerDisplay .CompletionDisplay div {
       width: 80%; }
+      .registerDisplay .CompletionDisplay div .reviewInfo {
+        margin-top: 1.5em; }
+        .registerDisplay .CompletionDisplay div .reviewInfo .redoIcon {
+          margin-right: 0.5em; }
+      .registerDisplay .CompletionDisplay div .sendEmail {
+        float: right;
+        margin-top: 1.5em; }
+        .registerDisplay .CompletionDisplay div .sendEmail color
+.sendIcon {
+          margin-left: 0.5em; }

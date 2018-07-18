@@ -13,7 +13,6 @@ import Register from './Pages/Register'
 import './App.css';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue'
 
 const theme = createMuiTheme({
   palette: {
@@ -23,21 +22,15 @@ const theme = createMuiTheme({
   },
   overrides: {
     MuiBottomNavigation: {
-      root: {
-        background: 'linear-gradient(#17252E, #0E171E)',
-      },
+      root: { background: 'linear-gradient(#17252E, #0E171E)' },
     },
     MuiBottomNavigationAction: {
       root: {
-        '&$selected': {
-          color: '#c89b3c',
-        },
-      }
+        '&$selected': { color: '#c89b3c' },
+      },
     },
     MuiPaper: {
-      root: {
-        backgroundColor: 'transparent',
-      },
+      root: { backgroundColor: 'transparent' },
     },
   },
 });

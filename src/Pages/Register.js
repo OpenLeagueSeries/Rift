@@ -12,6 +12,10 @@ import TextField from '@material-ui/core/TextField'
 import validator from 'validator';
 
 import lolPittLogo from '../../src/assets/banner.png'
+import BackIcon from '@material-ui/icons/ExpandLess'
+import NextIcon from '@material-ui/icons/ExpandMore'
+import RedoIcon from 'mdi-material-ui/RedoVariant'
+import SendIcon from '@material-ui/icons/Send'
 
 import './Pages.css'
 
@@ -88,17 +92,16 @@ class Register extends Component {
                           </form>
                         </Typography>
                         <div className='actionsContainer'>
-                          <Button
-                            disabled={activeStep === 0}
-                            onClick={this.handleBack}
-                          />
+                          <Button className='disappear' disabled>
+                            <BackIcon /> Back
+                          </Button>
                           <Button
                             variant='contained'
                             color='primary'
                             onClick={this.handleNext}
                             disabled={this.state.name === '' || !validator.contains(this.state.name, )}
                           >
-                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'} <NextIcon />
                           </Button>
                         </div>
                       </StepContent>
@@ -125,7 +128,7 @@ class Register extends Component {
                             color='secondary'
                             onClick={this.handleBack}
                           >
-                            Back
+                            <BackIcon /> Back
                           </Button>
                           <Button
                             variant='contained'
@@ -133,7 +136,7 @@ class Register extends Component {
                             onClick={this.handleNext}
                             disabled={this.state.ign === '' || !validator.isAlphanumeric(this.state.ign)}
                           >
-                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'} <NextIcon />
                           </Button>
                         </div>
                       </StepContent>
@@ -161,7 +164,7 @@ class Register extends Component {
                             color='secondary'
                             onClick={this.handleBack}
                           >
-                            Back
+                            <BackIcon /> Back
                           </Button>
                           <Button
                             variant='contained'
@@ -169,7 +172,7 @@ class Register extends Component {
                             onClick={this.handleNext}
                             disabled={this.state.email === '' || !validator.isEmail(this.state.email)}
                           >
-                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'} <NextIcon />
                           </Button>
                         </div>
                       </StepContent>
@@ -185,11 +188,11 @@ class Register extends Component {
           <Paper square elevation={0} className='CompletionDisplay'>
             <div>
               <Typography>Successfully completed - Click to send your confirmation email!</Typography>
-              <Button onClick={this.handleReset} color='secondary'>
-                Review Information
+              <Button className='reviewInfo' onClick={this.handleReset} color='secondary'>
+                <RedoIcon className='redoIcon' /> Review Information
               </Button>
-              <Button onClick={this.handleReset} color='secondary'>
-                Send Email
+              <Button className='sendEmail' onClick={this.handleReset} color='primary' variant='extendedFab'>
+                Send Email <SendIcon className='sendIcon' />
               </Button>
             </div>
           </Paper>

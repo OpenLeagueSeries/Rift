@@ -4,5 +4,3 @@
   width: 100%;
   display: flex;
   justify-content: space-evenly; }
-  .NavDisplay .MuiBottomNavigationAction-root.MuiBottomNavigationAction-selected {
-    color: #c89b3c; }

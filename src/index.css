@@ -1,7 +1,12 @@
+html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
   font-family: sans-serif;
-  background-image: url('./assets/carbon.jpg');
-  background-repeat: no-repeat;
+  background: linear-gradient(45deg, #000, #1c2957);
 }

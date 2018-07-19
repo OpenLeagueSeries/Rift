@@ -8,9 +8,12 @@
     justify-content: flex-start;
     width: 100vw; }
     .registerDisplay .main img {
+      position: relative;
+      top: 18px;
       margin-left: 0.1em;
       width: 100vw;
-      object-fit: scale-down; }
+      object-fit: scale-down;
+      height: 30vh; }
   .registerDisplay .registrationSteps {
     margin-left: 10%;
     margin-top: 1em; }
@@ -31,6 +34,5 @@
       .registerDisplay .CompletionDisplay div .sendEmail {
         float: right;
         margin-top: 1.5em; }
-        .registerDisplay .CompletionDisplay div .sendEmail color
-.sendIcon {
+        .registerDisplay .CompletionDisplay div .sendEmail color .sendIcon {
           margin-left: 0.5em; }

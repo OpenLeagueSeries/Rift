@@ -6,8 +6,6 @@ import './Nav.css'
 
 class Nav extends Component {
   render () {
-    const { location } = this.props
-
     return (
       <div className='navBar'>
         <NavLink className='navLink' activeClassName='selected' to={'/user'}>User</NavLink>

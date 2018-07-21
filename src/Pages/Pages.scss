@@ -1,5 +1,50 @@
-.main {
+.registerDisplay {
   display: flex;
-  justify-content: center;
-  img { margin-left: 0.1em; }
+  flex-direction: column;
+  justify-content: space-evenly;
+  .main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100vw;
+    img {
+      position: relative;
+      top: 18px;
+      margin-left: 0.1em;
+      width: 100vw;
+      object-fit: scale-down;
+      height: 30vh;
+    }
+  }
+  .registrationSteps {
+    margin-left: 10%;
+    margin-top: 1em;
+    .actionsContainer {
+      margin-top: 2em;
+      .disappear {
+        opacity: 0;
+      }
+    }
+  }
+  .CompletionDisplay {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    div {
+      width: 80%;
+      .reviewInfo {
+        margin-top: 1.5em;
+        .redoIcon {
+          margin-right: 0.5em;
+        }
+      }
+      .sendEmail {
+        float: right;
+        margin-top: 1.5em;
+        color .sendIcon {
+          margin-left: 0.5em;
+        }
+      }
+    }
+  }
 }

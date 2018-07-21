@@ -1,5 +1,38 @@
-.main {
+.registerDisplay {
   display: flex;
-  justify-content: center; }
-  .main img {
-    margin-left: 0.1em; }
+  flex-direction: column;
+  justify-content: space-evenly; }
+  .registerDisplay .main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100vw; }
+    .registerDisplay .main img {
+      position: relative;
+      top: 18px;
+      margin-left: 0.1em;
+      width: 100vw;
+      object-fit: scale-down;
+      height: 30vh; }
+  .registerDisplay .registrationSteps {
+    margin-left: 10%;
+    margin-top: 1em; }
+    .registerDisplay .registrationSteps .actionsContainer {
+      margin-top: 2em; }
+      .registerDisplay .registrationSteps .actionsContainer .disappear {
+        opacity: 0; }
+  .registerDisplay .CompletionDisplay {
+    display: flex;
+    justify-content: center;
+    width: 100%; }
+    .registerDisplay .CompletionDisplay div {
+      width: 80%; }
+      .registerDisplay .CompletionDisplay div .reviewInfo {
+        margin-top: 1.5em; }
+        .registerDisplay .CompletionDisplay div .reviewInfo .redoIcon {
+          margin-right: 0.5em; }
+      .registerDisplay .CompletionDisplay div .sendEmail {
+        float: right;
+        margin-top: 1.5em; }
+        .registerDisplay .CompletionDisplay div .sendEmail color .sendIcon {
+          margin-left: 0.5em; }

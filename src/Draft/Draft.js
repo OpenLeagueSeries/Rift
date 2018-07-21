@@ -10,6 +10,7 @@ class Draft extends Component {
     this.subscription.on('data', (data) => {
       this.setState(data)
     })
+    this.subscription.request('Hi there')
   }
 
   componentWillUnmount() {

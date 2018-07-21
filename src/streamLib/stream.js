@@ -1,6 +1,6 @@
 import http from 'stream-http'
 
-const host = 'https://localhost:4200'
+const host = 'localhost:4200'
 
 let isFunction = function(obj) {
     return typeof obj == 'function' || false;
@@ -8,8 +8,8 @@ let isFunction = function(obj) {
 
 class Subscription {
   constructor (url) {
-    this.url = host + url
-    this.req = http.get(this.url, (res) => {
+    this.path =  url
+    this.req = http.get('https://' + host + this.path, (res) => {
       res.on('data', (buf) => {
         this.emit('data', JSON.parse(buf))
       })
@@ -24,6 +24,10 @@ class Subscription {
   on(label, cb) {
     this.listeners.has(label) || this.listeners.set(label, []);
     this.listeners.get(label).push(cb);
+  }
+
+  request(info) {
+    http.request({hostname: host, path: this.path, method: 'POST'})
   }
 
   removeListener(label, callback) {
@@ -58,4 +62,5 @@ class Subscription {
   }
 }
 
-export { Subscription }
+
+export { Subscription}

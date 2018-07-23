@@ -19,12 +19,22 @@ import SendIcon from '@material-ui/icons/Send';
 
 import './Pages.css';
 
+const defaultHelperText = [
+  'Your first and last name here',
+  'Your IGN is at least 3 characters',
+  'Preferred Email',
+  'Looks good!'
+]
+
 class Register extends Component {
   state = {
     activeStep: 0,
     name: '',
     ign: '',
-    email: ''
+    email: '',
+    NamehelperText: defaultHelperText[0],
+    IGNhelperText: defaultHelperText[1],
+    EmailhelperText: defaultHelperText[2],
   };
 
   handleNext = () => {
@@ -39,13 +49,57 @@ class Register extends Component {
     }));
   };
 
-  handleChange = name => event => {
+  handleChange = inputType => event => {
     this.setState({
-      [name]: event.target.value
-    });
-    if (event.key === 'Enter') {
-      console.log('do validate');
-    }
+      [inputType]: event.target.value
+    }, () => {
+      const NameSpace = this.state.name.split(' ')
+      const NameRegEx = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
+
+      if (this.state.name === '' || NameSpace[1] === '' || NameSpace.length - 1 === 0) {
+        this.setState(state =>
+          ({ NamehelperText: defaultHelperText[0] }))
+      }
+      if (!validator.matches(this.state.name, NameRegEx) && this.state.name !== '') {
+        this.setState(state =>
+          ({ NamehelperText: 'Name contains invalid character(s)' }))
+      }
+      if (this.state.name !== '' && NameSpace.length - 1 > 0 && NameSpace[1] !== '' && validator.matches(this.state.name, NameRegEx)) {
+        const NameParts = this.state.name.split('-').map((NameToken) => NameToken.charAt(0).toUpperCase() + NameToken.slice(1)).join('-').split(' ').map((NameToken) => NameToken.charAt(0).toUpperCase() + NameToken.slice(1))
+        this.setState(state =>
+          ({ NamehelperText: defaultHelperText[3], name: NameParts.join(' ') }))
+      }
+
+      if (this.state.ign === '' || this.state.ign.length < 3) {
+        this.setState(state =>
+          ({ IGNhelperText: defaultHelperText[1] }))
+      }
+      if (this.state.ign.length > 16) {
+        this.setState(state =>
+          ({ IGNhelperText: 'Your IGN is longer than 16 characters' }))
+      }
+      if (!validator.matches(this.state.ign, /^[a-z0-9 ]+$/i) && this.state.ign !== '') {
+        this.setState(state =>
+          ({ IGNhelperText: 'Your IGN contains invalid character(s)' }))
+      }
+      if (this.state.ign.length >= 3 && this.state.ign.length <= 16 && validator.matches(this.state.ign, /^[a-z0-9 ]+$/i)) {
+        this.setState(state =>
+          ({ IGNhelperText: defaultHelperText[3] }))
+      }
+
+      if (this.state.email === '') {
+        this.setState(state =>
+          ({ EmailhelperText: defaultHelperText[2] }))
+      }
+      if (!validator.isEmail(this.state.email) && this.state.email !== '') {
+        this.setState(state =>
+          ({ EmailhelperText: 'Not a valid Email format' }))
+      }
+      if (this.state.email !== '' && validator.isEmail(this.state.email)) {
+        this.setState(state =>
+          ({ EmailhelperText: defaultHelperText[3] }))
+      }
+    })
   };
 
   handleReset = () => {
@@ -65,6 +119,8 @@ class Register extends Component {
       'What is your email address?'
     ];
     const { activeStep } = this.state;
+    const NameSpace = this.state.name.split(' ')
+    const NameRegEx = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
 
     return (
       <div className="registerDisplay">
@@ -83,11 +139,13 @@ class Register extends Component {
                         <Typography>
                           <form onSubmit={this.handleSubmit}>
                             <TextField
+                              className='nameForm'
                               label="Name IRL"
                               placeholder="Michael Santana"
-                              helperText="Your first and last name here"
+                              helperText={this.state.NamehelperText}
                               value={this.state.name}
                               onChange={this.handleChange('name')}
+                              fullWidth
                             />
                           </form>
                         </Typography>
@@ -101,12 +159,12 @@ class Register extends Component {
                             onClick={this.handleNext}
                             disabled={
                               this.state.name === '' ||
-                              !validator.contains(this.state.name)
+                              NameSpace.length - 1 === 0 ||
+                              NameSpace[1] === '' ||
+                              !validator.matches(this.state.name, NameRegEx)
                             }
                           >
-                            {activeStep === steps.length - 1
-                              ? 'Finish'
-                              : 'Next'}{' '}
+                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                             <NextIcon />
                           </Button>
                         </div>
@@ -123,9 +181,10 @@ class Register extends Component {
                             <TextField
                               label="Summoner Name"
                               placeholder="Imaqtpie"
-                              helperText="IGN"
+                              helperText={this.state.IGNhelperText}
                               value={this.state.ign}
                               onChange={this.handleChange('ign')}
+                              fullWidth
                             />
                           </form>
                         </Typography>
@@ -139,12 +198,12 @@ class Register extends Component {
                             onClick={this.handleNext}
                             disabled={
                               this.state.ign === '' ||
-                              !validator.isAlphanumeric(this.state.ign)
+                              this.state.ign.length < 3 ||
+                              this.state.ign.length > 16 ||
+                              !validator.matches(this.state.ign, /^[a-z0-9 ]+$/i)
                             }
                           >
-                            {activeStep === steps.length - 1
-                              ? 'Finish'
-                              : 'Next'}{' '}
+                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                             <NextIcon />
                           </Button>
                         </div>
@@ -165,9 +224,10 @@ class Register extends Component {
                             <TextField
                               label="Email Address"
                               placeholder="Imaqtpielol@gmail.com"
-                              helperText="Preferred Email"
+                              helperText={this.state.EmailhelperText}
                               value={this.state.email}
                               onChange={this.handleChange('email')}
+                              fullWidth
                             />
                           </form>
                         </Typography>
@@ -184,9 +244,7 @@ class Register extends Component {
                               !validator.isEmail(this.state.email)
                             }
                           >
-                            {activeStep === steps.length - 1
-                              ? 'Finish'
-                              : 'Next'}{' '}
+                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                             <NextIcon />
                           </Button>
                         </div>

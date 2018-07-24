@@ -1,31 +1,47 @@
 .registerDisplay {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  width: 90%; }
+  justify-content: center; }
   .registerDisplay .main {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     width: 100vw; }
     .registerDisplay .main img {
-      position: relative;
-      top: 18px;
-      margin-left: 0.1em;
+      margin-top: 0.5em;
+      margin-left: 0.05em;
       width: 100vw;
-      object-fit: scale-down;
-      height: 30vh; }
+      object-fit: scale-down; }
+  .registerDisplay .buttonLabel {
+    margin-top: 0.3em; }
   .registerDisplay .registrationSteps {
-    margin-left: 10%;
-    margin-top: 1em; }
-    .registerDisplay .registrationSteps .actionsContainer {
-      margin-top: 2em; }
-      .registerDisplay .registrationSteps .actionsContainer .disappear {
-        opacity: 0; }
+    position: fixed;
+    left: 5%;
+    right: 5%;
+    margin-top: 1em;
+    border-left: 3px solid #a47c41;
+    border-right: 3px solid #a47c41;
+    border-radius: 15%;
+    display: flex;
+    justify-content: center; }
+    .registerDisplay .registrationSteps form {
+      width: 15em;
+      margin-bottom: 1em; }
+      .registerDisplay .registrationSteps form .emailInfo {
+        font-size: 12px;
+        margin-bottom: 0.75em; }
+      .registerDisplay .registrationSteps form .actionsContainer {
+        margin-top: 1em; }
+        .registerDisplay .registrationSteps form .actionsContainer .disappear {
+          opacity: 0; }
   .registerDisplay .CompletionDisplay {
+    position: fixed;
+    bottom: 15%;
     display: flex;
     justify-content: center;
     width: 100%; }
+    .registerDisplay .CompletionDisplay .doneInfo {
+      width: 100%; }
     .registerDisplay .CompletionDisplay div {
       width: 80%; }
       .registerDisplay .CompletionDisplay div .reviewInfo {
@@ -34,6 +50,6 @@
           margin-right: 0.5em; }
       .registerDisplay .CompletionDisplay div .sendEmail {
         float: right;
-        margin-top: 1.5em; }
-        .registerDisplay .CompletionDisplay div .sendEmail color .sendIcon {
+        margin-top: 1em; }
+        .registerDisplay .CompletionDisplay div .sendEmail .sendIcon {
           margin-left: 0.5em; }

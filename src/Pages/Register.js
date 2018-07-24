@@ -11,11 +11,12 @@ import TextField from '@material-ui/core/TextField'
 
 import validator from 'validator'
 
-import lolPittLogo from '../../src/assets/lolpittlogo.png'
+import lolPittLogo from '../../src/assets/banner.png'
 import BackIcon from '@material-ui/icons/ExpandLess'
 import NextIcon from '@material-ui/icons/ExpandMore'
 import RedoIcon from 'mdi-material-ui/RedoVariant'
 import SendIcon from '@material-ui/icons/Send'
+import FadeIn from 'react-fade-in'
 
 import './Pages.css'
 
@@ -124,9 +125,12 @@ class Register extends Component {
 
     return (
       <div className='registerDisplay'>
+        <FadeIn transitionDuration='500'>
         <div className='main'>
           <img src={lolPittLogo} alt='lol@Pitt Logo' />
         </div>
+        </FadeIn>
+        <FadeIn transitionDuration='500' delay='1000'>
         <div className='registrationSteps'>
           <Stepper activeStep={activeStep} orientation='vertical'>
             {steps.map((label, index) => {
@@ -151,7 +155,8 @@ class Register extends Component {
                         </Typography>
                         <div className='actionsContainer'>
                           <Button className='disappear' disabled>
-                            <BackIcon /> Back
+                            <BackIcon />
+                            <span className='buttonLabel'>Back</span>
                           </Button>
                           <Button
                             variant='contained'
@@ -164,7 +169,9 @@ class Register extends Component {
                               !validator.matches(this.state.name, NameRegEx)
                             }
                           >
-                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                            <span className='buttonLabel'>
+                              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                            </span>
                             <NextIcon />
                           </Button>
                         </div>
@@ -190,7 +197,8 @@ class Register extends Component {
                         </Typography>
                         <div className='actionsContainer'>
                           <Button color='secondary' onClick={this.handleBack}>
-                            <BackIcon /> Back
+                            <BackIcon />
+                            <span className='buttonLabel'>Back</span>
                           </Button>
                           <Button
                             variant='contained'
@@ -203,7 +211,9 @@ class Register extends Component {
                               !validator.matches(this.state.ign, /^[a-z0-9 ]+$/i)
                             }
                           >
-                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                            <span className='buttonLabel'>
+                              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                            </span>
                             <NextIcon />
                           </Button>
                         </div>
@@ -217,7 +227,7 @@ class Register extends Component {
                       <StepContent>
                         <Typography>
                           <form onSubmit={this.handleSubmit}>
-                            <div>
+                            <div className='emailInfo'>
                               This email will be used to confirm your
                               registration!
                             </div>
@@ -233,7 +243,8 @@ class Register extends Component {
                         </Typography>
                         <div className='actionsContainer'>
                           <Button color='secondary' onClick={this.handleBack}>
-                            <BackIcon /> Back
+                            <BackIcon />
+                            <span className='buttonLabel'>Back</span>
                           </Button>
                           <Button
                             variant='contained'
@@ -244,7 +255,9 @@ class Register extends Component {
                               !validator.isEmail(this.state.email)
                             }
                           >
-                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                            <span className='buttonLabel'>
+                              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                            </span>
                             <NextIcon />
                           </Button>
                         </div>
@@ -257,18 +270,21 @@ class Register extends Component {
             })}
           </Stepper>
         </div>
+      </FadeIn>
         {activeStep === steps.length && (
           <Paper square elevation={0} className='CompletionDisplay'>
             <div>
               <Typography>
-                Successfully completed - Click to send your confirmation email!
+                <div className='doneInfo'>Successfully completed -</div>
+                <div className='doneInfo'>Click to send your confirmation email!</div>
               </Typography>
               <Button
                 className='reviewInfo'
                 onClick={this.handleReset}
                 color='secondary'
               >
-                <RedoIcon className='redoIcon' /> Review Information
+                <RedoIcon className='redoIcon' />
+                <span className='buttonLabel'>Review Information</span>
               </Button>
               <Button
                 className='sendEmail'
@@ -276,7 +292,8 @@ class Register extends Component {
                 color='primary'
                 variant='extendedFab'
               >
-                Send Email <SendIcon className='sendIcon' />
+                <span className='buttonLabel'>Send Email</span>
+                <SendIcon className='sendIcon' />
               </Button>
             </div>
           </Paper>

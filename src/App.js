@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
-import MediaQuery from 'react-responsive';
+import React, { Component } from 'react'
+import { BrowserRouter, Route, Redirect } from 'react-router-dom'
+import MediaQuery from 'react-responsive'
 
-import Nav from './Pages/Interface/Nav';
-import MobileNav from './Pages/Interface/MobileNav';
-import Home from './Pages/Home';
-import Archive from './Pages/Archive';
-import User from './Pages/User';
-import Draft from './Draft/Draft';
-import Register from './Pages/Register';
+import Nav from './Pages/Interface/Nav'
+import MobileNav from './Pages/Interface/MobileNav'
+import Home from './Pages/Home'
+import Archive from './Pages/Archive'
+import User from './Pages/User'
+import Draft from './Draft/Draft'
+import Register from './Pages/Register'
 
-import './App.css';
+import './App.css'
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 const theme = createMuiTheme({
   palette: {
@@ -23,19 +23,23 @@ const theme = createMuiTheme({
   },
   overrides: {
     MuiBottomNavigation: {
-      root: { backgroundColor: 'transparent' }
+      root: {
+        background: 'linear-gradient(#17252E, #0E171E)',
+        width: '100%',
+        borderTop: '1px solid #a47c41'
+      }
     },
     MuiBottomNavigationAction: {
       root: {
-        '&$selected': { color: '#cdb87c' },
-        backgroundColor: 'transparent'
+        '&$selected': { color: '#c89b3c' },
+        paddingTop: '10px'
       }
     },
     MuiPaper: {
       root: { backgroundColor: 'transparent' }
     }
   }
-});
+})
 
 class App extends Component {
   render() {
@@ -53,7 +57,7 @@ class App extends Component {
             <Route path="/user" component={User} />
             <Route path="/draft" component={Draft} />
             <Route path="/register" component={Register} />
-            <Route exact path="/" render={() => <Redirect to="/register" />} />
+            <Route exact path="/" render={() => <Redirect to="/register" /> } />
 
             {/* MOBILE */}
             <MediaQuery maxDeviceWidth={1224}>
@@ -62,8 +66,8 @@ class App extends Component {
           </div>
         </BrowserRouter>
       </MuiThemeProvider>
-    );
+    )
   }
 }
 
-export default App;
+export default App

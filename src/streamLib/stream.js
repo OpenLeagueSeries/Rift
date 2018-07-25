@@ -10,13 +10,14 @@ let isFunction = function(obj) {
 class Subscription {
   constructor (url, cb) {
     this.path =  url
+    this.listeners = new Map();
     this.on('data', cb)
     this.req = http.get('https://' + host + ':' + port + this.path, (res) => {
       res.on('data', (buf) => {
         this.emit('data', JSON.parse(buf))
       })
     });
-    this.listeners = new Map();
+
   }
 
   end() {
@@ -42,7 +43,7 @@ class Subscription {
     }, (res) => {
       console.log(res)
     });
-    req.write(info);
+    req.write(JSON.stringify(info));
     req.end();
   }
 

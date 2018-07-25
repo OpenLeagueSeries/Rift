@@ -15,10 +15,9 @@
   .registerDisplay .buttonLabel {
     margin-top: 0.3em; }
   .registerDisplay .registrationSteps {
-    position: fixed;
-    left: 5%;
-    right: 5%;
-    margin-top: 1em;
+    margin: 5%;
+    padding-top: 1em;
+    padding-bottom: 1em;
     border-left: 3px solid #a47c41;
     border-right: 3px solid #a47c41;
     border-radius: 15%;
@@ -30,13 +29,12 @@
       .registerDisplay .registrationSteps form .emailInfo {
         font-size: 12px;
         margin-bottom: 0.75em; }
-      .registerDisplay .registrationSteps form .actionsContainer {
-        margin-top: 1em; }
-        .registerDisplay .registrationSteps form .actionsContainer .disappear {
-          opacity: 0; }
+    .registerDisplay .registrationSteps .actionsContainer {
+      margin-top: 1em; }
+      .registerDisplay .registrationSteps .actionsContainer .disappear {
+        opacity: 0; }
   .registerDisplay .CompletionDisplay {
-    position: fixed;
-    bottom: 15%;
+    position: relative;
     display: flex;
     justify-content: center;
     width: 100%; }

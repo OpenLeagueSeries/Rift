@@ -35,7 +35,8 @@ class Register extends Component {
     email: '',
     NamehelperText: defaultHelperText[0],
     IGNhelperText: defaultHelperText[1],
-    EmailhelperText: defaultHelperText[2]
+    EmailhelperText: defaultHelperText[2],
+    inputError: false
   }
 
   handleNext = () => {
@@ -53,39 +54,39 @@ class Register extends Component {
   handleChange = inputType => event => {
     this.setState({
       [inputType]: event.target.value
-    }, () => {
+    }, () => { console.log(this.state.inputError)
       const NameSpace = this.state.name.split(' ')
       const NameRegEx = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
 
       if (this.state.name === '' || NameSpace[1] === '' || NameSpace.length - 1 === 0) {
         this.setState(state =>
-          ({ NamehelperText: defaultHelperText[0] }))
+          ({ NamehelperText: defaultHelperText[0], inputError: false }))
       }
       if (!validator.matches(this.state.name, NameRegEx) && this.state.name !== '') {
         this.setState(state =>
-          ({ NamehelperText: 'Name contains invalid character(s)' }))
+          ({ NamehelperText: 'Name contains invalid character(s)', inputError: true }))
       }
       if (this.state.name !== '' && NameSpace.length - 1 > 0 && NameSpace[1] !== '' && validator.matches(this.state.name, NameRegEx)) {
-        const NameParts = this.state.name.split('-').map((NameToken) => NameToken.charAt(0).toUpperCase() + NameToken.slice(1)).join('-').split(' ').map((NameToken) => NameToken.charAt(0).toUpperCase() + NameToken.slice(1))
+        const NameParts = this.state.name.split('-').map((NameToken) => NameToken.charAt(0).toUpperCase() + NameToken.slice(1)).join('-').split(' ').map((NameToken) => NameToken.charAt(0).toUpperCase() + NameToken.slice(1)).join(' ')
         this.setState(state =>
-          ({ NamehelperText: defaultHelperText[3], name: NameParts.join(' ') }))
+          ({ NamehelperText: defaultHelperText[3], name: NameParts, inputError: false }))
       }
 
       if (this.state.ign === '' || this.state.ign.length < 3) {
         this.setState(state =>
-          ({ IGNhelperText: defaultHelperText[1] }))
+          ({ IGNhelperText: defaultHelperText[1], inputError: false }))
       }
       if (this.state.ign.length > 16) {
         this.setState(state =>
-          ({ IGNhelperText: 'Your IGN is longer than 16 characters' }))
+          ({ IGNhelperText: 'Your IGN is longer than 16 characters', inputError: true }))
       }
       if (!validator.matches(this.state.ign, /^[a-z0-9 ]+$/i) && this.state.ign !== '') {
         this.setState(state =>
-          ({ IGNhelperText: 'Your IGN contains invalid character(s)' }))
+          ({ IGNhelperText: 'Your IGN contains invalid character(s)', inputError: true }))
       }
       if (this.state.ign.length >= 3 && this.state.ign.length <= 16 && validator.matches(this.state.ign, /^[a-z0-9 ]+$/i)) {
         this.setState(state =>
-          ({ IGNhelperText: defaultHelperText[3] }))
+          ({ IGNhelperText: defaultHelperText[3], inputError: false }))
       }
 
       if (this.state.email === '') {
@@ -143,6 +144,7 @@ class Register extends Component {
                         <Typography>
                           <form onSubmit={this.handleSubmit}>
                             <TextField
+                              error={this.state.inputError}
                               className='nameForm'
                               label='Name IRL'
                               placeholder='Michael Santana'
@@ -186,6 +188,7 @@ class Register extends Component {
                         <Typography>
                           <form onSubmit={this.handleSubmit}>
                             <TextField
+                              error={this.state.inputError}
                               label='Summoner Name'
                               placeholder='Imaqtpie'
                               helperText={this.state.IGNhelperText}
@@ -232,6 +235,7 @@ class Register extends Component {
                               registration!
                             </div>
                             <TextField
+                              error={this.state.inputError}
                               label='Email Address'
                               placeholder='Imaqtpielol@gmail.com'
                               helperText={this.state.EmailhelperText}

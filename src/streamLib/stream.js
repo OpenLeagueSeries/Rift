@@ -8,8 +8,9 @@ let isFunction = function(obj) {
 };
 
 class Subscription {
-  constructor (url) {
+  constructor (url, cb) {
     this.path =  url
+    this.on('data', cb)
     this.req = http.get('https://' + host + ':' + port + this.path, (res) => {
       res.on('data', (buf) => {
         this.emit('data', JSON.parse(buf))

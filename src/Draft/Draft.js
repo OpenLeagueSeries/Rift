@@ -6,11 +6,9 @@ class Draft extends Component {
   constructor (props) {
     super(props)
     this.state = {array: []}
-    this.subscription = new Subscription('/draft')
-    this.subscription.on('data', (data) => {
+    this.subscription = new Subscription('/draft', (data) => {
       this.setState(data)
     })
-    this.subscription.request('Hi there')
   }
 
   componentWillUnmount() {

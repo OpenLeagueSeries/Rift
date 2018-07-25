@@ -14,7 +14,12 @@ class Subscription {
     this.on('data', cb)
     this.req = http.get('https://' + host + ':' + port + this.path, (res) => {
       res.on('data', (buf) => {
-        this.emit('data', JSON.parse(buf))
+        const primedBuf = buf.toString().replace(/}{/g,'}}{{')
+        console.log(primedBuf)
+        primedBuf.split('}{').forEach((d) => {
+          this.emit('data', JSON.parse(d))
+        })
+
       })
     });
 
@@ -40,8 +45,6 @@ class Subscription {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(info)
       }
-    }, (res) => {
-      console.log(res)
     });
     req.write(JSON.stringify(info));
     req.end();

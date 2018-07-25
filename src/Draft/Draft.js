@@ -13,7 +13,7 @@ class Draft extends Component {
       this.setState({value: data.number})
       if (data.number > 1) {
         this.subscription.request({number: (data.number%2 === 1 ? 3 * data.number + 1: data.number/2)})
-      }    
+      }
     })
   }
   componentWillUnmount() {
@@ -24,6 +24,7 @@ class Draft extends Component {
     return (
       <div style={{color: 'white'}}>
         {this.state.value}
+        <input onChange={(ev) => {this.subscription.request({number: Number(ev.target.value)})}}></input>
       </div>
     )
   }

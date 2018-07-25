@@ -19,7 +19,7 @@ class Draft extends Component {
 
   render () {
     return (
-      <div>
+      <div style={{color: 'white'}}>
         {this.state.array.map((a)=> {
           return (
             a

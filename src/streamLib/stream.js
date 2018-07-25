@@ -1,6 +1,7 @@
 import http from 'stream-http'
 
-const host = 'localhost:4200'
+const host = 'localhost'
+const port = '4200'
 
 let isFunction = function(obj) {
     return typeof obj == 'function' || false;
@@ -9,7 +10,7 @@ let isFunction = function(obj) {
 class Subscription {
   constructor (url) {
     this.path =  url
-    this.req = http.get('https://' + host + this.path, (res) => {
+    this.req = http.get('https://' + host + ':' + port + this.path, (res) => {
       res.on('data', (buf) => {
         this.emit('data', JSON.parse(buf))
       })
@@ -18,7 +19,7 @@ class Subscription {
   }
 
   end() {
-    this.req.abort()
+    this.req.abort();
   }
 
   on(label, cb) {
@@ -27,7 +28,21 @@ class Subscription {
   }
 
   request(info) {
-    http.request({hostname: host, path: this.path, method: 'POST'})
+    const req = http.request({
+      protocol: 'https:',
+      host: host,
+      port: port,
+      path: this.path,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(info)
+      }
+    }, (res) => {
+      console.log(res)
+    });
+    req.write(info);
+    req.end();
   }
 
   removeListener(label, callback) {

@@ -8,7 +8,7 @@ import Home from './Pages/Home';
 import Archive from './Pages/Archive';
 import User from './Pages/User';
 import Draft from './Draft/Draft';
-import Register from './Pages/Register';
+// import Register from './Pages/Register';
 
 import './App.css';
 
@@ -52,7 +52,7 @@ class App extends Component {
             <Route path="/archive" component={Archive} />
             <Route path="/user" component={User} />
             <Route path="/draft" component={Draft} />
-            <Route path="/register" component={Register} />
+            {/**<Route path="/register" component={Register} /> */}
             <Route exact path="/" render={() => <Redirect to="/register" />} />
 
             {/* MOBILE */}

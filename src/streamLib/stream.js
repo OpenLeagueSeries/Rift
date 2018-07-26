@@ -4,7 +4,7 @@ const host = 'localhost'
 const port = '4200'
 
 let isFunction = function(obj) {
-    return typeof obj == 'function' || false;
+    return typeof obj === 'function' || false;
 };
 
 class Subscription {
@@ -19,9 +19,8 @@ class Subscription {
         primedBuf.split('}{').forEach((d) => {
           this.emit('data', JSON.parse(d))
         })
-
       })
-    });
+    })
 
   }
 
@@ -52,15 +51,14 @@ class Subscription {
 
   removeListener(label, callback) {
     let listeners = this.listeners.get(label),
-        index;
+        index
 
     if (listeners && listeners.length) {
         index = listeners.reduce((i, listener, index) => {
             return (isFunction(listener) && listener === callback) ?
                 i = index :
-                i;
-        }, -1);
-
+                i
+        }, -1)
         if (index > -1) {
             listeners.splice(index, 1);
             this.listeners.set(label, listeners);
@@ -83,4 +81,4 @@ class Subscription {
 }
 
 
-export { Subscription}
+export { Subscription }

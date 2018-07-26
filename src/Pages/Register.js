@@ -11,7 +11,7 @@ import TextField from '@material-ui/core/TextField'
 
 import validator from 'validator'
 
-import lolPittLogo from '../../src/assets/banner.png'
+import lolPittLogo from '../../src/assets/newestPittLogo.png'
 import BackIcon from '@material-ui/icons/ExpandLess'
 import NextIcon from '@material-ui/icons/ExpandMore'
 import RedoIcon from 'mdi-material-ui/RedoVariant'

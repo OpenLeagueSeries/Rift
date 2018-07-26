@@ -2,11 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background:
-    radial-gradient(
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 0.9)
-    ) center, url('./assets/carbon.jpg') no-repeat center fixed;
+  background: linear-gradient(#08090d, #03091f);
   background-size: 200vw 100vh;
   overflow: hidden;
 }

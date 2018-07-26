@@ -11,11 +11,11 @@ class Draft extends Component {
   componentDidMount() {
     this.subscription = new Subscription('/draft',
     (data) => {
-      this.setState({value: data.number, history: this.state.history.push('server sent: ' + data.number)})
+      this.setState({value: data.number, history: [ ...this.state.history, 'server sent: ' + data.number]})
       if (data.number > 1) {
         const collatz = (data.number%2 === 1 ? 3 * data.number + 1: data.number/2)
         this.subscription.request({number: collatz})
-        this.setState({history: this.state.history.push('we added sent: ' + data.number)})
+        this.setState({history: [ ...this.state.history, 'client sent: ' + collatz]})
       }
     })
   }
@@ -29,7 +29,7 @@ class Draft extends Component {
         {this.state.value}
         <input onChange={(ev) => {this.subscription.request({number: Number(ev.target.value)})}}></input>
         {this.state.history.map((h)=> {
-          <p>{h}</p>
+          return (<p>{h}</p>)
         } )}
       </div>
     )

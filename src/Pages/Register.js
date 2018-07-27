@@ -54,7 +54,7 @@ class Register extends Component {
   handleChange = inputType => event => {
     this.setState({
       [inputType]: event.target.value
-    }, () => { console.log(this.state.inputError)
+    }, () => {
       const NameSpace = this.state.name.split(' ')
       const NameRegEx = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
@@ -11,72 +11,61 @@ import NextIcon from '@material-ui/icons/ExpandMore'
 
 import '../Pages.css'
 
-const defaultHelperText = [
-  'Preferred Email',
-  'Looks good!'
-]
 
-class EmailField extends Component {
-  state = {
-    email: '',
-    EmailhelperText: defaultHelperText[0]
-  }
 
-  handleChange = event => {
-    this.setState({
-      email: event.target.value
-    }, () => {
-      if (this.state.email === '') {
-        this.setState(state =>
-          ({ EmailhelperText: defaultHelperText[0] }))
-      }
-      if (!validator.isEmail(this.state.email) && this.state.email !== '') {
-        this.setState(state =>
-          ({ EmailhelperText: 'Not a valid Email format' }))
-      }
-      if (this.state.email !== '' && validator.isEmail(this.state.email)) {
-        this.setState(state =>
-          ({ EmailhelperText: defaultHelperText[1] }))
-      }
-    })
-  }
+export function emailValidator (event) {
+  const defaultHelperText = [
+    'Preferred Email',
+    'Looks good!'
+  ]
+  this.setState({
+    email: event.target.value
+  }, () => {
+    if (this.state.email === '') {
+      this.setState(state =>
+        ({ EmailHelperText: defaultHelperText[0] }))
+    }
+    if (!validator.isEmail(this.state.email) && this.state.email !== '') {
+      this.setState(state =>
+        ({ EmailHelperText: 'Not a valid Email format' }))
+    }
+    if (this.state.email !== '' && validator.isEmail(this.state.email)) {
+      this.setState(state =>
+        ({ EmailHelperText: defaultHelperText[1] }))
+    }
+  })
+}
 
-  handleSubmit = event => {
-    event.preventDefault()
-  }
-
-  render() {
+export const EmailField = (props) => {
     return (
       <div>
-        <Typography>
-          <form onSubmit={this.handleSubmit}>
-            <div className='emailInfo'>
-              This email will be used to confirm your
-              registration!
-            </div>
-            <TextField
-              error={this.state.inputError}
-              label='Email Address'
-              placeholder='Imaqtpielol@gmail.com'
-              helperText={this.state.EmailhelperText}
-              value={this.state.email}
-              onChange={this.handleChange}
-              fullWidth
-            />
-          </form>
-        </Typography>
+        <form onSubmit={props.nextStep}>
+          <div className='emailInfo'>
+            This email will be used to confirm your
+            registration!
+          </div>
+          <TextField
+            error={props.inputError}
+            label='Email Address'
+            placeholder='Imaqtpielol@gmail.com'
+            helperText={props.helperText}
+            value={props.email}
+            onChange={props.handleChange}
+            fullWidth
+          />
+        </form>
         <div className='actionsContainer'>
-          <Button color='secondary' onClick={this.props.prevStep}>
+          <Button color='secondary' onClick={props.prevStep}>
             <BackIcon />
             <span className='buttonLabel'>Back</span>
           </Button>
           <Button
             variant='contained'
             color='primary'
-            onClick={this.props.nextStep}
+            onClick={props.nextStep}
             disabled={
-              this.state.email === '' ||
-              !validator.isEmail(this.state.email)
+              props.email === '' ||
+              !validator.isEmail(props.email)
             }
           >
             <span className='buttonLabel'>Finish</span>
@@ -86,6 +75,3 @@ class EmailField extends Component {
       </div>
     )
   }
-}
-
-export default EmailField

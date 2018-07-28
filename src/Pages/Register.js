@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
-import NameField from './Data/NameField'
-import IgnField from './Data/IgnField'
-import EmailField from './Data/EmailField'
+import { NameField, nameValidator } from './Data/NameField'
+import { IgnField, ignValidator } from './Data/IgnField'
+import { EmailField, emailValidator } from './Data/EmailField'
 
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
@@ -26,36 +26,57 @@ class Register extends Component {
   state = {
     activeStep: 0,
     name: '',
+    NameHelperText: 'Your first and last name here',
     ign: '',
-    email: ''
+    IGNHelperText: 'Your IGN is at least 3 characters',
+    email: '',
+    EmailHelperText: 'Preferred Email',
+    inputError: false
   }
 
+  constructor(props) {
+    super(props)
+    this.nameValidator = nameValidator.bind(this)
+    this.ignValidator = ignValidator.bind(this)
+    this.emailValidator = emailValidator.bind(this)
+  }
   handleNext = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep + 1
-    }))
+    console.log('attempting next' + this.state.inputError)
+    if (!this.state.inputError) {
+      this.setState(state => ({
+        activeStep: state.activeStep + 1
+      }))
+    }
   }
 
   handleBack = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep - 1
-    }))
+    if (!this.state.inputError) {
+      this.setState(state => ({
+        activeStep: state.activeStep - 1
+      }))
+    }
   }
 
   handleField = inputType => event => {
-    this.setState({
-      [inputType]: event.target.value
-    })
+    switch (inputType){
+      case 'name':
+        this.nameValidator(event)
+        break
+      case 'ign':
+        this.ignValidator(event)
+        break
+      case 'email':
+        this.emailValidator(event)
+        break
+      default:
+        return null
+    }
   }
 
   handleReset = () => {
     this.setState(state => ({
       activeStep: 0
     }))
-  }
-
-  handleSubmit = event => {
-    event.preventDefault()
   }
 
   render() {
@@ -77,37 +98,50 @@ class Register extends Component {
         <div className='registrationSteps'>
           <Stepper activeStep={activeStep} orientation='vertical'>
             {steps.map((label, index) => {
+              let inner = {}
               switch (index) {
                 case 0:
-                  return (
-                    <Step key={label}>
-                      <StepLabel>{label}</StepLabel>
-                      <StepContent>
-                        <NameField handleName={this.handleField} />
-                      </StepContent>
-                    </Step>
-                  )
+                    inner = (
+                    <NameField
+                        handleChange={this.handleField('name')}
+                        name={this.state.name}
+                        helperText={this.state.NameHelperText}
+                        nextStep={this.handleNext} />
+                    )
+                    break;
                 case 1:
-                  return (
-                    <Step key={label}>
-                      <StepLabel>{label}</StepLabel>
-                      <StepContent>
-                        <IgnField nextStep={this.handleNext} prevStep={this.handleBack} />
-                      </StepContent>
-                    </Step>
-                  )
+                    inner = (
+                      <IgnField
+                          handleChange={this.handleField('ign')}
+                          ign={this.state.ign}
+                          helperText={this.state.IGNHelperText}
+                          nextStep={this.handleNext}
+                          prevStep={this.handleBack} />
+                    )
+                    break;
                 case 2:
-                  return (
-                    <Step key={label}>
-                      <StepLabel>{label}</StepLabel>
-                      <StepContent>
-                        <EmailField nextStep={this.handleNext} prevStep={this.handleBack} />
-                      </StepContent>
-                    </Step>
-                  )
+                    inner = (
+                      <EmailField
+                        handleChange={this.handleField('email')}
+                        email={this.state.email}
+                        helperText={this.state.EmailHelperText}
+                        nextStep={this.handleNext}
+                        prevStep={this.handleBack} />
+                    )
+                    break;
                 default:
                   return 'Something went wrong with your registration D:'
-              }
+                  break;
+                }
+                return (
+                    <Step key={label}>
+                      <StepLabel>{label}</StepLabel>
+                      <StepContent>
+                        {inner}
+                      </StepContent>
+                    </Step>
+                  )
+
             })}
           </Stepper>
         </div>

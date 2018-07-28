@@ -40,8 +40,8 @@ class Register extends Component {
     this.ignValidator = ignValidator.bind(this)
     this.emailValidator = emailValidator.bind(this)
   }
-  handleNext = () => {
-    console.log('attempting next' + this.state.inputError)
+  handleNext = (ev) => {
+    ev.preventDefault()
     if (!this.state.inputError) {
       this.setState(state => ({
         activeStep: state.activeStep + 1

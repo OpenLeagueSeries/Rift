@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 
+import NameField from './Data/NameField'
+import IgnField from './Data/IgnField'
+import EmailField from './Data/EmailField'
+
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
@@ -12,31 +16,18 @@ import TextField from '@material-ui/core/TextField'
 import validator from 'validator'
 
 import lolPittLogo from '../../src/assets/newestPittLogo.png'
-import BackIcon from '@material-ui/icons/ExpandLess'
-import NextIcon from '@material-ui/icons/ExpandMore'
 import RedoIcon from 'mdi-material-ui/RedoVariant'
 import SendIcon from '@material-ui/icons/Send'
 import FadeIn from 'react-fade-in'
 
 import './Pages.css'
 
-const defaultHelperText = [
-  'Your first and last name here',
-  'Your IGN is at least 3 characters',
-  'Preferred Email',
-  'Looks good!'
-]
-
 class Register extends Component {
   state = {
     activeStep: 0,
     name: '',
     ign: '',
-    email: '',
-    NamehelperText: defaultHelperText[0],
-    IGNhelperText: defaultHelperText[1],
-    EmailhelperText: defaultHelperText[2],
-    inputError: false
+    email: ''
   }
 
   handleNext = () => {
@@ -51,56 +42,9 @@ class Register extends Component {
     }))
   }
 
-  handleChange = inputType => event => {
+  handleField = inputType => event => {
     this.setState({
       [inputType]: event.target.value
-    }, () => {
-      const NameSpace = this.state.name.split(' ')
-      const NameRegEx = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
-
-      if (this.state.name === '' || NameSpace[1] === '' || NameSpace.length - 1 === 0) {
-        this.setState(state =>
-          ({ NamehelperText: defaultHelperText[0], inputError: false }))
-      }
-      if (!validator.matches(this.state.name, NameRegEx) && this.state.name !== '') {
-        this.setState(state =>
-          ({ NamehelperText: 'Name contains invalid character(s)', inputError: true }))
-      }
-      if (this.state.name !== '' && NameSpace.length - 1 > 0 && NameSpace[1] !== '' && validator.matches(this.state.name, NameRegEx)) {
-        const NameParts = this.state.name.split('-').map((NameToken) => NameToken.charAt(0).toUpperCase() + NameToken.slice(1)).join('-').split(' ').map((NameToken) => NameToken.charAt(0).toUpperCase() + NameToken.slice(1)).join(' ')
-        this.setState(state =>
-          ({ NamehelperText: defaultHelperText[3], name: NameParts, inputError: false }))
-      }
-
-      if (this.state.ign === '' || this.state.ign.length < 3) {
-        this.setState(state =>
-          ({ IGNhelperText: defaultHelperText[1], inputError: false }))
-      }
-      if (this.state.ign.length > 16) {
-        this.setState(state =>
-          ({ IGNhelperText: 'Your IGN is longer than 16 characters', inputError: true }))
-      }
-      if (!validator.matches(this.state.ign, /^[a-z0-9 ]+$/i) && this.state.ign !== '') {
-        this.setState(state =>
-          ({ IGNhelperText: 'Your IGN contains invalid character(s)', inputError: true }))
-      }
-      if (this.state.ign.length >= 3 && this.state.ign.length <= 16 && validator.matches(this.state.ign, /^[a-z0-9 ]+$/i)) {
-        this.setState(state =>
-          ({ IGNhelperText: defaultHelperText[3], inputError: false }))
-      }
-
-      if (this.state.email === '') {
-        this.setState(state =>
-          ({ EmailhelperText: defaultHelperText[2] }))
-      }
-      if (!validator.isEmail(this.state.email) && this.state.email !== '') {
-        this.setState(state =>
-          ({ EmailhelperText: 'Not a valid Email format' }))
-      }
-      if (this.state.email !== '' && validator.isEmail(this.state.email)) {
-        this.setState(state =>
-          ({ EmailhelperText: defaultHelperText[3] }))
-      }
     })
   }
 
@@ -121,8 +65,6 @@ class Register extends Component {
       'What is your email address?'
     ]
     const { activeStep } = this.state
-    const NameSpace = this.state.name.split(' ')
-    const NameRegEx = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
 
     return (
       <div className='registerDisplay'>
@@ -141,42 +83,7 @@ class Register extends Component {
                     <Step key={label}>
                       <StepLabel>{label}</StepLabel>
                       <StepContent>
-                        <Typography>
-                          <form onSubmit={this.handleSubmit}>
-                            <TextField
-                              error={this.state.inputError}
-                              className='nameForm'
-                              label='Name IRL'
-                              placeholder='Michael Santana'
-                              helperText={this.state.NamehelperText}
-                              value={this.state.name}
-                              onChange={this.handleChange('name')}
-                              fullWidth
-                            />
-                          </form>
-                        </Typography>
-                        <div className='actionsContainer'>
-                          <Button className='disappear' disabled>
-                            <BackIcon />
-                            <span className='buttonLabel'>Back</span>
-                          </Button>
-                          <Button
-                            variant='contained'
-                            color='primary'
-                            onClick={this.handleNext}
-                            disabled={
-                              this.state.name === '' ||
-                              NameSpace.length - 1 === 0 ||
-                              NameSpace[1] === '' ||
-                              !validator.matches(this.state.name, NameRegEx)
-                            }
-                          >
-                            <span className='buttonLabel'>
-                              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                            </span>
-                            <NextIcon />
-                          </Button>
-                        </div>
+                        <NameField handleName={this.handleField} />
                       </StepContent>
                     </Step>
                   )
@@ -185,41 +92,7 @@ class Register extends Component {
                     <Step key={label}>
                       <StepLabel>{label}</StepLabel>
                       <StepContent>
-                        <Typography>
-                          <form onSubmit={this.handleSubmit}>
-                            <TextField
-                              error={this.state.inputError}
-                              label='Summoner Name'
-                              placeholder='Imaqtpie'
-                              helperText={this.state.IGNhelperText}
-                              value={this.state.ign}
-                              onChange={this.handleChange('ign')}
-                              fullWidth
-                            />
-                          </form>
-                        </Typography>
-                        <div className='actionsContainer'>
-                          <Button color='secondary' onClick={this.handleBack}>
-                            <BackIcon />
-                            <span className='buttonLabel'>Back</span>
-                          </Button>
-                          <Button
-                            variant='contained'
-                            color='primary'
-                            onClick={this.handleNext}
-                            disabled={
-                              this.state.ign === '' ||
-                              this.state.ign.length < 3 ||
-                              this.state.ign.length > 16 ||
-                              !validator.matches(this.state.ign, /^[a-z0-9 ]+$/i)
-                            }
-                          >
-                            <span className='buttonLabel'>
-                              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                            </span>
-                            <NextIcon />
-                          </Button>
-                        </div>
+                        <IgnField nextStep={this.handleNext} prevStep={this.handleBack} />
                       </StepContent>
                     </Step>
                   )
@@ -228,43 +101,7 @@ class Register extends Component {
                     <Step key={label}>
                       <StepLabel>{label}</StepLabel>
                       <StepContent>
-                        <Typography>
-                          <form onSubmit={this.handleSubmit}>
-                            <div className='emailInfo'>
-                              This email will be used to confirm your
-                              registration!
-                            </div>
-                            <TextField
-                              error={this.state.inputError}
-                              label='Email Address'
-                              placeholder='Imaqtpielol@gmail.com'
-                              helperText={this.state.EmailhelperText}
-                              value={this.state.email}
-                              onChange={this.handleChange('email')}
-                              fullWidth
-                            />
-                          </form>
-                        </Typography>
-                        <div className='actionsContainer'>
-                          <Button color='secondary' onClick={this.handleBack}>
-                            <BackIcon />
-                            <span className='buttonLabel'>Back</span>
-                          </Button>
-                          <Button
-                            variant='contained'
-                            color='primary'
-                            onClick={this.handleNext}
-                            disabled={
-                              this.state.email === '' ||
-                              !validator.isEmail(this.state.email)
-                            }
-                          >
-                            <span className='buttonLabel'>
-                              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                            </span>
-                            <NextIcon />
-                          </Button>
-                        </div>
+                        <EmailField nextStep={this.handleNext} prevStep={this.handleBack} />
                       </StepContent>
                     </Step>
                   )

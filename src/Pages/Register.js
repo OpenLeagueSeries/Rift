@@ -106,7 +106,8 @@ class Register extends Component {
                         handleChange={this.handleField('name')}
                         name={this.state.name}
                         helperText={this.state.NameHelperText}
-                        nextStep={this.handleNext} />
+                        nextStep={this.handleNext}
+                        inputError={this.state.inputError} />
                     )
                     break;
                 case 1:
@@ -116,7 +117,8 @@ class Register extends Component {
                           ign={this.state.ign}
                           helperText={this.state.IGNHelperText}
                           nextStep={this.handleNext}
-                          prevStep={this.handleBack} />
+                          prevStep={this.handleBack}
+                          inputError={this.state.inputError} />
                     )
                     break;
                 case 2:
@@ -126,7 +128,8 @@ class Register extends Component {
                         email={this.state.email}
                         helperText={this.state.EmailHelperText}
                         nextStep={this.handleNext}
-                        prevStep={this.handleBack} />
+                        prevStep={this.handleBack}
+                        inputError={this.state.inputError} />
                     )
                     break;
                 default:

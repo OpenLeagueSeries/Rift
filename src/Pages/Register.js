@@ -10,10 +10,6 @@ import StepLabel from '@material-ui/core/StepLabel'
 import StepContent from '@material-ui/core/StepContent'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import TextField from '@material-ui/core/TextField'
-
-import validator from 'validator'
 
 import lolPittLogo from '../../src/assets/newestPittLogo.png'
 import RedoIcon from 'mdi-material-ui/RedoVariant'
@@ -31,7 +27,8 @@ class Register extends Component {
     IGNHelperText: 'Your IGN is at least 3 characters',
     email: '',
     EmailHelperText: 'Preferred Email',
-    inputError: false
+    inputError: false,
+    nextForm: false
   }
 
   constructor(props) {
@@ -40,9 +37,10 @@ class Register extends Component {
     this.ignValidator = ignValidator.bind(this)
     this.emailValidator = emailValidator.bind(this)
   }
+
   handleNext = (ev) => {
     ev.preventDefault()
-    if (!this.state.inputError) {
+    if (!this.state.inputError && this.state.nextForm) {
       this.setState(state => ({
         activeStep: state.activeStep + 1
       }))
@@ -50,15 +48,13 @@ class Register extends Component {
   }
 
   handleBack = () => {
-    if (!this.state.inputError) {
-      this.setState(state => ({
-        activeStep: state.activeStep - 1
-      }))
-    }
+    this.setState(state => ({
+      activeStep: state.activeStep - 1
+    }))
   }
 
   handleField = inputType => event => {
-    switch (inputType){
+    switch (inputType) {
       case 'name':
         this.nameValidator(event)
         break
@@ -101,50 +97,54 @@ class Register extends Component {
               let inner = {}
               switch (index) {
                 case 0:
-                    inner = (
+                  inner = (
                     <NameField
-                        handleChange={this.handleField('name')}
-                        name={this.state.name}
-                        helperText={this.state.NameHelperText}
-                        nextStep={this.handleNext}
-                        inputError={this.state.inputError} />
-                    )
-                    break;
+                      handleChange={this.handleField('name')}
+                      name={this.state.name}
+                      helperText={this.state.NameHelperText}
+                      nextStep={this.handleNext}
+                      inputError={this.state.inputError}
+                      nextForm={this.state.nextForm}
+                    />
+                  )
+                  break;
                 case 1:
-                    inner = (
-                      <IgnField
-                          handleChange={this.handleField('ign')}
-                          ign={this.state.ign}
-                          helperText={this.state.IGNHelperText}
-                          nextStep={this.handleNext}
-                          prevStep={this.handleBack}
-                          inputError={this.state.inputError} />
-                    )
-                    break;
+                  inner = (
+                    <IgnField
+                      handleChange={this.handleField('ign')}
+                      ign={this.state.ign}
+                      helperText={this.state.IGNHelperText}
+                      nextStep={this.handleNext}
+                      prevStep={this.handleBack}
+                      inputError={this.state.inputError}
+                      nextForm={this.state.nextForm}
+                    />
+                  )
+                  break;
                 case 2:
-                    inner = (
-                      <EmailField
-                        handleChange={this.handleField('email')}
-                        email={this.state.email}
-                        helperText={this.state.EmailHelperText}
-                        nextStep={this.handleNext}
-                        prevStep={this.handleBack}
-                        inputError={this.state.inputError} />
-                    )
-                    break;
+                  inner = (
+                    <EmailField
+                      handleChange={this.handleField('email')}
+                      email={this.state.email}
+                      helperText={this.state.EmailHelperText}
+                      nextStep={this.handleNext}
+                      prevStep={this.handleBack}
+                      inputError={this.state.inputError}
+                      nextForm={this.state.nextForm}
+                    />
+                  )
+                  break;
                 default:
                   return 'Something went wrong with your registration D:'
-                  break;
-                }
-                return (
-                    <Step key={label}>
-                      <StepLabel>{label}</StepLabel>
-                      <StepContent>
-                        {inner}
-                      </StepContent>
-                    </Step>
-                  )
-
+              }
+              return (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                  <StepContent>
+                    {inner}
+                  </StepContent>
+                </Step>
+              )
             })}
           </Stepper>
         </div>
@@ -152,12 +152,9 @@ class Register extends Component {
         {activeStep === steps.length && (
           <Paper square elevation={0} className='CompletionDisplay'>
             <div>
-              <Typography>
-                <div className='doneInfo'>Successfully completed -</div>
-                <div className='doneInfo'>Click to send your confirmation email!</div>
-              </Typography>
+              <div className='textInfo'>Successfully completed -</div>
+              <div className='textInfo'>Click to send your confirmation email!</div>
               <Button
-                className='reviewInfo'
                 onClick={this.handleReset}
                 color='secondary'
               >

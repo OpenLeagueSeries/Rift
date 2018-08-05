@@ -2,11 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  width: 100%;
-}
-
-body {
-  font-family: sans-serif;
-  background: linear-gradient(45deg, #000, #1c2957);
+  background: linear-gradient(#08090d, #03091f);
+  background-size: 200vw 100vh;
+  overflow: hidden;
 }

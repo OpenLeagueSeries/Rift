@@ -10,6 +10,7 @@
     "normalize.css": "^8.0.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-fade-in": "^0.1.6",
     "react-redux": "^5.0.7",
     "react-responsive": "^4.1.0",
     "react-router": "^4.3.1",

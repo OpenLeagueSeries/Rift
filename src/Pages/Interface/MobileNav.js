@@ -19,7 +19,7 @@ class MobileNav extends Component {
   render () {
     return (
       <div className='NavDisplay'>
-        <BottomNavigation position value={this.state.value} onChange={this.handleChange} showLabels >
+        <BottomNavigation value={this.state.value} onChange={this.handleChange} showLabels >
           <BottomNavigationAction label='Account' icon={<UserIcon />} component={Link} to={'/user'} />
           <BottomNavigationAction label='Tournament' icon={<TrophyIcon />} component={Link} to={'/home'} />
           <BottomNavigationAction label='Archive' icon={<ArchiveIcon />} component={Link} to={'/archive'} />

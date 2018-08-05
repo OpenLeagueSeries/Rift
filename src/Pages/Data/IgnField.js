@@ -21,7 +21,7 @@ export function ignValidator (event) {
   }, () => {
     if (this.state.ign === '' || this.state.ign.length < 3) {
       this.setState(state =>
-        ({ IGNHelperText: defaultHelperText[0], inputError: false }))
+        ({ IGNHelperText: defaultHelperText[0], inputError: false, nextForm: false }))
     }
     if (this.state.ign.length > 16) {
       this.setState(state =>

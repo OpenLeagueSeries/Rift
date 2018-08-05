@@ -42,7 +42,8 @@ class Register extends Component {
     ev.preventDefault()
     if (!this.state.inputError && this.state.nextForm) {
       this.setState(state => ({
-        activeStep: state.activeStep + 1
+        activeStep: state.activeStep + 1,
+        nextForm: false
       }))
     }
   }
@@ -90,7 +91,6 @@ class Register extends Component {
           <img src={lolPittLogo} alt='lol@Pitt Logo' />
         </div>
         </FadeIn>
-        <FadeIn transitionDuration='500' delay='1000'>
         <div className='registrationSteps'>
           <Stepper activeStep={activeStep} orientation='vertical'>
             {steps.map((label, index) => {
@@ -148,7 +148,6 @@ class Register extends Component {
             })}
           </Stepper>
         </div>
-      </FadeIn>
         {activeStep === steps.length && (
           <Paper square elevation={0} className='CompletionDisplay'>
             <div>

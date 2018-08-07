@@ -9,6 +9,7 @@ import Archive from './Pages/Archive'
 import User from './Pages/User'
 import Draft from './Draft/Draft'
 import Register from './Pages/Register'
+import Register_list from './Pages/Register_list'
 
 import './App.css'
 
@@ -57,6 +58,7 @@ class App extends Component {
             <Route path="/user" component={User} />
             <Route path="/draft" component={Draft} />
             <Route path="/register" component={Register} />
+            <Route path="/register_list" component={Register_list} />
             <Route exact path="/" render={() => <Redirect to="/register" /> } />
 
             {/* MOBILE */}

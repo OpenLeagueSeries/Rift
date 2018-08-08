@@ -10,6 +10,7 @@ import User from './Pages/User'
 import Draft from './Draft/Draft'
 import Register from './Pages/Register'
 import Register_list from './Pages/Register_list'
+import Player_list from './Pages/Player_list'
 
 import './App.css'
 
@@ -59,6 +60,7 @@ class App extends Component {
             <Route path="/draft" component={Draft} />
             <Route path="/register" component={Register} />
             <Route path="/register_list" component={Register_list} />
+            <Route path="/player_list" component={Player_list} />
             <Route exact path="/" render={() => <Redirect to="/register" /> } />
 
             {/* MOBILE */}

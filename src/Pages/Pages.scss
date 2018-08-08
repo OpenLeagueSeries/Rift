@@ -7,11 +7,53 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 100vw;
+    animation: bounce 1s both;
+    @keyframes bounce {
+      0% {
+        transform: scale(7);
+        animation-timing-function: ease-in;
+        opacity: 0;
+      }
+      38% {
+        transform: scale(1);
+        animation-timing-function: ease-out;
+        opacity: 1;
+      }
+      55% {
+        transform: scale(1.5);
+        animation-timing-function: ease-in;
+      }
+      72% {
+        transform: scale(1);
+        animation-timing-function: ease-out;
+      }
+      81% {
+        transform: scale(1.24);
+        animation-timing-function: ease-in;
+      }
+      89% {
+        transform: scale(1);
+        animation-timing-function: ease-out;
+      }
+      95% {
+        transform: scale(1.04);
+        animation-timing-function: ease-in;
+      }
+      100% {
+        transform: scale(1);
+        animation-timing-function: ease-out;
+      }
+    }
     img {
       margin-top: 0.5em;
       margin-left: 0.05em;
       width: 100vw;
       object-fit: scale-down;
+      animation: pulse 5s 1.5s ease-out infinite;
+      @keyframes pulse {
+        0%, 60%, 100% { opacity: 1; }
+        70% { opacity: 0.5; }
+      }
     }
   }
   .buttonLabel { margin-top: 0em; }
@@ -31,8 +73,8 @@
     display: flex;
     justify-content: center;
     animation:
-      stretch .5s ease-out .5s both,
-      curl 1s ease-out 1s both;
+      stretch 0.5s ease-out 1s both,
+      curl 1s ease-out 1.5s both;
     @keyframes stretch {
       0% {
         transform: scaleX(0);
@@ -64,16 +106,18 @@
     }
   }
   .CompletionDisplay {
+    margin-left: 5%;
     position: relative;
     display: flex;
     justify-content: center;
     width: 100%;
     div {
-      width: 80%;
       .redoIcon { margin-right: 0.5em; }
+      .resetIcon { margin-left: 0.5em; }
       .sendEmail {
         float: right;
         margin-top: 1em;
+        margin-right: 10%;
         .sendIcon { margin-left: 0.5em; }
       }
     }

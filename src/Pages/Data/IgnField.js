@@ -33,7 +33,7 @@ export function ignValidator (event) {
     }
     if (this.state.ign.length >= 3 && this.state.ign.length <= 16 && validator.matches(this.state.ign, /^[a-z0-9 ]+$/i)) {
       this.setState(state =>
-        ({ IGNHelperText: defaultHelperText[1], inputError: false, nextForm: true }))
+        ({ IGNHelperText: defaultHelperText[1], inputError: false, nextForm: true, reviewForm: true }))
     }
   })
 }

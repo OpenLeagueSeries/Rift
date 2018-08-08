@@ -13,8 +13,8 @@ import Paper from '@material-ui/core/Paper'
 
 import lolPittLogo from '../../src/assets/newestPittLogo.png'
 import RedoIcon from 'mdi-material-ui/RedoVariant'
+import ResetIcon from '@material-ui/icons/Clear'
 import SendIcon from '@material-ui/icons/Send'
-import FadeIn from 'react-fade-in'
 
 import './Pages.css'
 
@@ -28,7 +28,13 @@ class Register extends Component {
     email: '',
     EmailHelperText: 'Preferred Email',
     inputError: false,
-    nextForm: false
+    nextForm: false,
+    reviewForm: false,
+    steps: [
+      'Tell us your name! [  ]',
+      'What is your summoner name? [  ]',
+      'What is your email address? [  ]'
+    ]
   }
 
   constructor(props) {
@@ -41,16 +47,39 @@ class Register extends Component {
   handleNext = (ev) => {
     ev.preventDefault()
     if (!this.state.inputError && this.state.nextForm) {
-      this.setState(state => ({
-        activeStep: state.activeStep + 1,
-        nextForm: false
-      }))
+      if (this.state.reviewForm) {
+        this.setState(state => ({
+          activeStep: state.activeStep + 1,
+          nextForm: true,
+          steps: [
+            'Tell us your name! [ ' + this.state.name + ' ]',
+            'What is your summoner name? [ ' + this.state.ign + ' ]',
+            'What is your email address? [ ' + this.state.email + ' ]'
+          ]
+        }))
+      } else {
+        this.setState(state => ({
+          activeStep: state.activeStep + 1,
+          nextForm: false,
+          steps: [
+            'Tell us your name! [ ' + this.state.name + ' ]',
+            'What is your summoner name? [ ' + this.state.ign + ' ]',
+            'What is your email address? [ ' + this.state.email + ' ]'
+          ]
+        }))
+      }
     }
   }
 
   handleBack = () => {
     this.setState(state => ({
-      activeStep: state.activeStep - 1
+      activeStep: state.activeStep - 1,
+      nextForm: true,
+      steps: [
+        'Tell us your name! [ ' + this.state.name + ' ]',
+        'What is your summoner name? [ ' + this.state.ign + ' ]',
+        'What is your email address? [ ' + this.state.email + ' ]'
+      ]
     }))
   }
 
@@ -70,27 +99,43 @@ class Register extends Component {
     }
   }
 
+  handleReview = () => {
+    this.setState(state => ({
+      activeStep: 0,
+      nextForm: true
+    }))
+  }
+
   handleReset = () => {
     this.setState(state => ({
-      activeStep: 0
+      activeStep: 0,
+      name: '',
+      ign: '',
+      email: '',
+      inputError: false,
+      nextForm: false,
+      reviewForm: false,
+      steps: [
+        'Tell us your name! [  ]',
+        'What is your summoner name? [  ]',
+        'What is your email address? [  ]'
+      ]
     }))
   }
 
   render() {
     const steps = [
-      'Tell us your name!',
-      'What is your summoner name?',
-      'What is your email address?'
+      'Tell us your name! [  ]',
+      'What is your summoner name? [  ]',
+      'What is your email address? [  ]'
     ]
-    const { activeStep } = this.state
+    const { activeStep, name } = this.state
 
     return (
       <div className='registerDisplay'>
-        <FadeIn transitionDuration='500'>
         <div className='main'>
           <img src={lolPittLogo} alt='lol@Pitt Logo' />
         </div>
-        </FadeIn>
         <div className='registrationSteps'>
           <Stepper activeStep={activeStep} orientation='vertical'>
             {steps.map((label, index) => {
@@ -139,7 +184,7 @@ class Register extends Component {
               }
               return (
                 <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
+                  <StepLabel optional={name}>{label}</StepLabel>
                   <StepContent>
                     {inner}
                   </StepContent>
@@ -154,15 +199,22 @@ class Register extends Component {
               <div className='textInfo'>Successfully completed -</div>
               <div className='textInfo'>Click to send your confirmation email!</div>
               <Button
-                onClick={this.handleReset}
+                onClick={this.handleReview}
                 color='secondary'
               >
                 <RedoIcon className='redoIcon' />
                 <span className='buttonLabel'>Review Information</span>
               </Button>
               <Button
-                className='sendEmail'
                 onClick={this.handleReset}
+                color='secondary'
+              >
+                <span className='buttonLabel'>Reset</span>
+                <ResetIcon className='resetIcon' />
+              </Button>
+              <Button
+                className='sendEmail'
+                onClick={this.handleReview}
                 color='primary'
                 variant='extendedFab'
               >

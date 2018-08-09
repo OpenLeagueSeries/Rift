@@ -15,6 +15,9 @@ import lolPittLogo from '../../src/assets/newestPittLogo.png'
 import RedoIcon from 'mdi-material-ui/RedoVariant'
 import ResetIcon from '@material-ui/icons/Clear'
 import SendIcon from '@material-ui/icons/Send'
+import NameIcon from '@material-ui/icons/AccountCircle'
+import IgnIcon from 'mdi-material-ui/GamepadVariant'
+import EmailIcon from 'mdi-material-ui/Email'
 
 import './Pages.css'
 
@@ -29,12 +32,7 @@ class Register extends Component {
     EmailHelperText: 'Preferred Email',
     inputError: false,
     nextForm: false,
-    reviewForm: false,
-    steps: [
-      'Tell us your name! [  ]',
-      'What is your summoner name? [  ]',
-      'What is your email address? [  ]'
-    ]
+    reviewForm: false
   }
 
   constructor(props) {
@@ -50,22 +48,12 @@ class Register extends Component {
       if (this.state.reviewForm) {
         this.setState(state => ({
           activeStep: state.activeStep + 1,
-          nextForm: true,
-          steps: [
-            'Tell us your name! [ ' + this.state.name + ' ]',
-            'What is your summoner name? [ ' + this.state.ign + ' ]',
-            'What is your email address? [ ' + this.state.email + ' ]'
-          ]
+          nextForm: true
         }))
       } else {
         this.setState(state => ({
           activeStep: state.activeStep + 1,
-          nextForm: false,
-          steps: [
-            'Tell us your name! [ ' + this.state.name + ' ]',
-            'What is your summoner name? [ ' + this.state.ign + ' ]',
-            'What is your email address? [ ' + this.state.email + ' ]'
-          ]
+          nextForm: false
         }))
       }
     }
@@ -74,12 +62,7 @@ class Register extends Component {
   handleBack = () => {
     this.setState(state => ({
       activeStep: state.activeStep - 1,
-      nextForm: true,
-      steps: [
-        'Tell us your name! [ ' + this.state.name + ' ]',
-        'What is your summoner name? [ ' + this.state.ign + ' ]',
-        'What is your email address? [ ' + this.state.email + ' ]'
-      ]
+      nextForm: true
     }))
   }
 
@@ -114,22 +97,19 @@ class Register extends Component {
       email: '',
       inputError: false,
       nextForm: false,
-      reviewForm: false,
-      steps: [
-        'Tell us your name! [  ]',
-        'What is your summoner name? [  ]',
-        'What is your email address? [  ]'
-      ]
+      reviewForm: false
     }))
   }
 
+
+
   render() {
     const steps = [
-      'Tell us your name! [  ]',
-      'What is your summoner name? [  ]',
-      'What is your email address? [  ]'
+      'Tell us your name!',
+      'What is your summoner name?',
+      'What is your email address?'
     ]
-    const { activeStep, name } = this.state
+    const { activeStep } = this.state
 
     return (
       <div className='registerDisplay'>
@@ -140,6 +120,7 @@ class Register extends Component {
           <Stepper activeStep={activeStep} orientation='vertical'>
             {steps.map((label, index) => {
               let inner = {}
+              let userInfo = {}
               switch (index) {
                 case 0:
                   inner = (
@@ -152,6 +133,7 @@ class Register extends Component {
                       nextForm={this.state.nextForm}
                     />
                   )
+                  userInfo.optional = <div className='userInfo'><NameIcon className='fieldIcon' />{this.state.name}</div>
                   break;
                 case 1:
                   inner = (
@@ -165,6 +147,7 @@ class Register extends Component {
                       nextForm={this.state.nextForm}
                     />
                   )
+                  userInfo.optional = <div className='userInfo'><IgnIcon className='fieldIcon' />{this.state.ign}</div>
                   break;
                 case 2:
                   inner = (
@@ -178,13 +161,14 @@ class Register extends Component {
                       nextForm={this.state.nextForm}
                     />
                   )
+                  userInfo.optional = <div className='userInfo'><EmailIcon className='fieldIcon' />{this.state.email}</div>
                   break;
                 default:
                   return 'Something went wrong with your registration D:'
               }
               return (
                 <Step key={label}>
-                  <StepLabel optional={name}>{label}</StepLabel>
+                  <StepLabel {...userInfo}>{label}</StepLabel>
                   <StepContent>
                     {inner}
                   </StepContent>
@@ -203,7 +187,7 @@ class Register extends Component {
                 color='secondary'
               >
                 <RedoIcon className='redoIcon' />
-                <span className='buttonLabel'>Review Information</span>
+                <span className='buttonLabel'>Edit Information</span>
               </Button>
               <Button
                 onClick={this.handleReset}

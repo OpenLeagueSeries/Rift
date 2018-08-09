@@ -104,12 +104,20 @@
       margin-top: 1em;
       .disappear { opacity: 0; }
     }
+    .fieldIcon { margin-right: 0.5em; }
+    .userInfo {
+      font-size: 12px;
+      color: #fff;
+      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+      display: flex;
+      align-items: center;
+    }
   }
   .CompletionDisplay {
     margin-left: 5%;
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: base;
     width: 100%;
     div {
       .redoIcon { margin-right: 0.5em; }
@@ -118,6 +126,18 @@
         float: right;
         margin-top: 1em;
         margin-right: 10%;
+        animation: pulsate 2s ease-in-out infinite both;
+        @keyframes pulsate {
+          0% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(0.95);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
         .sendIcon { margin-left: 0.5em; }
       }
     }

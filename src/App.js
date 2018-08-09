@@ -61,7 +61,7 @@ class App extends Component {
 
             {/* MOBILE */}
             <MediaQuery maxDeviceWidth={1224}>
-              <MobileNav />
+              {/* <MobileNav /> */}
             </MediaQuery>
           </div>
         </BrowserRouter>

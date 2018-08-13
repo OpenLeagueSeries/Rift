@@ -2,7 +2,4 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(#08090d, #03091f);
-  background-size: 200vw 100vh;
-  overflow: hidden;
 }

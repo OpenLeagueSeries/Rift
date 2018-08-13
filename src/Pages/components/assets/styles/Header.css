@@ -1,0 +1,56 @@
+@import url(./typography.css);
+.header-slant-bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 80%;
+  background: #03091f;
+  transform: skewY(-12deg);
+  transform-origin: top left; }
+
+.header-gradient-bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(black, transparent);
+  background-size: 100vh; }
+
+header {
+  height: 100vh;
+  width: 100vw;
+  left: 0;
+  margin-top: -3vh;
+  z-index: 2; }
+
+.header-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 15vh;
+  padding-left: 29vh; }
+  .header-wrap .left-side {
+    width: 30%; }
+  .header-wrap .right-side {
+    min-width: 40vw;
+    background-image: url("../img/devices.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-height: 75vh; }
+
+button {
+  margin-top: 30px;
+  border: none;
+  padding: 1em 1em;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #cdb77d;
+  font-size: 1.3em;
+  font-weight: 400; }

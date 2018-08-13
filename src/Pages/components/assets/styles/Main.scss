@@ -1,0 +1,12 @@
+main {
+  display: flex;
+  justify-content: space-evenly;
+  width: 70vw;
+  margin: 0 auto;
+  .main-left {
+    max-width: 60%;
+  }
+  .main-right {
+    max-width: 20vw;
+  }
+}

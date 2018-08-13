@@ -1,0 +1,69 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100vw; }
+  .main img {
+    margin-top: 0.5em;
+    margin-left: 0.05em;
+    width: 100vw;
+    object-fit: scale-down; }
+
+.buttonLabel {
+  margin-top: 0em; }
+
+.textInfo {
+  width: 100%;
+  font-size: 12px;
+  margin-bottom: 0.75em;
+  color: #fff;
+  font-weight: 400;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.46429em; }
+
+.registrationSteps {
+  margin: 5%;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  display: flex;
+  justify-content: center;
+  animation: stretch .5s ease-out .5s both, curl 1s ease-out 1s both; }
+
+@keyframes stretch {
+  0% {
+    transform: scaleX(0);
+    opacity: 0; }
+  100% {
+    transform: scaleX(1);
+    opacity: 1; } }
+
+@keyframes curl {
+  0% {
+    border-left: 3px solid #cdb87c;
+    border-right: 3px solid #cdb87c; }
+  100% {
+    border-left: 3px solid #cdb87c;
+    border-right: 3px solid #cdb87c;
+    border-radius: 15%; } }
+  .registrationSteps form {
+    width: 15em;
+    margin-bottom: 1em; }
+  .registrationSteps .actionsContainer {
+    margin-top: 1em; }
+    .registrationSteps .actionsContainer .disappear {
+      opacity: 0; }
+
+.CompletionDisplay {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%; }
+  .CompletionDisplay div {
+    width: 80%; }
+    .CompletionDisplay div .redoIcon {
+      margin-right: 0.5em; }
+    .CompletionDisplay div .sendEmail {
+      float: right;
+      margin-top: 1em; }
+      .CompletionDisplay div .sendEmail .sendIcon {
+        margin-left: 0.5em; }

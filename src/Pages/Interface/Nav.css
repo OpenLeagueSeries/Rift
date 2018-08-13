@@ -1,6 +1,65 @@
-.navBar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly; }
-  .navBar .navLink {
-    font-size: 20px; }
+#navbar {
+  overflow: hidden;
+  height: 18vh;
+  width: 100vw;
+  z-index: 2000;
+  position: fixed;
+  top: 0;
+  background: #03091f;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s; }
+  #navbar .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%; }
+  #navbar .link-wrap {
+    display: flex;
+    justify-content: space-evenly;
+    width: 60vw;
+    margin: 0 auto;
+    align-items: center; }
+    #navbar .link-wrap a {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      font-size: 1.75em;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      transition: all 0.3s;
+      color: #fff; }
+    #navbar .link-wrap #navbar a:hover {
+      text-decoration: underline; }
+
+#navbar.nav-shrink {
+  height: 8vh;
+  background-color: #03091f; }
+
+#navbar.nav-shrink a {
+  font-size: 1.25em; }
+
+.logo {
+  height: 15vh;
+  width: auto;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s; }
+
+.logo.logo-shrink {
+  height: 7vh; }
+
+.drawer {
+  z-index: 5000 !important;
+  box-shadow: 0 !important; }
+
+.closeButton {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  width: 100vw;
+  height: 3em;
+  text-align: center;
+  font-size: 2em;
+  font-weight: 300;
+  color: #fff;
+  padding: 0;
+  margin: 0; }

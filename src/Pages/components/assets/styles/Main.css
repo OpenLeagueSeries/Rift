@@ -1,0 +1,9 @@
+main {
+  display: flex;
+  justify-content: space-evenly;
+  width: 70vw;
+  margin: 0 auto; }
+  main .main-left {
+    max-width: 60%; }
+  main .main-right {
+    max-width: 20vw; }

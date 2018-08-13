@@ -1,15 +1,9 @@
-import React, { Component } from 'react'
-
-import './Pages.css'
+import React, { Component } from 'react';
 
 class Home extends Component {
-  render () {
-    return (
-      <div className='main'>
-
-      </div>
-    )
+  render() {
+    return <div className="main" />;
   }
 }
 
-export default Home
+export default Home;

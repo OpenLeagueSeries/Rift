@@ -49,8 +49,7 @@
   height: 7vh; }
 
 .drawer {
-  z-index: 5000 !important;
-  box-shadow: 0 !important; }
+  z-index: 5000 !important; }
 
 .closeButton {
   background-color: rgba(0, 0, 0, 0.5);

@@ -1,3 +1,4 @@
+$blue: #03091f;
 #navbar {
   overflow: hidden;
   height: 18vh;
@@ -5,7 +6,7 @@
   z-index: 2000;
   position: fixed;
   top: 0;
-  background: #03091f;
+  background: $blue;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
@@ -38,7 +39,7 @@
 
 #navbar.nav-shrink {
   height: 8vh;
-  background-color: #03091f;
+  background-color: $blue;
 }
 
 #navbar.nav-shrink a {
@@ -59,7 +60,6 @@
 
 .drawer {
   z-index: 5000 !important;
-  box-shadow: 0 !important;
 }
 
 .closeButton {

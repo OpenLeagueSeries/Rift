@@ -1,4 +1,7 @@
 footer {
   margin-top: 250px;
   height: 8vh;
-  background-color: #020406; }
+  background-color: #020406;
+  margin-bottom: 0; }
+  footer p {
+    margin-bottom: 0; }

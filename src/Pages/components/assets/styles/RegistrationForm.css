@@ -1,7 +1,69 @@
 .register-wrap {
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 20vh; }
-  .register-wrap h1 {
+  align-items: center; }
+
+h1,
+input::-webkit-input-placeholder,
+button {
+  font-family: 'roboto', sans-serif;
+  transition: all 0.3s ease-in-out; }
+
+form {
+  background-color: #eee;
+  box-sizing: border-box;
+  width: 30vw;
+  margin: 100px auto 0;
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
+  padding-bottom: 40px;
+  border-radius: 10px; }
+  form h1 {
+    box-sizing: border-box;
+    padding: 20px;
+    height: 100px;
+    width: 100%;
+    font-size: 36px;
+    background: #050e32;
+    color: #eee;
+    line-height: 150%;
+    border-radius: 3px 3px 0 0;
+    box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+    text-align: center; }
+  form input {
+    margin: 40px auto;
+    width: 25vw;
+    display: block;
+    border: none;
+    padding: 10px 0;
+    border-bottom: solid 1px #03091f;
+    transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #03091f 4%);
+    background-position: -25vw 0;
+    background-size: 25vw 100%;
+    background-repeat: no-repeat;
     color: black; }
+    form input:focus, form input:valid {
+      box-shadow: none;
+      outline: none;
+      background-position: 0 0; }
+      form input:focus::-webkit-input-placeholder, form input:valid::-webkit-input-placeholder {
+        color: #03091f;
+        font-size: 11px;
+        transform: translateY(-20px);
+        visibility: visible !important; }
+  form button {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border: none;
+    background-color: #cdb77d;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 6px;
+    width: 10vw;
+    color: #03091f;
+    margin-left: auto;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2); }
+    form button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2); }

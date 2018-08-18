@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import './Pages.css'
+import './MobileRegister.css'
 
 class Home extends Component {
   render () {

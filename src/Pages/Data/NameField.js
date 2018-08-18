@@ -8,7 +8,7 @@ import validator from 'validator'
 import BackIcon from '@material-ui/icons/ExpandLess'
 import NextIcon from '@material-ui/icons/ExpandMore'
 
-import '../Pages.css'
+import '../MobileRegister.css'
 
 export function nameValidator (event) {
   const defaultHelperText = [

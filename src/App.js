@@ -3,12 +3,13 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom'
 import MediaQuery from 'react-responsive'
 
 import Nav from './Pages/Interface/Nav'
-import MobileNav from './Pages/Interface/MobileNav'
+// import MobileNav from './Pages/Interface/MobileNav'
 import Home from './Pages/Home'
 import Archive from './Pages/Archive'
 import User from './Pages/User'
 import Draft from './Draft/Draft'
 import Register from './Pages/Register'
+import RegisterSteps from './Pages/RegisterSteps'
 
 import './App.css'
 
@@ -49,19 +50,20 @@ class App extends Component {
         <BrowserRouter>
           <div>
             {/* WEB */}
+            <Route exact path="/" render={() => <Redirect to="/register" /> } />
             <MediaQuery minDeviceWidth={1224}>
               <Nav />
+              <Route path="/home" component={Home} />
+              <Route path="/archive" component={Archive} />
+              <Route path="/user" component={User} />
+              <Route path="/draft" component={Draft} />
+              <Route path="/register" component={Register} />
             </MediaQuery>
-            <Route path="/home" component={Home} />
-            <Route path="/archive" component={Archive} />
-            <Route path="/user" component={User} />
-            <Route path="/draft" component={Draft} />
-            <Route path="/register" component={Register} />
-            <Route exact path="/" render={() => <Redirect to="/register" /> } />
 
             {/* MOBILE */}
             <MediaQuery maxDeviceWidth={1224}>
               {/* <MobileNav /> */}
+              <Route path="/register" component={RegisterSteps} />
             </MediaQuery>
           </div>
         </BrowserRouter>

@@ -25,28 +25,28 @@ export function nameValidator (event) {
 
     if (this.state.name === '' || NameSpace[1] === '' || NameSpace.length - 1 === 0) {
       this.setState(state =>
-        ({ NameHelperText: defaultHelperText[0], inputError: false, nextForm: false }))
+        ({ NameHelperText: defaultHelperText[0], inputNameError: false, nextForm: false }))
     }
     if (!validator.matches(this.state.name, NameRegEx) && this.state.name !== '') {
       this.setState(state =>
-        ({ NameHelperText: 'Name contains invalid character(s)', inputError: true, nextForm: false }))
+        ({ NameHelperText: 'Name contains invalid character(s)', inputNameError: true, nextForm: false }))
     }
     if (validator.matches(this.state.name, /[ ]{2,}/)) {
       this.setState(state =>
-        ({ NameHelperText: 'Name contains multiple spaces', inputError: true, nextForm: false }))
+        ({ NameHelperText: 'Name contains multiple spaces', inputNameError: true, nextForm: false }))
     }
     if (this.state.name.charAt(0) === ' ') {
       this.setState(state =>
-        ({ NameHelperText: 'Name begins with a space', inputError: true, nextForm: false }))
+        ({ NameHelperText: 'Name begins with a space', inputNameError: true, nextForm: false }))
     }
     if (this.state.name !== '' && NameSpace.length - 1 > 0 && NameSpace[1] !== '' && validator.matches(this.state.name, NameRegEx) && this.state.name.charAt(0) !== ' ') {
       const NameParts = this.state.name.split('-').map((NameToken) => NameToken.charAt(0).toUpperCase() + NameToken.slice(1)).join('-').split(' ').map((NameToken) => NameToken.charAt(0).toUpperCase() + NameToken.slice(1)).join(' ')
       if (NameSpace[NameSpace.length-1] === '') {
         this.setState(state =>
-          ({ NameHelperText: 'Name ends with space(s)', inputError: true, nextForm: false }))
+          ({ NameHelperText: 'Name ends with space(s)', inputNameError: true, nextForm: false }))
       } else {
         this.setState(state =>
-          ({ NameHelperText: defaultHelperText[1], name: NameParts.replace(/  +/g, ' '), inputError: false, nextForm: true, reviewForm: true }))
+          ({ NameHelperText: defaultHelperText[1], name: NameParts.replace(/  +/g, ' '), inputNameError: false, nextForm: true, reviewForm: true }))
       }
     }
   })
@@ -62,7 +62,7 @@ export const NameField = (props) => {
       <form onSubmit={props.nextStep}>
         <TextField
           autoFocus
-          error={props.inputError}
+          error={props.inputNameError}
           className='nameForm'
           label='Name IRL'
           placeholder='Michael Santana'

@@ -1,4 +1,5 @@
 import React from 'react'
+import MediaQuery from 'react-responsive'
 
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -55,21 +56,23 @@ export const IgnField = (props) => {
           fullWidth
         />
       </form>
-      <div className='actionsContainer'>
-        <Button color='secondary' onClick={props.prevStep} disabled={props.inputError}>
-          <BackIcon />
-          <span className='buttonLabel'>Back</span>
-        </Button>
-        <Button
-          variant='contained'
-          color='primary'
-          onClick={props.nextStep}
-          disabled={disableButton}
-        >
-          <span className='buttonLabel'>Next</span>
-          <NextIcon />
-        </Button>
-      </div>
+      <MediaQuery maxDeviceWidth={1224}>
+        <div className='actionsContainer'>
+          <Button color='secondary' onClick={props.prevStep} disabled={props.inputError}>
+            <BackIcon />
+            <span className='buttonLabel'>Back</span>
+          </Button>
+          <Button
+            variant='contained'
+            color='primary'
+            onClick={props.nextStep}
+            disabled={disableButton}
+          >
+            <span className='buttonLabel'>Next</span>
+            <NextIcon />
+          </Button>
+        </div>
+      </MediaQuery>
     </div>
   )
 }

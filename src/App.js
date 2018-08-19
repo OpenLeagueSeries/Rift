@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom'
 import MediaQuery from 'react-responsive'
 
-import Nav from './Pages/Interface/Nav'
+// import Nav from './Pages/Interface/Nav'
 // import MobileNav from './Pages/Interface/MobileNav'
 import Home from './Pages/Home'
 import Archive from './Pages/Archive'
@@ -52,7 +52,7 @@ class App extends Component {
             {/* WEB */}
             <Route exact path="/" render={() => <Redirect to="/register" /> } />
             <MediaQuery minDeviceWidth={1224}>
-              <Nav />
+              {/* <Nav /> */}
               <Route path="/home" component={Home} />
               <Route path="/archive" component={Archive} />
               <Route path="/user" component={User} />

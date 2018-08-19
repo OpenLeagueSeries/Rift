@@ -26,11 +26,47 @@ class Register extends Component {
     this.emailValidator = emailValidator.bind(this)
   }
 
+  handleField = inputType => event => {
+    switch (inputType) {
+      case 'name':
+        this.nameValidator(event)
+        break
+      case 'ign':
+        this.ignValidator(event)
+        break
+      case 'email':
+        this.emailValidator(event)
+        break
+      default:
+        return null
+    }
+  }
+
   render() {
     return (
       <div className='desktopDisplay'>
         <div className='logoArea'>
           <img src={lolPittLogo} alt='lol@Pitt Logo' />
+        </div>
+        <div className='signUpForm'>
+          <NameField
+            handleChange={this.handleField('name')}
+            name={this.state.name}
+            helperText={this.state.NameHelperText}
+            inputError={this.state.inputError}
+          />
+          <IgnField
+            handleChange={this.handleField('ign')}
+            ign={this.state.ign}
+            helperText={this.state.IGNHelperText}
+            inputError={this.state.inputError}
+          />
+          <EmailField
+            handleChange={this.handleField('email')}
+            email={this.state.email}
+            helperText={this.state.EmailHelperText}
+            inputError={this.state.inputError}
+          />
         </div>
       </div>
     )

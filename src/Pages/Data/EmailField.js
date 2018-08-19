@@ -21,15 +21,15 @@ export function emailValidator (event) {
   }, () => {
     if (this.state.email === '') {
       this.setState(state =>
-        ({ EmailHelperText: defaultHelperText[0], inputError: false, nextForm: false }))
+        ({ EmailHelperText: defaultHelperText[0], inputEmailError: false, nextForm: false }))
     }
     if (!validator.isEmail(this.state.email) && this.state.email !== '') {
       this.setState(state =>
-        ({ EmailHelperText: 'Not a valid Email format', inputError: true, nextForm: false }))
+        ({ EmailHelperText: 'Not a valid Email format', inputEmailError: true, nextForm: false }))
     }
     if (this.state.email !== '' && validator.isEmail(this.state.email)) {
       this.setState(state =>
-        ({ EmailHelperText: defaultHelperText[1], inputError: false, nextForm: true, reviewForm: true }))
+        ({ EmailHelperText: defaultHelperText[1], inputEmailError: false, nextForm: true, reviewForm: true }))
     }
   })
 }
@@ -56,7 +56,7 @@ export const EmailField = (props) => {
       </form>
       <MediaQuery maxDeviceWidth={1224}>
         <div className='actionsContainer'>
-          <Button color='secondary' onClick={props.prevStep} disabled={props.inputError}>
+          <Button color='secondary' onClick={props.prevStep} disabled={props.inputEmailError}>
             <BackIcon />
             <span className='buttonLabel'>Back</span>
           </Button>

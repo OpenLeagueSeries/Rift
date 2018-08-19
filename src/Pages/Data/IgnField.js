@@ -22,19 +22,19 @@ export function ignValidator (event) {
   }, () => {
     if (this.state.ign === '' || this.state.ign.length < 3) {
       this.setState(state =>
-        ({ IGNHelperText: defaultHelperText[0], inputError: false, nextForm: false }))
+        ({ IGNHelperText: defaultHelperText[0], inputIgnError: false, nextForm: false }))
     }
     if (this.state.ign.length > 16) {
       this.setState(state =>
-        ({ IGNHelperText: 'Your IGN is longer than 16 characters', inputError: true, nextForm: false }))
+        ({ IGNHelperText: 'Your IGN is longer than 16 characters', inputIgnError: true, nextForm: false }))
     }
     if (!validator.matches(this.state.ign, /^[a-z0-9 ]+$/i) && this.state.ign !== '') {
       this.setState(state =>
-        ({ IGNHelperText: 'Your IGN contains invalid character(s)', inputError: true, nextForm: false }))
+        ({ IGNHelperText: 'Your IGN contains invalid character(s)', inputIgnError: true, nextForm: false }))
     }
     if (this.state.ign.length >= 3 && this.state.ign.length <= 16 && validator.matches(this.state.ign, /^[a-z0-9 ]+$/i)) {
       this.setState(state =>
-        ({ IGNHelperText: defaultHelperText[1], inputError: false, nextForm: true, reviewForm: true }))
+        ({ IGNHelperText: defaultHelperText[1], inputIgnError: false, nextForm: true, reviewForm: true }))
     }
   })
 }
@@ -47,7 +47,7 @@ export const IgnField = (props) => {
       <form onSubmit={props.nextStep}>
         <TextField
           autoFocus
-          error={props.inputError}
+          error={props.inputIgnError}
           label='Summoner Name'
           placeholder='Imaqtpie'
           helperText={props.helperText}
@@ -58,7 +58,7 @@ export const IgnField = (props) => {
       </form>
       <MediaQuery maxDeviceWidth={1224}>
         <div className='actionsContainer'>
-          <Button color='secondary' onClick={props.prevStep} disabled={props.inputError}>
+          <Button color='secondary' onClick={props.prevStep} disabled={props.inputIgnError}>
             <BackIcon />
             <span className='buttonLabel'>Back</span>
           </Button>

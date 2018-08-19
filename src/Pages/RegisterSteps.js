@@ -30,7 +30,9 @@ class RegisterSteps extends Component {
     IGNHelperText: 'Your IGN is at least 3 characters',
     email: '',
     EmailHelperText: 'Preferred Email',
-    inputError: false,
+    inputNameError: false,
+    inputIgnError: false,
+    inputEmailError: false,
     nextForm: false,
     reviewForm: false
   }
@@ -44,7 +46,7 @@ class RegisterSteps extends Component {
 
   handleNext = (ev) => {
     ev.preventDefault()
-    if (!this.state.inputError && this.state.nextForm) {
+    if ((!this.state.inputNameError && this.state.nextForm) || (!this.state.inputIgnError && this.state.nextForm) || (!this.state.inputEmailError && this.state.nextForm)) {
       if (this.state.reviewForm) {
         this.setState(state => ({
           activeStep: state.activeStep + 1,
@@ -93,12 +95,23 @@ class RegisterSteps extends Component {
     this.setState(state => ({
       activeStep: 0,
       name: '',
+      NameHelperText: 'Your first and last name here',
       ign: '',
+      IGNHelperText: 'Your IGN is at least 3 characters',
       email: '',
-      inputError: false,
+      EmailHelperText: 'Preferred Email',
+      inputNameError: false,
+      inputIgnError: false,
+      inputEmailError: false,
       nextForm: false,
       reviewForm: false
     }))
+  }
+
+  sendRegister = () => {
+    this.req = new Request('/register', {name: this.state.name, ign: this.state.ign, email: this.state.email}, (res) => {
+      console.log('User information was sent!');
+    })
   }
 
   render() {
@@ -127,7 +140,7 @@ class RegisterSteps extends Component {
                       name={this.state.name}
                       helperText={this.state.NameHelperText}
                       nextStep={this.handleNext}
-                      inputError={this.state.inputError}
+                      inputNameError={this.state.inputNameError}
                       nextForm={this.state.nextForm}
                     />
                   )
@@ -141,7 +154,7 @@ class RegisterSteps extends Component {
                       helperText={this.state.IGNHelperText}
                       nextStep={this.handleNext}
                       prevStep={this.handleBack}
-                      inputError={this.state.inputError}
+                      inputIgnError={this.state.inputIgnError}
                       nextForm={this.state.nextForm}
                     />
                   )
@@ -155,7 +168,7 @@ class RegisterSteps extends Component {
                       helperText={this.state.EmailHelperText}
                       nextStep={this.handleNext}
                       prevStep={this.handleBack}
-                      inputError={this.state.inputError}
+                      inputEmailError={this.state.inputEmailError}
                       nextForm={this.state.nextForm}
                     />
                   )
@@ -196,7 +209,7 @@ class RegisterSteps extends Component {
               </Button>
               <Button
                 className='sendEmail'
-                onClick={this.handleReview}
+                onClick={this.sendRegister}
                 color='primary'
                 variant='extendedFab'
               >

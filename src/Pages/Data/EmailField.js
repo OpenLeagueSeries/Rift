@@ -1,4 +1,5 @@
 import React from 'react'
+import MediaQuery from 'react-responsive'
 
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -8,7 +9,7 @@ import validator from 'validator'
 import BackIcon from '@material-ui/icons/ExpandLess'
 import NextIcon from '@material-ui/icons/ExpandMore'
 
-import '../Pages.css'
+import '../MobileRegister.css'
 
 export function emailValidator (event) {
   const defaultHelperText = [
@@ -24,11 +25,11 @@ export function emailValidator (event) {
     }
     if (!validator.isEmail(this.state.email) && this.state.email !== '') {
       this.setState(state =>
-        ({ EmailHelperText: 'Not a valid Email format', inputError: false, nextForm: false }))
+        ({ EmailHelperText: 'Not a valid Email format', inputError: true, nextForm: false }))
     }
     if (this.state.email !== '' && validator.isEmail(this.state.email)) {
       this.setState(state =>
-        ({ EmailHelperText: defaultHelperText[1], inputError: false, nextForm: true }))
+        ({ EmailHelperText: defaultHelperText[1], inputError: false, nextForm: true, reviewForm: true }))
     }
   })
 }
@@ -45,7 +46,6 @@ export const EmailField = (props) => {
         </div>
         <TextField
           autoFocus
-          error={props.inputError}
           label='Email Address'
           placeholder='Imaqtpielol@gmail.com'
           helperText={props.helperText}
@@ -54,21 +54,23 @@ export const EmailField = (props) => {
           fullWidth
         />
       </form>
-      <div className='actionsContainer'>
-        <Button color='secondary' onClick={props.prevStep} disabled={props.inputError}>
-          <BackIcon />
-          <span className='buttonLabel'>Back</span>
-        </Button>
-        <Button
-          variant='contained'
-          color='primary'
-          onClick={props.nextStep}
-          disabled={disableButton}
-        >
-          <span className='buttonLabel'>Finish</span>
-          <NextIcon />
-        </Button>
-      </div>
+      <MediaQuery maxDeviceWidth={1224}>
+        <div className='actionsContainer'>
+          <Button color='secondary' onClick={props.prevStep} disabled={props.inputError}>
+            <BackIcon />
+            <span className='buttonLabel'>Back</span>
+          </Button>
+          <Button
+            variant='contained'
+            color='primary'
+            onClick={props.nextStep}
+            disabled={disableButton}
+          >
+            <span className='buttonLabel'>Finish</span>
+            <NextIcon />
+          </Button>
+        </div>
+      </MediaQuery>
     </div>
   )
 }

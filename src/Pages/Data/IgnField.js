@@ -1,4 +1,5 @@
 import React from 'react'
+import MediaQuery from 'react-responsive'
 
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -8,7 +9,7 @@ import validator from 'validator'
 import BackIcon from '@material-ui/icons/ExpandLess'
 import NextIcon from '@material-ui/icons/ExpandMore'
 
-import '../Pages.css'
+import '../MobileRegister.css'
 
 export function ignValidator (event) {
   const defaultHelperText = [
@@ -33,7 +34,7 @@ export function ignValidator (event) {
     }
     if (this.state.ign.length >= 3 && this.state.ign.length <= 16 && validator.matches(this.state.ign, /^[a-z0-9 ]+$/i)) {
       this.setState(state =>
-        ({ IGNHelperText: defaultHelperText[1], inputError: false, nextForm: true }))
+        ({ IGNHelperText: defaultHelperText[1], inputError: false, nextForm: true, reviewForm: true }))
     }
   })
 }
@@ -55,21 +56,23 @@ export const IgnField = (props) => {
           fullWidth
         />
       </form>
-      <div className='actionsContainer'>
-        <Button color='secondary' onClick={props.prevStep} disabled={props.inputError}>
-          <BackIcon />
-          <span className='buttonLabel'>Back</span>
-        </Button>
-        <Button
-          variant='contained'
-          color='primary'
-          onClick={props.nextStep}
-          disabled={disableButton}
-        >
-          <span className='buttonLabel'>Next</span>
-          <NextIcon />
-        </Button>
-      </div>
+      <MediaQuery maxDeviceWidth={1224}>
+        <div className='actionsContainer'>
+          <Button color='secondary' onClick={props.prevStep} disabled={props.inputError}>
+            <BackIcon />
+            <span className='buttonLabel'>Back</span>
+          </Button>
+          <Button
+            variant='contained'
+            color='primary'
+            onClick={props.nextStep}
+            disabled={disableButton}
+          >
+            <span className='buttonLabel'>Next</span>
+            <NextIcon />
+          </Button>
+        </div>
+      </MediaQuery>
     </div>
   )
 }

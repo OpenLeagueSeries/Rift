@@ -1,4 +1,5 @@
 import React from 'react'
+import MediaQuery from 'react-responsive'
 
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -8,7 +9,7 @@ import validator from 'validator'
 import BackIcon from '@material-ui/icons/ExpandLess'
 import NextIcon from '@material-ui/icons/ExpandMore'
 
-import '../Pages.css'
+import '../MobileRegister.css'
 
 export function nameValidator (event) {
   const defaultHelperText = [
@@ -20,7 +21,7 @@ export function nameValidator (event) {
     name: event.target.value
   }, () => {
     const NameSpace = this.state.name.split(' ')
-    const NameRegEx = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+/u
+    const NameRegEx = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
 
     if (this.state.name === '' || NameSpace[1] === '' || NameSpace.length - 1 === 0) {
       this.setState(state =>
@@ -40,16 +41,21 @@ export function nameValidator (event) {
     }
     if (this.state.name !== '' && NameSpace.length - 1 > 0 && NameSpace[1] !== '' && validator.matches(this.state.name, NameRegEx) && this.state.name.charAt(0) !== ' ') {
       const NameParts = this.state.name.split('-').map((NameToken) => NameToken.charAt(0).toUpperCase() + NameToken.slice(1)).join('-').split(' ').map((NameToken) => NameToken.charAt(0).toUpperCase() + NameToken.slice(1)).join(' ')
-      this.setState(state =>
-        ({ NameHelperText: defaultHelperText[1], name: NameParts.replace(/  +/g, ' '), inputError: false, nextForm: true }))
+      if (NameSpace[NameSpace.length-1] === '') {
+        this.setState(state =>
+          ({ NameHelperText: 'Name ends with space(s)', inputError: true, nextForm: false }))
+      } else {
+        this.setState(state =>
+          ({ NameHelperText: defaultHelperText[1], name: NameParts.replace(/  +/g, ' '), inputError: false, nextForm: true, reviewForm: true }))
+      }
     }
   })
 }
 
 export const NameField = (props) => {
   const NameSpace = props.name.split(' ')
-  const NameRegEx = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+/u
-  const disableButton = props.name === '' || NameSpace[1] === '' || NameSpace.length - 1 === 0 || !validator.matches(props.name, NameRegEx) || validator.matches(props.name, /[ ]{2,}/) || props.name.charAt(0) === ' '
+  const NameRegEx = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
+  const disableButton = props.name === '' || NameSpace[NameSpace.length-1] === '' || NameSpace.length - 1 === 0 || !validator.matches(props.name, NameRegEx) || validator.matches(props.name, /[ ]{2,}/) || props.name.charAt(0) === ' '
 
   return (
     <div>
@@ -66,21 +72,23 @@ export const NameField = (props) => {
           fullWidth
         />
       </form>
-      <div className='actionsContainer'>
-        <Button className='disappear' disabled>
-          <BackIcon />
-          <span className='buttonLabel'>Back</span>
-        </Button>
-        <Button
-          variant='contained'
-          color='primary'
-          onClick={props.nextStep}
-          disabled={disableButton}
-        >
-          <span className='buttonLabel'>Next</span>
-          <NextIcon />
-        </Button>
-      </div>
+      <MediaQuery maxDeviceWidth={1224}>
+        <div className='actionsContainer'>
+          <Button className='disappear' disabled>
+            <BackIcon />
+            <span className='buttonLabel'>Back</span>
+          </Button>
+          <Button
+            variant='contained'
+            color='primary'
+            onClick={props.nextStep}
+            disabled={disableButton}
+          >
+            <span className='buttonLabel'>Next</span>
+            <NextIcon />
+          </Button>
+        </div>
+      </MediaQuery>
     </div>
   )
 }

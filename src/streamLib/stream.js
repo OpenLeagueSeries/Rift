@@ -80,5 +80,24 @@ class Subscription {
   }
 }
 
+class Request {
+  constructor(url, data, cb) {
+    const req = http.request({
+      protocol: 'https:',
+      host: host,
+      port: port,
+      path: url,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(data)
+      }
+    })
+    req.on('data', (d) => cb(d))
+    req.write(JSON.stringify(data))
+    req.end()
+  }
+}
 
-export { Subscription }
+
+export { Subscription, Request }

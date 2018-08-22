@@ -5,7 +5,7 @@
   height: 100vh;
   align-items: center;
   color: #fff;
-  background-color: #1c2957; }
+  background: linear-gradient(#03091f, #1c2957, #03091f); }
   .desktopDisplay .logoArea {
     display: flex;
     flex-direction: column;
@@ -14,10 +14,11 @@
     font-family: "Verdana";
     width: 50%; }
     .desktopDisplay .logoArea img {
-      width: 90%; }
+      width: 90%;
+      margin-bottom: 0.5em; }
     .desktopDisplay .logoArea .join {
       margin-top: 4em;
-      margin-bottom: 0.5em;
+      margin-bottom: 0.75em;
       font-size: 20px;
       font-family: "Roboto"; }
     .desktopDisplay .logoArea .social {

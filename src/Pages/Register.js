@@ -6,6 +6,7 @@ import { EmailField, emailValidator } from './Data/EmailField'
 
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
+import Tooltip from '@material-ui/core/Tooltip'
 
 import lolPittLogo from '../../src/assets/newestPittLogo.png'
 import ResetIcon from '@material-ui/icons/Clear'
@@ -94,25 +95,31 @@ class Register extends Component {
           <div className='join'>Join us at:</div>
           <div className='social'>
               <div className='facebook'>
-                <a href='https://www.facebook.com/groups/LoLatPitt/' target='_blank' rel='noopener noreferrer'>
-                  <FBIcon className='fbIcon'/>
-                  <div className='FBinfo'>LoL@Pitt</div>
-                </a>
+                <Tooltip title='Facebook'>
+                  <a href='https://www.facebook.com/groups/LoLatPitt/' target='_blank' rel='noopener noreferrer'>
+                    <FBIcon className='fbIcon'/>
+                    <div className='FBinfo'>LoL@Pitt</div>
+                  </a>
+                </Tooltip>
               </div>
             <div className='teamspeak'>
-              <a href='https://www.teamspeak.com/en/downloads' target='_blank' rel='noopener noreferrer'>
-                <div className='TSlogo'></div>
-                <div className='TSinfo'>
-                  <div>Server: pitt.lol</div>
-                  <div>Password: pittlol</div>
-                </div>
-              </a>
+              <Tooltip title='TeamSpeak'>
+                <a href='https://www.teamspeak.com/en/downloads' target='_blank' rel='noopener noreferrer'>
+                  <div className='TSlogo'></div>
+                  <div className='TSinfo'>
+                    <div>Server: pitt.lol</div>
+                    <div>Password: pittlol</div>
+                  </div>
+                </a>
+              </Tooltip>
             </div>
             <div className='discord'>
-              <a href='https://discord.gg/yZcPxav' target='_blank' rel='noopener noreferrer'>
-                <div className='DSlogo'><DiscIcon /></div>
-                <div className='DSinfo'>discord.gg/yZcPxav</div>
-              </a>
+              <Tooltip title='Discord'>
+                <a href='https://discord.gg/yZcPxav' target='_blank' rel='noopener noreferrer'>
+                  <div className='DSlogo'><DiscIcon /></div>
+                  <div className='DSinfo'>discord.gg/yZcPxav</div>
+                </a>
+              </Tooltip>
             </div>
           </div>
         </div>

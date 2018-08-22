@@ -40,19 +40,33 @@ export const EmailField = (props) => {
   return (
     <div>
       <form onSubmit={props.nextStep}>
-        <div className='textInfo'>
-          This email will be used to confirm your
-          registration!
-        </div>
-        <TextField
-          autoFocus
-          label='Email Address'
-          placeholder='Imaqtpielol@gmail.com'
-          helperText={props.helperText}
-          value={props.email}
-          onChange={props.handleChange}
-          fullWidth
-        />
+        <MediaQuery minDeviceWidth={1224}>
+          <TextField
+            className='emailForm'
+            label='Email Address'
+            placeholder='Imaqtpielol@gmail.com'
+            helperText={props.helperText}
+            value={props.email}
+            onChange={props.handleChange}
+            fullWidth
+          />
+        </MediaQuery>
+        <MediaQuery maxDeviceWidth={1224}>
+          <div className='textInfo'>
+            This email will be used to confirm your
+            registration!
+          </div>
+          <TextField
+            autoFocus
+            className='emailForm'
+            label='Email Address'
+            placeholder='Imaqtpielol@gmail.com'
+            helperText={props.helperText}
+            value={props.email}
+            onChange={props.handleChange}
+            fullWidth
+          />
+        </MediaQuery>
       </form>
       <MediaQuery maxDeviceWidth={1224}>
         <div className='actionsContainer'>

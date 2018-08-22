@@ -1,3 +1,102 @@
 .desktopDisplay {
   display: flex;
-  justify-content: center; }
+  justify-content: space-around;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  color: #fff;
+  background-color: #1c2957; }
+  .desktopDisplay .logoArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 25px;
+    font-family: "Verdana";
+    width: 50%; }
+    .desktopDisplay .logoArea img {
+      width: 90%; }
+    .desktopDisplay .logoArea .join {
+      margin-top: 4em;
+      margin-bottom: 0.5em;
+      font-size: 20px;
+      font-family: "Roboto"; }
+    .desktopDisplay .logoArea .social {
+      display: flex;
+      font-size: 14px;
+      margin-left: 3em;
+      font-family: "Roboto"; }
+      .desktopDisplay .logoArea .social .facebook, .desktopDisplay .logoArea .social .teamspeak, .desktopDisplay .logoArea .social .discord, .desktopDisplay .logoArea .social a:link, .desktopDisplay .logoArea .social a:visited {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #fff; }
+      .desktopDisplay .logoArea .social a:hover {
+        color: #cdb87c; }
+        .desktopDisplay .logoArea .social a:hover .TSlogo {
+          background: url("../../src/assets/TSIconHover.svg") no-repeat; }
+      .desktopDisplay .logoArea .social .FBinfo {
+        margin-left: 0.5em;
+        margin-right: 1em;
+        margin-top: 0.2em; }
+      .desktopDisplay .logoArea .social .teamspeak {
+        padding-top: 1em;
+        padding-bottom: 1em;
+        border-left: 3px solid #cdb87c;
+        border-right: 3px solid #cdb87c; }
+        .desktopDisplay .logoArea .social .teamspeak .TSlogo {
+          height: 24px;
+          width: 24px;
+          margin-left: 1em;
+          margin-right: 0.5em;
+          background: url("../../src/assets/TSIcon.svg") no-repeat; }
+      .desktopDisplay .logoArea .social .TSinfo {
+        margin-right: 1em; }
+      .desktopDisplay .logoArea .social .DSlogo {
+        margin-left: 1em; }
+      .desktopDisplay .logoArea .social .DSinfo {
+        margin-left: 0.5em; }
+  .desktopDisplay .signUpForm {
+    width: 30%;
+    font-size: 12px;
+    font-family: "Helvetica";
+    margin-top: 3em;
+    margin-right: 10%;
+    padding: 3em;
+    border-left: 3px solid #cdb87c;
+    border-right: 3px solid #cdb87c;
+    border-radius: 15%; }
+    .desktopDisplay .signUpForm .inputContainer {
+      display: flex;
+      align-items: center; }
+      .desktopDisplay .signUpForm .inputContainer .inputIcon {
+        margin-right: 1em;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column; }
+        .desktopDisplay .signUpForm .inputContainer .inputIcon .iconType {
+          margin-top: .2em; }
+        .desktopDisplay .signUpForm .inputContainer .inputIcon .inputStatus {
+          margin-bottom: 1.15em; }
+          .desktopDisplay .signUpForm .inputContainer .inputIcon .inputStatus .indicatorIcon {
+            font-size: 12px;
+            margin-top: 0.5em;
+            color: #cdb87c; }
+      .desktopDisplay .signUpForm .inputContainer .inputField {
+        width: 80%; }
+    .desktopDisplay .signUpForm .nameForm, .desktopDisplay .signUpForm .ignForm, .desktopDisplay .signUpForm .emailForm {
+      margin-bottom: 3em; }
+    .desktopDisplay .signUpForm .textInfo {
+      display: flex;
+      justify-content: center;
+      margin-top: -1em;
+      margin-bottom: 2em; }
+    .desktopDisplay .signUpForm .CompletionDisplay {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      width: 100%; }
+      .desktopDisplay .signUpForm .CompletionDisplay div .resetIcon {
+        margin-left: 0.5em; }
+      .desktopDisplay .signUpForm .CompletionDisplay div .sendIcon {
+        margin-left: 0.5em; }

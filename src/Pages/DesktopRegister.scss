@@ -1,7 +1,113 @@
 .desktopDisplay {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  color: #fff;
+  // background: linear-gradient(#03091f, #1c2957, #03091f);
+  background-color: #1c2957;
   .logoArea {
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 25px;
+    font-family: "Verdana";
+    width: 50%;
+    img { width: 90%; }
+    .join {
+      margin-top: 4em;
+      margin-bottom: 0.5em;
+      font-size: 20px;
+      font-family: "Roboto";
+    }
+    .social {
+      display: flex;
+      font-size: 14px;
+      margin-left: 3em;
+      font-family: "Roboto";
+      .facebook, .teamspeak, .discord, a:link, a:visited {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #fff;
+      }
+      a:hover {
+        color: #cdb87c;
+        .TSlogo { background: url('../../src/assets/TSIconHover.svg') no-repeat; }
+      }
+      .FBinfo {
+        margin-left: 0.5em;
+        margin-right: 1em;
+        margin-top: 0.2em;
+      }
+      .teamspeak {
+        padding-top: 1em;
+        padding-bottom: 1em;
+        border-left: 3px solid #cdb87c;
+        border-right: 3px solid #cdb87c;
+        .TSlogo {
+          height: 24px;
+          width: 24px;
+          margin-left: 1em;
+          margin-right: 0.5em;
+          background: url('../../src/assets/TSIcon.svg') no-repeat;
+        }
+      }
+      .TSinfo { margin-right: 1em; }
+      .DSlogo { margin-left: 1em; }
+      .DSinfo { margin-left: 0.5em; }
+    }
+  }
+  .signUpForm {
+    width: 30%;
+    font-size: 12px;
+    font-family: "Helvetica";
+    margin-top: 3em;
+    margin-right: 10%;
+    padding: 3em;
+    border-left: 3px solid #cdb87c;
+    border-right: 3px solid #cdb87c;
+    border-radius: 15%;
+    .inputContainer {
+      display: flex;
+      align-items: center;
+      .inputIcon {
+        margin-right: 1em;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+        .iconType { margin-top: .2em; }
+        .inputStatus {
+          margin-bottom: 1.15em;
+          .indicatorIcon {
+            font-size: 12px;
+            margin-top: 0.5em;
+            color: #cdb87c;
+          }
+        }
+      }
+      .inputField { width: 80%; }
+    }
+    .nameForm, .ignForm, .emailForm {
+      margin-bottom: 3em;
+    }
+    .textInfo {
+      display: flex;
+      justify-content: center;
+      margin-top: -1em;
+      margin-bottom: 2em;
+    }
+    .CompletionDisplay {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      div {
+        .resetIcon { margin-left: 0.5em; }
+        .sendIcon { margin-left: 0.5em; }
+      }
+    }
   }
 }

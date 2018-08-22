@@ -40,7 +40,7 @@ export function nameValidator (event) {
         ({ NameHelperText: 'Name begins with a space', inputNameError: true, nextForm: false }))
     }
     if (this.state.name !== '' && NameSpace.length - 1 > 0 && NameSpace[1] !== '' && validator.matches(this.state.name, NameRegEx) && this.state.name.charAt(0) !== ' ') {
-      const NameParts = this.state.name.split('-').map((NameToken) => NameToken.charAt(0).toUpperCase() + NameToken.slice(1)).join('-').split(' ').map((NameToken) => NameToken.charAt(0).toUpperCase() + NameToken.slice(1)).join(' ')
+      const NameParts = this.state.name.split("'").map((NameToken) => NameToken.charAt(0).toUpperCase() + NameToken.slice(1)).join("'").split('-').map((NameToken) => NameToken.charAt(0).toUpperCase() + NameToken.slice(1)).join('-').split(' ').map((NameToken) => NameToken.charAt(0).toUpperCase() + NameToken.slice(1)).join(' ')
       if (NameSpace[NameSpace.length-1] === '') {
         this.setState(state =>
           ({ NameHelperText: 'Name ends with space(s)', inputNameError: true, nextForm: false }))

@@ -6,10 +6,19 @@ import { EmailField, emailValidator } from './Data/EmailField'
 
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
+import Tooltip from '@material-ui/core/Tooltip'
 
 import lolPittLogo from '../../src/assets/newestPittLogo.png'
 import ResetIcon from '@material-ui/icons/Clear'
 import SendIcon from '@material-ui/icons/Send'
+import NameIcon from '@material-ui/icons/AccountCircle'
+import IgnIcon from 'mdi-material-ui/GamepadVariant'
+import EmailIcon from 'mdi-material-ui/Email'
+import DoneIcon from '@material-ui/icons/Done'
+import ErrorIcon from 'mdi-material-ui/Exclamation'
+import BlankIcon from 'mdi-material-ui/Help'
+import FBIcon from 'mdi-material-ui/FacebookBox'
+import DiscIcon from 'mdi-material-ui/Discord'
 
 import './DesktopRegister.css'
 
@@ -74,59 +83,124 @@ class Register extends Component {
   }
 
   render() {
-    const disableButton = this.state.name === '' || this.state.ign === '' || this.state.email === '' || this.state.inputNameError || this.state.inputIgnError || this.state.inputEmailError
+    const disableButton = this.state.name === '' || this.state.ign === '' || this.state.email === '' || this.state.inputNameError || this.state.inputIgnError || this.state.inputEmailError || this.state.NameHelperText !== 'Looks good!' || this.state.IGNHelperText !== 'Looks good!' || this.state.EmailHelperText !== 'Looks good!'
 
     return (
       <div className='desktopDisplay'>
         <div className='logoArea'>
           <img src={lolPittLogo} alt='lol@Pitt Logo' />
+          <div className='caption'>
+            Official Activities Fair Registration 2018
+          </div>
+          <div className='join'>Join us at:</div>
+          <div className='social'>
+              <div className='facebook'>
+                <Tooltip title='Facebook'>
+                  <a href='https://www.facebook.com/groups/LoLatPitt/' target='_blank' rel='noopener noreferrer'>
+                    <FBIcon className='fbIcon'/>
+                    <div className='FBinfo'>LoL@Pitt</div>
+                  </a>
+                </Tooltip>
+              </div>
+            <div className='teamspeak'>
+              <Tooltip title='TeamSpeak'>
+                <a href='https://www.teamspeak.com/en/downloads' target='_blank' rel='noopener noreferrer'>
+                  <div className='TSlogo'></div>
+                  <div className='TSinfo'>
+                    <div>Server: pitt.lol</div>
+                    <div>Password: pittlol</div>
+                  </div>
+                </a>
+              </Tooltip>
+            </div>
+            <div className='discord'>
+              <Tooltip title='Discord'>
+                <a href='https://discord.gg/yZcPxav' target='_blank' rel='noopener noreferrer'>
+                  <div className='DSlogo'><DiscIcon /></div>
+                  <div className='DSinfo'>discord.gg/yZcPxav</div>
+                </a>
+              </Tooltip>
+            </div>
+          </div>
         </div>
         <div className='signUpForm'>
-          <NameField
-            handleChange={this.handleField('name')}
-            name={this.state.name}
-            helperText={this.state.NameHelperText}
-            inputNameError={this.state.inputNameError}
-            nextStep={this.handleSubmit}
-          />
-          <IgnField
-            handleChange={this.handleField('ign')}
-            ign={this.state.ign}
-            helperText={this.state.IGNHelperText}
-            inputIgnError={this.state.inputIgnError}
-            nextStep={this.handleSubmit}
-          />
-          <EmailField
-            handleChange={this.handleField('email')}
-            email={this.state.email}
-            helperText={this.state.EmailHelperText}
-            inputEmailError={this.state.inputEmailError}
-            nextStep={this.handleSubmit}
-          />
-        </div>
-        <Paper square elevation={0} className='CompletionDisplay'>
-          <div>
-            <div className='textInfo'>Successfully completed -</div>
-            <div className='textInfo'>Click to send your confirmation email!</div>
-            <Button
-              onClick={this.handleReset}
-              color='secondary'
-            >
-              <span className='buttonLabel'>Reset</span>
-              <ResetIcon className='resetIcon' />
-            </Button>
-            <Button
-              className='sendEmail'
-              onClick={this.sendRegister}
-              color='primary'
-              variant='extendedFab'
-              disabled={disableButton}
-            >
-              <span className='buttonLabel'>Send Email</span>
-              <SendIcon className='sendIcon' />
-            </Button>
+          <div className='inputContainer'>
+            <div className='inputIcon'>
+              <div className='iconType'><NameIcon /></div>
+              { this.state.NameHelperText === 'Looks good!' ? <div className='inputStatus'><DoneIcon className='indicatorIcon'/></div>
+              : this.state.inputNameError ? <div className='inputStatus'><ErrorIcon className='indicatorIcon'/></div>
+              : <div className='inputStatus'><BlankIcon className='indicatorIcon'/></div> }
+            </div>
+            <div className='inputField'>
+              <NameField
+                handleChange={this.handleField('name')}
+                name={this.state.name}
+                helperText={this.state.NameHelperText}
+                inputNameError={this.state.inputNameError}
+                nextStep={this.handleSubmit}
+              />
+            </div>
           </div>
-        </Paper>
+          <div className='inputContainer'>
+            <div className='inputIcon'>
+              <div className='iconType'><IgnIcon /></div>
+              { this.state.IGNHelperText === 'Looks good!' ? <div className='inputStatus'><DoneIcon className='indicatorIcon'/></div>
+              : this.state.inputIgnError ? <div className='inputStatus'><ErrorIcon className='indicatorIcon'/></div>
+              : <div className='inputStatus'><BlankIcon className='indicatorIcon'/></div> }
+            </div>
+            <div className='inputField'>
+              <IgnField
+                handleChange={this.handleField('ign')}
+                ign={this.state.ign}
+                helperText={this.state.IGNHelperText}
+                inputIgnError={this.state.inputIgnError}
+                nextStep={this.handleSubmit}
+              />
+            </div>
+          </div>
+          <div className='inputContainer'>
+            <div className='inputIcon'>
+              <div className='iconType'><EmailIcon /></div>
+              { this.state.EmailHelperText === 'Looks good!' ? <div className='inputStatus'><DoneIcon className='indicatorIcon'/></div>
+              : this.state.inputEmailError ? <div className='inputStatus'><ErrorIcon className='indicatorIcon'/></div>
+              : <div className='inputStatus'><BlankIcon className='indicatorIcon'/></div> }
+            </div>
+            <div className='inputField'>
+              <EmailField
+                handleChange={this.handleField('email')}
+                email={this.state.email}
+                helperText={this.state.EmailHelperText}
+                inputEmailError={this.state.inputEmailError}
+                nextStep={this.handleSubmit}
+              />
+            </div>
+          </div>
+          <div className='textInfo'>
+            This email will be used to confirm your
+            registration!
+          </div>
+          <Paper square elevation={0} className='CompletionDisplay'>
+            <div>
+              <Button
+                onClick={this.handleReset}
+                color='secondary'
+              >
+                <span className='buttonLabel'>Reset</span>
+                <ResetIcon className='resetIcon' />
+              </Button>
+              <Button
+                className='sendEmail'
+                onClick={this.sendRegister}
+                color='primary'
+                variant='extendedFab'
+                disabled={disableButton}
+              >
+                <span className='buttonLabel'>Send Email</span>
+                <SendIcon className='sendIcon' />
+              </Button>
+            </div>
+          </Paper>
+        </div>
       </div>
     )
   }

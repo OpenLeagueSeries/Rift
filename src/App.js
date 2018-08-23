@@ -59,7 +59,7 @@ class App extends Component {
               <Route path="/user" component={User} />
               <Route path="/draft" component={Draft} />
               <Route path="/register" component={Register} />
-              <Route path="/register" component={RegisteredTable} />
+              <Route path="/registeredTable" component={RegisteredTable} />
             </MediaQuery>
 
             {/* MOBILE */}

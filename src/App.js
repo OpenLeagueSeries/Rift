@@ -10,6 +10,7 @@ import User from './Pages/User'
 import Draft from './Draft/Draft'
 import Register from './Pages/Register'
 import RegisterSteps from './Pages/RegisterSteps'
+import RegisteredTable from './UserListDisplay/RegisteredTable'
 
 import './App.css'
 
@@ -58,6 +59,7 @@ class App extends Component {
               <Route path="/user" component={User} />
               <Route path="/draft" component={Draft} />
               <Route path="/register" component={Register} />
+              <Route path="/register" component={RegisteredTable} />
             </MediaQuery>
 
             {/* MOBILE */}

@@ -57,6 +57,9 @@ class RegisteredTable extends Component {
 
   render () {
     return (
+
+      this.state(users => .map(users => <RegisteredRow users={users}/>)
+
       <Paper>
             <Table>
               <TableHead>
@@ -71,7 +74,6 @@ class RegisteredTable extends Component {
               </TableHead>
               <TableBody>
                     <TableRow>
-                      <CustomTableCell numeric>{this.state.userName}</CustomTableCell>
                       <CustomTableCell numeric>{this.state.userIGN}</CustomTableCell>
                       <CustomTableCell numeric>{this.state.userEmail}</CustomTableCell>
                       <CustomTableCell numeric>{""}</CustomTableCell>

@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import RegisteredRow from './RegisteredRow';
-import './RegTable.css'
+
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -57,7 +57,13 @@ class RegisteredTable extends Component {
 
   render () {
     return (
-<div className='tableDisplay'>
+      <div>
+
+      <div style={{color:"#cdb87c", fontSize:"300%"}}>
+         <p>Registered Player List</p>
+      </div>
+
+      <div style={{color:"#cdb87c"}}>
       <Paper>
             <Table>
               <TableHead>
@@ -70,14 +76,12 @@ class RegisteredTable extends Component {
                   <CustomTableCell>TBD(Whatever Needed) </CustomTableCell>
                 </TableRow>
               </TableHead>
-          <div className='rowDisplay'>
-              <TableBody>
               { this.state.data.map(users => <RegisteredRow users={users}/>) }
-              </TableBody>
-          </div>    
             </Table>
-          </Paper>
-  </div>
+        </Paper>
+      </div>
+
+      </div>
     )
   }
 

@@ -5,6 +5,17 @@ import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+
+const CustomTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: "#cdb87c",
+    color: "black",
+  },
+  body: {
+    fontSize: 20,
+  },
+}))(TableCell);
 
 const styles = theme => ({
   root: {
@@ -16,26 +27,22 @@ const styles = theme => ({
     minWidth: 700,
   },
   row: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.background.default,
-    },
+      backgroundColor: "#cdb87c",
   },
 });
 
 function RegisteredRow(props) {
-  const { classes } = props;
 
   return(
-
-    <TableBody>
+  
         <TableRow>
-          <CustomTableCell numeric>{props.users.userName}</CustomTableCell>
-          <CustomTableCell numeric>{props.users.userEmail}</CustomTableCell>
-          <CustomTableCell numeric>{""}</CustomTableCell>
-          <CustomTableCell numeric>{""}</CustomTableCell>
-          <CustomTableCell numeric>{""}</CustomTableCell>
+          <CustomTableCell>{props.users.name}</CustomTableCell>
+          <CustomTableCell>{""}</CustomTableCell>
+          <CustomTableCell >{props.users.email}</CustomTableCell>
+          <CustomTableCell>{""}</CustomTableCell>
+          <CustomTableCell>{""}</CustomTableCell>
+          <CustomTableCell>{""}</CustomTableCell>
         </TableRow>
-    </TableBody>
 
 
     )

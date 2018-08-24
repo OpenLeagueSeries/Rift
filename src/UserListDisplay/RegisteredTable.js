@@ -8,6 +8,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import RegisteredRow from './RegisteredRow';
+import './RegTable.css'
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -15,7 +17,7 @@ const CustomTableCell = withStyles(theme => ({
     color: "black",
   },
   body: {
-    fontSize: 50,
+    fontSize: 10,
   },
 }))(TableCell);
 
@@ -26,12 +28,10 @@ const styles = theme => ({
     overflowX: 'auto',
   },
   table: {
-    minWidth: 700,
+    minWidth: 10000,
   },
   row: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.background.default,
-    },
+      backgroundColor: "#cdb87c",
   },
 });
 
@@ -39,13 +39,13 @@ const styles = theme => ({
 class RegisteredTable extends Component {
   constructor (props) {
     super(props)
-    this.state = {userName: "", userIGN: "", userEmail: ""}
+    this.state = {data:[]}
     }
 
   componentDidMount() {
     this.subscription = new Subscription('/users',
-    (info) => {
-      this.setState({userName: info.name, userIGN: " ", userEmail: info.email})
+    (info) => {this.setState({data:info})
+
     })
   }
 
@@ -57,32 +57,27 @@ class RegisteredTable extends Component {
 
   render () {
     return (
-
-      this.state(users => .map(users => <RegisteredRow users={users}/>)
-
+<div className='tableDisplay'>
       <Paper>
             <Table>
               <TableHead>
                 <TableRow>
                   <CustomTableCell>Name</CustomTableCell>
-                  <CustomTableCell numeric>IGN</CustomTableCell>
-                  <CustomTableCell numeric>Email Address </CustomTableCell>
-                  <CustomTableCell numeric>TBD(Prefered Roll) </CustomTableCell>
-                  <CustomTableCell numeric>TBD(Self Description) </CustomTableCell>
-                  <CustomTableCell numeric>TBD </CustomTableCell>
+                  <CustomTableCell>IGN</CustomTableCell>
+                  <CustomTableCell>Email Address </CustomTableCell>
+                  <CustomTableCell>TBD(Prefered Roll) </CustomTableCell>
+                  <CustomTableCell>TBD(Self Description) </CustomTableCell>
+                  <CustomTableCell>TBD(Whatever Needed) </CustomTableCell>
                 </TableRow>
               </TableHead>
+          <div className='rowDisplay'>
               <TableBody>
-                    <TableRow>
-                      <CustomTableCell numeric>{this.state.userIGN}</CustomTableCell>
-                      <CustomTableCell numeric>{this.state.userEmail}</CustomTableCell>
-                      <CustomTableCell numeric>{""}</CustomTableCell>
-                      <CustomTableCell numeric>{""}</CustomTableCell>
-                      <CustomTableCell numeric>{""}</CustomTableCell>
-                    </TableRow>
+              { this.state.data.map(users => <RegisteredRow users={users}/>) }
               </TableBody>
+          </div>    
             </Table>
           </Paper>
+  </div>
     )
   }
 

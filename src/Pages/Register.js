@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { NameField, nameValidator } from './Data/NameField'
 import { IgnField, ignValidator } from './Data/IgnField'
 import { EmailField, emailValidator } from './Data/EmailField'
+import { Request } from '../streamLib/stream'
 
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'

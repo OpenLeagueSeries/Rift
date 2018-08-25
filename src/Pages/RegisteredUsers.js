@@ -178,8 +178,8 @@ class CustomPaginationActionsTable extends React.Component {
                     return (
                       <TableRow className={classes.row} key={row.id}>
                         <TableCell>{row.id}</TableCell>
-                        <TableCell numeric>{row.irlName}</TableCell>
-                        <TableCell numeric>{row.igName}</TableCell>
+                        <TableCell>{row.irlName}</TableCell>
+                        <TableCell>{row.igName}</TableCell>
                         <TableCell numeric>{row.email}</TableCell>
                       </TableRow>
                     );

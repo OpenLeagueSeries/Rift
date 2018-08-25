@@ -25,7 +25,7 @@ export function emailValidator (event) {
     }
     if (!validator.isEmail(this.state.email) && this.state.email !== '') {
       this.setState(state =>
-        ({ EmailHelperText: 'Not a valid Email format', inputEmailError: true, nextForm: false }))
+        ({ EmailHelperText: 'Not a valid Email format', inputEmailError: false, nextForm: false }))
     }
     if (this.state.email !== '' && validator.isEmail(this.state.email)) {
       this.setState(state =>
@@ -42,6 +42,7 @@ export const EmailField = (props) => {
       <form onSubmit={props.nextStep}>
         <MediaQuery minDeviceWidth={1224}>
           <TextField
+            error={props.inputEmailError}
             className='emailForm'
             label='Email Address'
             placeholder='Imaqtpielol@gmail.com'

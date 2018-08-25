@@ -6,8 +6,7 @@ class Footer extends Component {
   render() {
     return (
       <footer>
-        <p>Copyright information</p>
-        <p>breadcrumbs etc</p>
+        
       </footer>
     );
   }

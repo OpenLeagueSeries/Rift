@@ -1,12 +1,18 @@
 main {
   display: flex;
-  justify-content: space-evenly;
-  width: 70vw;
-  margin: 0 auto;
+  justify-content: space-around;
+  padding-left: 20vh;
   .main-left {
-    max-width: 60%;
+    width: 30%;
   }
   .main-right {
-    max-width: 20vw;
+    min-width: 40vw;
+    min-height: 75vh;
+    margin-right: 3vw;
+    padding-top: 5vh;
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
 }

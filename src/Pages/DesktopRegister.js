@@ -63,6 +63,9 @@ class DesktopRegister extends Component {
     ev.preventDefault()
     if (this.state.NameHelperText === 'Looks good!' && this.state.IGNHelperText === 'Looks good!' && this.state.EmailHelperText === 'Looks good!') {
       this.sendRegister()
+    } else {
+      this.handleIncomplete()
+      setTimeout(this.handleContinue, 1000)
     }
   }
 

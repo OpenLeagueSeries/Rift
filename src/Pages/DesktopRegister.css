@@ -56,49 +56,54 @@
         margin-left: 1em; }
       .desktopDisplay .logoArea .social .DSinfo {
         margin-left: 0.5em; }
-  .desktopDisplay .signUpForm {
+  .desktopDisplay .formSide {
+    display: flex;
+    flex-direction: column;
     width: 30%;
-    font-size: 12px;
-    font-family: "Helvetica";
-    margin-top: 3em;
-    margin-right: 10%;
-    padding: 3em;
-    border-left: 3px solid #cdb87c;
-    border-right: 3px solid #cdb87c;
-    border-radius: 15%; }
-    .desktopDisplay .signUpForm .inputContainer {
-      display: flex;
-      align-items: center; }
-      .desktopDisplay .signUpForm .inputContainer .inputIcon {
-        margin-left: 5%;
-        margin-right: 1em;
+    margin-right: 15%;
+    margin-top: 3em; }
+    .desktopDisplay .formSide .signUpForm {
+      font-size: 12px;
+      font-family: "Helvetica";
+      padding: 3em;
+      border-left: 3px solid #cdb87c;
+      border-right: 3px solid #cdb87c;
+      border-radius: 15%; }
+      .desktopDisplay .formSide .signUpForm .inputContainer {
         display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        flex-direction: column; }
-        .desktopDisplay .signUpForm .inputContainer .inputIcon .iconType {
-          margin-top: .2em; }
-        .desktopDisplay .signUpForm .inputContainer .inputIcon .inputStatus {
-          margin-bottom: 1.15em; }
-          .desktopDisplay .signUpForm .inputContainer .inputIcon .inputStatus .indicatorIcon {
-            font-size: 12px;
-            margin-top: 0.5em;
-            color: #cdb87c; }
-      .desktopDisplay .signUpForm .inputContainer .inputField {
-        width: 80%; }
-    .desktopDisplay .signUpForm .nameForm, .desktopDisplay .signUpForm .ignForm, .desktopDisplay .signUpForm .emailForm {
-      margin-bottom: 3em; }
-    .desktopDisplay .signUpForm .textInfo {
-      display: flex;
-      justify-content: center;
-      margin-top: -1em;
-      margin-bottom: 5em; }
-    .desktopDisplay .signUpForm .CompletionDisplay {
+        align-items: center; }
+        .desktopDisplay .formSide .signUpForm .inputContainer .inputIcon {
+          margin-left: 5%;
+          margin-right: 1em;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          flex-direction: column; }
+          .desktopDisplay .formSide .signUpForm .inputContainer .inputIcon .iconType {
+            margin-top: .2em; }
+          .desktopDisplay .formSide .signUpForm .inputContainer .inputIcon .inputStatus {
+            margin-bottom: 1.15em; }
+            .desktopDisplay .formSide .signUpForm .inputContainer .inputIcon .inputStatus .indicatorIcon {
+              font-size: 12px;
+              margin-top: 0.5em;
+              color: #cdb87c; }
+        .desktopDisplay .formSide .signUpForm .inputContainer .inputField {
+          width: 80%; }
+      .desktopDisplay .formSide .signUpForm .nameForm, .desktopDisplay .formSide .signUpForm .ignForm, .desktopDisplay .formSide .signUpForm .emailForm {
+        margin-bottom: 3em; }
+      .desktopDisplay .formSide .signUpForm .textInfo {
+        display: flex;
+        justify-content: center;
+        margin-top: -1em;
+        margin-bottom: 1em; }
+    .desktopDisplay .formSide .CompletionDisplay {
       position: relative;
       display: flex;
       justify-content: center;
       width: 100%; }
-      .desktopDisplay .signUpForm .CompletionDisplay div .resetIcon {
-        margin-left: 0.5em; }
-      .desktopDisplay .signUpForm .CompletionDisplay div .sendIcon {
-        margin-left: 0.5em; }
+      .desktopDisplay .formSide .CompletionDisplay div {
+        display: flex; }
+        .desktopDisplay .formSide .CompletionDisplay div .resetIcon {
+          margin-left: 0.5em; }
+        .desktopDisplay .formSide .CompletionDisplay div .sendIcon {
+          margin-left: 0.5em; }

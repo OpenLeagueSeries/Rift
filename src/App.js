@@ -8,8 +8,8 @@ import Home from './Pages/Home'
 import Archive from './Pages/Archive'
 import User from './Pages/User'
 import Draft from './Draft/Draft'
-import Register from './Pages/Register'
-import RegisterSteps from './Pages/RegisterSteps'
+import DesktopRegister from './Pages/DesktopRegister'
+import MobileRegister from './Pages/MobileRegister'
 
 import './App.css'
 
@@ -57,13 +57,13 @@ class App extends Component {
               <Route path="/archive" component={Archive} />
               <Route path="/user" component={User} />
               <Route path="/draft" component={Draft} />
-              <Route path="/register" component={Register} />
+              <Route path="/register" component={DesktopRegister} />
             </MediaQuery>
 
             {/* MOBILE */}
             <MediaQuery maxDeviceWidth={1224}>
               {/* <MobileNav /> */}
-              <Route path="/register" component={RegisterSteps} />
+              <Route path="/register" component={MobileRegister} />
             </MediaQuery>
           </div>
         </BrowserRouter>

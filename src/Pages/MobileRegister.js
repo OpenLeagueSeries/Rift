@@ -22,7 +22,7 @@ import EmailIcon from 'mdi-material-ui/Email'
 
 import './MobileRegister.css'
 
-class RegisterSteps extends Component {
+class MobileRegister extends Component {
   state = {
     activeStep: 0,
     name: '',
@@ -225,4 +225,4 @@ class RegisterSteps extends Component {
   }
 }
 
-export default RegisterSteps
+export default MobileRegister

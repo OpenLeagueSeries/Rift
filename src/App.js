@@ -9,7 +9,7 @@ import Archive from './Pages/Archive'
 import User from './Pages/User'
 import Draft from './Draft/Draft'
 import DesktopRegister from './Pages/DesktopRegister'
-import RegisterSteps from './Pages/RegisterSteps'
+import MobileRegister from './Pages/MobileRegister'
 
 import './App.css'
 
@@ -63,7 +63,7 @@ class App extends Component {
             {/* MOBILE */}
             <MediaQuery maxDeviceWidth={1224}>
               {/* <MobileNav /> */}
-              <Route path="/register" component={RegisterSteps} />
+              <Route path="/register" component={MobileRegister} />
             </MediaQuery>
           </div>
         </BrowserRouter>

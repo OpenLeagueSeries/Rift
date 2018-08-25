@@ -33,7 +33,8 @@ class DesktopRegister extends Component {
     EmailHelperText: 'Preferred Email',
     inputNameError: false,
     inputIgnError: false,
-    inputEmailError: false
+    inputEmailError: false,
+    open: false
   }
 
   constructor(props) {
@@ -65,7 +66,7 @@ class DesktopRegister extends Component {
       this.sendRegister()
     } else {
       this.handleIncomplete()
-      setTimeout(this.handleContinue, 1000)
+      setTimeout(this.handleContinue, 2000)
     }
   }
 
@@ -92,17 +93,17 @@ class DesktopRegister extends Component {
   handleIncomplete = () => {
     if (this.state.NameHelperText !== 'Looks good!' && this.state.inputNameError === false) {
       this.setState(state => ({
-        inputNameError: true
+        inputNameError: true, open: true, NameHelperText: 'Check your name input!'
       }))
     }
     if (this.state.IGNHelperText !== 'Looks good!' && this.state.inputIgnError === false) {
       this.setState(state => ({
-        inputIgnError: true
+        inputIgnError: true, open: true, IGNHelperText: 'Check your IGN input!'
       }))
     }
     if (this.state.EmailHelperText !== 'Looks good!' && this.state.inputEmailError === false) {
       this.setState(state => ({
-        inputEmailError: true
+        inputEmailError: true, open: true, EmailHelperText: 'Check your email input!'
       }))
     }
   }
@@ -110,17 +111,17 @@ class DesktopRegister extends Component {
   handleContinue = () => {
     if (this.state.NameHelperText !== 'Looks good!' && this.state.inputNameError === true) {
       this.setState(state => ({
-        inputNameError: false
+        inputNameError: false, open: false, NameHelperText: 'Your first and last name here'
       }))
     }
     if (this.state.IGNHelperText !== 'Looks good!' && this.state.inputIgnError === true) {
       this.setState(state => ({
-        inputIgnError: false
+        inputIgnError: false, open: false, IGNHelperText: 'Your IGN is at least 3 characters'
       }))
     }
     if (this.state.EmailHelperText !== 'Looks good!' && this.state.inputEmailError === true) {
       this.setState(state => ({
-        inputEmailError: false
+        inputEmailError: false, open: false, EmailHelperText: 'Preferred Email'
       }))
     }
   }
@@ -235,7 +236,7 @@ class DesktopRegister extends Component {
                   <ResetIcon className='resetIcon' />
                 </Button>
                 { disableButton ?
-                  <Tooltip title='Form is still incomplete!' onOpen={this.handleIncomplete} onClose={this.handleContinue} leaveDelay={500}>
+                  <Tooltip title='Form is still incomplete!' open={this.state.open} onOpen={this.handleIncomplete} onClose={this.handleContinue} leaveDelay={500}>
                     <div>
                       <Button
                         className='sendEmail'

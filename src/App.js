@@ -1,20 +1,21 @@
-import React, { Component } from 'react'
-import { BrowserRouter, Route, Redirect } from 'react-router-dom'
-import MediaQuery from 'react-responsive'
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import MediaQuery from 'react-responsive';
 
 // import Nav from './Pages/Interface/Nav'
 // import MobileNav from './Pages/Interface/MobileNav'
-import Home from './Pages/Home'
-import Archive from './Pages/Archive'
-import User from './Pages/User'
-import Draft from './Draft/Draft'
-import Register from './Pages/Register'
-import RegisterSteps from './Pages/RegisterSteps'
+import Home from './Pages/Home';
+import Archive from './Pages/Archive';
+import User from './Pages/User';
+import Draft from './Draft/Draft';
+import Register from './Pages/Register';
+import RegisterSteps from './Pages/RegisterSteps';
+import RegisteredUsers from './Pages/RegisteredUsers';
 
-import './App.css'
+import './App.css';
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import CssBaseline from '@material-ui/core/CssBaseline'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 const theme = createMuiTheme({
   palette: {
@@ -40,7 +41,7 @@ const theme = createMuiTheme({
       root: { backgroundColor: 'transparent' }
     }
   }
-})
+});
 
 class App extends Component {
   render() {
@@ -50,7 +51,7 @@ class App extends Component {
         <BrowserRouter>
           <div>
             {/* WEB */}
-            <Route exact path="/" render={() => <Redirect to="/register" /> } />
+            <Route exact path="/" render={() => <Redirect to="/register" />} />
             <MediaQuery minDeviceWidth={1224}>
               {/* <Nav /> */}
               <Route path="/home" component={Home} />
@@ -58,6 +59,7 @@ class App extends Component {
               <Route path="/user" component={User} />
               <Route path="/draft" component={Draft} />
               <Route path="/register" component={Register} />
+              <Route path="/registeredUsers" component={RegisteredUsers} />
             </MediaQuery>
 
             {/* MOBILE */}
@@ -68,8 +70,8 @@ class App extends Component {
           </div>
         </BrowserRouter>
       </MuiThemeProvider>
-    )
+    );
   }
 }
 
-export default App
+export default App;

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { NameField, nameValidator } from './Data/NameField'
 import { IgnField, ignValidator } from './Data/IgnField'
 import { EmailField, emailValidator } from './Data/EmailField'
-import { Request, Subscription } from '../streamLib/stream'
+import { Request } from '../streamLib/stream'
 
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
@@ -37,7 +37,7 @@ class DesktopRegister extends Component {
     inputEmailError: false,
     open: false,
     submitted: false,
-    data: []
+    message: ''
   }
 
   constructor(props) {
@@ -45,18 +45,6 @@ class DesktopRegister extends Component {
     this.nameValidator = nameValidator.bind(this)
     this.ignValidator = ignValidator.bind(this)
     this.emailValidator = emailValidator.bind(this)
-  }
-
-  componentDidMount() {
-    this.subscription = new Subscription('/users', (info) => {
-      this.setState({
-        data: info
-      })
-    })
-  }
-
-  componentWillUnmount() {
-    this.subscription && this.subscription.end()
   }
 
   handleField = inputType => event => {
@@ -107,12 +95,29 @@ class DesktopRegister extends Component {
       inputIgnError: false,
       inputEmailError: false,
       open: false,
-      submitted: false
+      submitted: false,
+      message: ''
     }))
   }
 
   sendRegister = () => {
-    this.req = new Request('/register', {name: this.state.name, ign: this.state.ign, email: this.state.email}, (res) => {
+    this.req = new Request('/register', {name: this.state.name, ign: this.state.ign, email: this.state.email}, (result) => {
+      if (result.success) {
+        this.setState(state => ({
+          message: 'Your information was successfully submitted!'
+        }))
+      } else {
+        if (result.data === 'Email already exists') {
+          this.setState(state => ({
+            message: 'This email has already been registered!'
+          }))
+        }
+        if (result.data === 'Server error') {
+          this.setState(state => ({
+            message: 'Something went wrong with the server'
+          }))
+        }
+      }
     })
   }
 
@@ -154,7 +159,7 @@ class DesktopRegister extends Component {
 
   render() {
     const disableButton = this.state.name === '' || this.state.ign === '' || this.state.email === '' || this.state.inputNameError || this.state.inputIgnError || this.state.inputEmailError || this.state.NameHelperText !== 'Looks good!' || this.state.IGNHelperText !== 'Looks good!' || this.state.EmailHelperText !== 'Looks good!'
-
+    console.log(this.state.message)
     return (
       <div className='desktopDisplay'>
         <div className='logoArea'>
@@ -288,20 +293,12 @@ class DesktopRegister extends Component {
             </Paper>
           </div>
         </div>
-        { this.state.data === 'Email already exists' ?
-          <Snackbar
-            message={<div className='submitMsg'>This email was already registered!</div>}
-            open={this.state.submitted}
-            onClose={this.handleClose}
-            autoHideDuration={2500}
-          /> :
-          <Snackbar
-            message={<div className='submitMsg'>Your information was successfully submitted!</div>}
-            open={this.state.submitted}
-            onClose={this.handleClose}
-            autoHideDuration={2500}
-          />
-        }
+        <Snackbar
+          message={this.state.message}
+          open={this.state.submitted}
+          onClose={this.handleClose}
+          autoHideDuration={2500}
+        />
       </div>
     )
   }

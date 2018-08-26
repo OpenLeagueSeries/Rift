@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { NameField, nameValidator } from './Data/NameField'
 import { IgnField, ignValidator } from './Data/IgnField'
 import { EmailField, emailValidator } from './Data/EmailField'
-import { Request } from '../streamLib/stream'
+import { Request, Subscription } from '../streamLib/stream'
 
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
@@ -36,7 +36,8 @@ class DesktopRegister extends Component {
     inputIgnError: false,
     inputEmailError: false,
     open: false,
-    submitted: false
+    submitted: false,
+    data: []
   }
 
   constructor(props) {
@@ -44,6 +45,18 @@ class DesktopRegister extends Component {
     this.nameValidator = nameValidator.bind(this)
     this.ignValidator = ignValidator.bind(this)
     this.emailValidator = emailValidator.bind(this)
+  }
+
+  componentDidMount() {
+    this.subscription = new Subscription('/users', (info) => {
+      this.setState({
+        data: info
+      })
+    })
+  }
+
+  componentWillUnmount() {
+    this.subscription && this.subscription.end()
   }
 
   handleField = inputType => event => {
@@ -240,7 +253,7 @@ class DesktopRegister extends Component {
           </div>
           <div className='CompletionDisplay'>
             <Paper square elevation={0}>
-              <div>
+              <div className='buttonContainer'>
                 <Button
                   onClick={this.handleReset}
                   color='secondary'>
@@ -275,12 +288,20 @@ class DesktopRegister extends Component {
             </Paper>
           </div>
         </div>
-        <Snackbar
-          message={<div className='submitMsg'>Your information was successfully submitted!</div>}
-          open={this.state.submitted}
-          onClose={this.handleClose}
-          autoHideDuration={2500}
-        />
+        { this.state.data === 'Email already exists' ?
+          <Snackbar
+            message={<div className='submitMsg'>This email was already registered!</div>}
+            open={this.state.submitted}
+            onClose={this.handleClose}
+            autoHideDuration={2500}
+          /> :
+          <Snackbar
+            message={<div className='submitMsg'>Your information was successfully submitted!</div>}
+            open={this.state.submitted}
+            onClose={this.handleClose}
+            autoHideDuration={2500}
+          />
+        }
       </div>
     )
   }

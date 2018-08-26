@@ -109,8 +109,9 @@
       display: flex;
       justify-content: center;
       width: 100%;
-      div {
+      .buttonContainer {
         display: flex;
+        margin-top: -0.5em;
         .resetIcon { margin-left: 0.5em; }
         .sendIcon { margin-left: 0.5em; }
       }

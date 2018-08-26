@@ -101,11 +101,12 @@
       display: flex;
       justify-content: center;
       width: 100%; }
-      .desktopDisplay .formSide .CompletionDisplay div {
-        display: flex; }
-        .desktopDisplay .formSide .CompletionDisplay div .resetIcon {
+      .desktopDisplay .formSide .CompletionDisplay .buttonContainer {
+        display: flex;
+        margin-top: -0.5em; }
+        .desktopDisplay .formSide .CompletionDisplay .buttonContainer .resetIcon {
           margin-left: 0.5em; }
-        .desktopDisplay .formSide .CompletionDisplay div .sendIcon {
+        .desktopDisplay .formSide .CompletionDisplay .buttonContainer .sendIcon {
           margin-left: 0.5em; }
   .desktopDisplay .submitMsg {
     color: black; }

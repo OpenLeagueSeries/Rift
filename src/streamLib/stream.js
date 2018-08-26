@@ -95,7 +95,7 @@ class Request {
       res.on('data', (buf) => {
         const primedBuf = buf.toString().replace(/}{/g,'}}{{')
         primedBuf.split('}{').forEach((d) => {
-          cb(d)
+          cb(JSON.parse(d))
         })
       })
     })

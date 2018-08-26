@@ -102,7 +102,6 @@ class DesktopRegister extends Component {
 
   sendRegister = () => {
     this.req = new Request('/register', {name: this.state.name, ign: this.state.ign, email: this.state.email}, (result) => {
-      console.log(result)
       if (result.success) {
         this.setState(state => ({
           message: 'Your information was successfully submitted!'

@@ -102,6 +102,7 @@ class DesktopRegister extends Component {
 
   sendRegister = () => {
     this.req = new Request('/register', {name: this.state.name, ign: this.state.ign, email: this.state.email}, (result) => {
+      console.log(result)
       if (result.success) {
         this.setState(state => ({
           message: 'Your information was successfully submitted!'
@@ -159,7 +160,6 @@ class DesktopRegister extends Component {
 
   render() {
     const disableButton = this.state.name === '' || this.state.ign === '' || this.state.email === '' || this.state.inputNameError || this.state.inputIgnError || this.state.inputEmailError || this.state.NameHelperText !== 'Looks good!' || this.state.IGNHelperText !== 'Looks good!' || this.state.EmailHelperText !== 'Looks good!'
-    console.log(this.state.message)
     return (
       <div className='desktopDisplay'>
         <div className='logoArea'>

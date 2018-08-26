@@ -15,7 +15,6 @@ class Subscription {
     this.req = http.get('https://' + host + ':' + port + this.path, (res) => {
       res.on('data', (buf) => {
         const primedBuf = buf.toString().replace(/}{/g,'}}{{')
-        console.log(primedBuf)
         primedBuf.split('}{').forEach((d) => {
           this.emit('data', JSON.parse(d))
         })
@@ -92,8 +91,14 @@ class Request {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(data)
       }
+    }, (res) => {
+      res.on('data', (buf) => {
+        const primedBuf = buf.toString().replace(/}{/g,'}}{{')
+        primedBuf.split('}{').forEach((d) => {
+          cb(d)
+        })
+      })
     })
-    req.on('data', (d) => cb(d))
     req.write(JSON.stringify(data))
     req.end()
   }

@@ -11,6 +11,7 @@ import StepLabel from '@material-ui/core/StepLabel'
 import StepContent from '@material-ui/core/StepContent'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
+import Snackbar from '@material-ui/core/Snackbar'
 
 import lolPittLogo from '../../src/assets/newestPittLogo.png'
 import RedoIcon from 'mdi-material-ui/RedoVariant'
@@ -35,7 +36,8 @@ class MobileRegister extends Component {
     inputIgnError: false,
     inputEmailError: false,
     nextForm: false,
-    reviewForm: false
+    reviewForm: false,
+    open: false
   }
 
   constructor(props) {
@@ -92,6 +94,13 @@ class MobileRegister extends Component {
     }))
   }
 
+  handleClose = () => {
+    this.setState(state => ({
+      open: false
+    }))
+    this.handleReset()
+  }
+
   handleReset = () => {
     this.setState(state => ({
       activeStep: 0,
@@ -105,14 +114,17 @@ class MobileRegister extends Component {
       inputIgnError: false,
       inputEmailError: false,
       nextForm: false,
-      reviewForm: false
+      reviewForm: false,
+      open: false
     }))
   }
 
   sendRegister = () => {
     this.req = new Request('/register', {name: this.state.name, ign: this.state.ign, email: this.state.email}, (res) => {
-      console.log('User information was sent!');
     })
+    this.setState(state => ({
+      open: true
+    }))
   }
 
   render() {
@@ -190,36 +202,45 @@ class MobileRegister extends Component {
           </Stepper>
         </div>
         {activeStep === steps.length && (
-          <Paper square elevation={0} className='CompletionDisplay'>
-            <div>
-              <div className='textInfo'>Successfully completed -</div>
-              <div className='textInfo'>Click to send your confirmation email!</div>
-              <Button
-                onClick={this.handleReview}
-                color='secondary'
-              >
-                <RedoIcon className='redoIcon' />
-                <span className='buttonLabel'>Edit Information</span>
-              </Button>
-              <Button
-                onClick={this.handleReset}
-                color='secondary'
-              >
-                <span className='buttonLabel'>Reset</span>
-                <ResetIcon className='resetIcon' />
-              </Button>
-              <Button
-                className='sendEmail'
-                onClick={this.sendRegister}
-                color='primary'
-                variant='extendedFab'
-              >
-                <span className='buttonLabel'>Send Email</span>
-                <SendIcon className='sendIcon' />
-              </Button>
+          <Paper square elevation={0}>
+            <div className='CompletionDisplay'>
+              <div className='infoBox'>
+                <div className='textInfo'>Successfully completed -</div>
+                <div className='textInfo2'>Click to send your confirmation email!</div>
+              </div>
+              <div className='completeButtons'>
+                <Button
+                  onClick={this.handleReview}
+                  color='secondary'>
+                  <RedoIcon className='redoIcon' />
+                  <span className='buttonLabel'>Edit Information</span>
+                </Button>
+                <Button
+                  onClick={this.handleReset}
+                  color='secondary'>
+                  <span className='buttonLabel'>Reset</span>
+                  <ResetIcon className='resetIcon' />
+                </Button>
+              </div>
+              <div className='sendButton'>
+                <Button
+                  className='sendEmail'
+                  onClick={this.sendRegister}
+                  color='primary'
+                  variant='extendedFab'>
+                  <span className='buttonLabel'>Send Email</span>
+                  <SendIcon className='sendIcon' />
+                </Button>
+              </div>
             </div>
           </Paper>
         )}
+        <Snackbar
+          message={<div className='submitMsg'>Your information was successfully submitted!</div>}
+          open={this.state.open}
+          onClose={this.handleClose}
+          autoHideDuration={2500}
+        />
       </div>
     )
   }

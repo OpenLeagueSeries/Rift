@@ -8,6 +8,7 @@ import { Request } from '../streamLib/stream'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Tooltip from '@material-ui/core/Tooltip'
+import Snackbar from '@material-ui/core/Snackbar'
 
 import lolPittLogo from '../../src/assets/newestPittLogo.png'
 import ResetIcon from '@material-ui/icons/Clear'
@@ -34,7 +35,8 @@ class DesktopRegister extends Component {
     inputNameError: false,
     inputIgnError: false,
     inputEmailError: false,
-    open: false
+    open: false,
+    submitted: false
   }
 
   constructor(props) {
@@ -64,10 +66,20 @@ class DesktopRegister extends Component {
     ev.preventDefault()
     if (this.state.NameHelperText === 'Looks good!' && this.state.IGNHelperText === 'Looks good!' && this.state.EmailHelperText === 'Looks good!') {
       this.sendRegister()
+      this.setState(state => ({
+        submitted: true
+      }))
     } else {
       this.handleIncomplete()
       setTimeout(this.handleContinue, 2000)
     }
+  }
+
+  handleClose = () => {
+    this.setState(state => ({
+      submitted: false
+    }))
+    this.handleReset()
   }
 
   handleReset = () => {
@@ -80,13 +92,14 @@ class DesktopRegister extends Component {
       EmailHelperText: 'Preferred Email',
       inputNameError: false,
       inputIgnError: false,
-      inputEmailError: false
+      inputEmailError: false,
+      open: false,
+      submitted: false
     }))
   }
 
   sendRegister = () => {
     this.req = new Request('/register', {name: this.state.name, ign: this.state.ign, email: this.state.email}, (res) => {
-      console.log('User information was sent!');
     })
   }
 
@@ -230,8 +243,7 @@ class DesktopRegister extends Component {
               <div>
                 <Button
                   onClick={this.handleReset}
-                  color='secondary'
-                  >
+                  color='secondary'>
                   <span className='buttonLabel'>Reset</span>
                   <ResetIcon className='resetIcon' />
                 </Button>
@@ -251,7 +263,7 @@ class DesktopRegister extends Component {
                   </Tooltip> :
                   <Button
                     className='sendEmail'
-                    onClick={this.sendRegister}
+                    onClick={this.handleSubmit}
                     color='primary'
                     variant='extendedFab'
                     disabled={disableButton}>
@@ -263,6 +275,12 @@ class DesktopRegister extends Component {
             </Paper>
           </div>
         </div>
+        <Snackbar
+          message={<div className='submitMsg'>Your information was successfully submitted!</div>}
+          open={this.state.submitted}
+          onClose={this.handleClose}
+          autoHideDuration={2500}
+        />
       </div>
     )
   }

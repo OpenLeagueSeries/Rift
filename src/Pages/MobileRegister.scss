@@ -114,32 +114,46 @@
     }
   }
   .CompletionDisplay {
-    margin-left: 5%;
     position: relative;
     display: flex;
-    justify-content: base;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    div {
+    .infoBox {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: -2em;
+      .textInfo2 {
+        margin-top: -0.5em;
+        color: #fff;
+        font-family: "Helvetica";
+        font-size: 12px;
+      }
+    }
+    .completeButtons {
+      display: flex;
+      margin-top: 1em;
       .redoIcon { margin-right: 0.5em; }
       .resetIcon { margin-left: 0.5em; }
-      .sendEmail {
-        float: right;
-        margin-top: 1em;
-        margin-right: 10%;
-        animation: pulsate 2s ease-in-out infinite both;
-        @keyframes pulsate {
-          0% {
-            transform: scale(1);
-          }
-          50% {
-            transform: scale(0.95);
-          }
-          100% {
-            transform: scale(1);
-          }
+    }
+    .sendButton {
+      align-self: flex-end;
+      margin-top: 1em;
+      margin-right: 10%;
+      animation: pulsate 2s ease-in-out infinite both;
+      @keyframes pulsate {
+        0% {
+          transform: scale(1);
         }
-        .sendIcon { margin-left: 0.5em; }
+        50% {
+          transform: scale(0.95);
+        }
+        100% {
+          transform: scale(1);
+        }
       }
+      .sendIcon { margin-left: 0.5em; }
     }
   }
 }

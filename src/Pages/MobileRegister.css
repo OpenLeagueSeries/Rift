@@ -40,7 +40,8 @@
     transform: scale(1);
     animation-timing-function: ease-out; } }
     .registerDisplay .main img {
-      width: 100vw;
+      width: auto;
+      max-width: 100%;
       height: auto;
       animation: pulse 5s 1.5s ease-out infinite; }
 

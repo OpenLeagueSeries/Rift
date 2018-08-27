@@ -16,6 +16,10 @@ import './App.css'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 
+import JssProvider from 'react-jss/lib/JssProvider'
+import { create } from 'jss'
+import { createGenerateClassName, jssPreset } from '@material-ui/core/styles'
+
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
@@ -48,32 +52,37 @@ const theme = createMuiTheme({
   }
 })
 
+const generateClassName = createGenerateClassName()
+const jss = create(jssPreset())
+
 class App extends Component {
   render() {
     return (
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        <BrowserRouter>
-          <div>
-            {/* WEB */}
-            <Route exact path="/" render={() => <Redirect to="/register" /> } />
-            <MediaQuery minDeviceWidth={1224}>
-              {/* <Nav /> */}
-              <Route path="/home" component={Home} />
-              <Route path="/archive" component={Archive} />
-              <Route path="/user" component={User} />
-              <Route path="/draft" component={Draft} />
-              <Route path="/register" component={DesktopRegister} />
-            </MediaQuery>
+      <JssProvider jss={jss} generateClassName={generateClassName}>
+        <MuiThemeProvider theme={theme}>
+          <CssBaseline />
+          <BrowserRouter>
+            <div>
+              {/* WEB */}
+              <Route exact path="/" render={() => <Redirect to="/register" /> } />
+              <MediaQuery minDeviceWidth={1224}>
+                {/* <Nav /> */}
+                <Route path="/home" component={Home} />
+                <Route path="/archive" component={Archive} />
+                <Route path="/user" component={User} />
+                <Route path="/draft" component={Draft} />
+                <Route path="/register" component={DesktopRegister} />
+              </MediaQuery>
 
-            {/* MOBILE */}
-            <MediaQuery maxDeviceWidth={1224}>
-              {/* <MobileNav /> */}
-              <Route path="/register" component={MobileRegister} />
-            </MediaQuery>
-          </div>
-        </BrowserRouter>
-      </MuiThemeProvider>
+              {/* MOBILE */}
+              <MediaQuery maxDeviceWidth={1224}>
+                {/* <MobileNav /> */}
+                <Route path="/register" component={MobileRegister} />
+              </MediaQuery>
+            </div>
+          </BrowserRouter>
+        </MuiThemeProvider>
+      </JssProvider>
     )
   }
 }

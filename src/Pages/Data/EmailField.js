@@ -53,7 +53,7 @@ export const EmailField = (props) => {
           />
         </MediaQuery>
         <MediaQuery maxDeviceWidth={1224}>
-          <div className='textInfo'>
+          <div className='emailInfo'>
             This email will be used to confirm your
             registration!
           </div>

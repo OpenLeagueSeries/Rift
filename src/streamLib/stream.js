@@ -12,10 +12,9 @@ class Subscription {
     this.path =  url
     this.listeners = new Map();
     this.on('data', cb)
-    this.req = http.get('https://' + host + ':' + port + this.path, (res) => {
+    this.req = http.get('https://' + host + ':' + port + this.path, {withCredentials: true}, (res) => {
       res.on('data', (buf) => {
         const primedBuf = buf.toString().replace(/}{/g,'}}{{')
-        console.log(primedBuf)
         primedBuf.split('}{').forEach((d) => {
           this.emit('data', JSON.parse(d))
         })
@@ -91,9 +90,16 @@ class Request {
       headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(data)
-      }
+      },
+      withCredentials: true
+    }, (res) => {
+      res.on('data', (buf) => {
+        const primedBuf = buf.toString().replace(/}{/g,'}}{{')
+        primedBuf.split('}{').forEach((d) => {
+          cb(JSON.parse(d))
+        })
+      })
     })
-    req.on('data', (d) => cb(d))
     req.write(JSON.stringify(data))
     req.end()
   }

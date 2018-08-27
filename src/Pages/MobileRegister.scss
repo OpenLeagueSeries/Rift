@@ -2,10 +2,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(#08090d, #03091f);
   .main {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    align-self: center;
     width: 100vw;
     animation: bounce 1s both;
     @keyframes bounce {
@@ -45,10 +47,7 @@
       }
     }
     img {
-      margin-top: 0.5em;
-      margin-left: 0.05em;
-      width: 100vw;
-      object-fit: scale-down;
+      margin-top: -5em;
       animation: pulse 5s 1.5s ease-out infinite;
       @keyframes pulse {
         0%, 60%, 100% { opacity: 1; }
@@ -56,18 +55,9 @@
       }
     }
   }
-  .buttonLabel { margin-top: 0em; }
-  .textInfo {
-    width: 100%;
-    font-size: 12px;
-    margin-bottom: 0.75em;
-    color: #fff;
-    font-weight: 400;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    line-height: 1.46429em;
-  }
   .registrationSteps {
-    margin: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
     padding-top: 1em;
     padding-bottom: 1em;
     display: flex;
@@ -100,6 +90,13 @@
       width: 15em;
       margin-bottom: 1em;
     }
+    .emailInfo {
+      font-size: 12px;
+      margin-bottom: 0.75em;
+      color: #fff;
+      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+      line-height: 1.46429em;
+    }
     .actionsContainer {
       margin-top: 1em;
       .disappear { opacity: 0; }
@@ -114,32 +111,56 @@
     }
   }
   .CompletionDisplay {
-    margin-left: 5%;
     position: relative;
     display: flex;
-    justify-content: base;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    div {
+    .infoBox {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: -1em;
+      .textInfo {
+        font-size: 12px;
+        margin-bottom: 0.75em;
+        color: #fff;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        line-height: 1.46429em;
+      }
+      .textInfo2 {
+        margin-top: -0.5em;
+        color: #fff;
+        font-family: "Helvetica";
+        font-size: 12px;
+      }
+    }
+    .completeButtons {
+      display: flex;
+      margin-top: 1em;
       .redoIcon { margin-right: 0.5em; }
       .resetIcon { margin-left: 0.5em; }
-      .sendEmail {
-        float: right;
-        margin-top: 1em;
-        margin-right: 10%;
-        animation: pulsate 2s ease-in-out infinite both;
-        @keyframes pulsate {
-          0% {
-            transform: scale(1);
-          }
-          50% {
-            transform: scale(0.95);
-          }
-          100% {
-            transform: scale(1);
-          }
+    }
+    .sendButton {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 1em;
+      margin-right: 10%;
+      animation: pulsate 2s ease-in-out infinite both;
+      @keyframes pulsate {
+        0% {
+          transform: scale(1);
         }
-        .sendIcon { margin-left: 0.5em; }
+        50% {
+          transform: scale(0.95);
+        }
+        100% {
+          transform: scale(1);
+        }
       }
+      .loading { margin-left: -3.1em; }
+      .sendIcon { margin-left: 0.5em; }
     }
   }
 }

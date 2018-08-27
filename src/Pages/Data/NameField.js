@@ -62,6 +62,7 @@ export const NameField = (props) => {
       <form onSubmit={props.nextStep}>
         <TextField
           autoFocus
+          inputRef={props.focusField}
           error={props.inputNameError}
           className='nameForm'
           label='Name IRL'

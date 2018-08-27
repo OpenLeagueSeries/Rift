@@ -6,9 +6,7 @@
   height: 100vh;
   background: linear-gradient(#08090d, #03091f);
   .main {
-    display: flex;
-    align-self: center;
-    margin-top: -5em;
+    margin-top: -10em;
     width: auto;
     max-width: 100%;
     height: auto;
@@ -53,6 +51,7 @@
       width: auto;
       max-width: 100%;
       height: auto;
+      object-fit: contain;
       animation: pulse 5s 1.5s ease-out infinite;
       @keyframes pulse {
         0%, 60%, 100% { opacity: 1; }

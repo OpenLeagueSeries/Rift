@@ -41,6 +41,7 @@
     animation-timing-function: ease-out; } }
     .registerDisplay .main img {
       width: 100vw;
+      height: auto;
       animation: pulse 5s 1.5s ease-out infinite; }
 
 @keyframes pulse {

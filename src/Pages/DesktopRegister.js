@@ -193,9 +193,9 @@ class DesktopRegister extends Component {
             </div>
             <div className='discord'>
               <Tooltip title='Discord'>
-                <a href='https://discord.gg/yZcPxav' target='_blank' rel='noopener noreferrer'>
+                <a href='https://discord.gg/n74BaQq' target='_blank' rel='noopener noreferrer'>
                   <div className='DSlogo'><DiscIcon /></div>
-                  <div className='DSinfo'>discord.gg/yZcPxav</div>
+                  <div className='DSinfo'>discord.gg/n74BaQq</div>
                 </a>
               </Tooltip>
             </div>

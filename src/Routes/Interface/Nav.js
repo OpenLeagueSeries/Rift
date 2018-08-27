@@ -8,9 +8,8 @@ class Nav extends Component {
   render () {
     return (
       <div className='navBar'>
-        <NavLink className='navLink' activeClassName='selected' to={'/user'}>User</NavLink>
-        <NavLink className='navLink' activeClassName='selected' to={'/home'}>Tournament</NavLink>
-        <NavLink className='navLink' activeClassName='selected' to={'/archive'}>Archive</NavLink>
+        <NavLink className='navLink' activeClassName='selected' to={'/register'}>User</NavLink>
+        <NavLink className='navLink' activeClassName='selected' to={'/players'}>Archive</NavLink>
       </div>
     )
   }

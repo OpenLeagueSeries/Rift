@@ -48,6 +48,7 @@
     }
     img {
       margin-top: -5em;
+      object-fit: scale-down;
       animation: pulse 5s 1.5s ease-out infinite;
       @keyframes pulse {
         0%, 60%, 100% { opacity: 1; }

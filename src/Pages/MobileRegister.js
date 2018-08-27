@@ -40,6 +40,14 @@ class MobileRegister extends Component {
     message: ''
   }
 
+  componentDidMount() {
+    screen.lockOrientationUniversal = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation
+    screen.lockOrientationUniversal('portrait');
+  }
+  componentWillUnMount() {
+    screen.unlockOrientation || screen.mozUnlockOrientation || screen.msUnlockOrientation || (screen.orientation && screen.orientation.unlock)
+  }
+
   constructor(props) {
     super(props)
     this.nameValidator = nameValidator.bind(this)

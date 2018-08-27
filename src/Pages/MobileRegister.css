@@ -8,6 +8,7 @@
   .registerDisplay .main {
     display: flex;
     align-self: center;
+    margin-top: -5em;
     width: 100vw;
     animation: bounce 1s both; }
 
@@ -39,8 +40,7 @@
     transform: scale(1);
     animation-timing-function: ease-out; } }
     .registerDisplay .main img {
-      margin-top: -5em;
-      object-fit: scale-down;
+      width: 100vw;
       animation: pulse 5s 1.5s ease-out infinite; }
 
 @keyframes pulse {

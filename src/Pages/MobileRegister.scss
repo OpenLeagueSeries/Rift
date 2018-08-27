@@ -8,6 +8,7 @@
   .main {
     display: flex;
     align-self: center;
+    margin-top: -5em;
     width: 100vw;
     animation: bounce 1s both;
     @keyframes bounce {
@@ -47,8 +48,7 @@
       }
     }
     img {
-      margin-top: -5em;
-      object-fit: scale-down;
+      width: 100vw;
       animation: pulse 5s 1.5s ease-out infinite;
       @keyframes pulse {
         0%, 60%, 100% { opacity: 1; }

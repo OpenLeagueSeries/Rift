@@ -6,6 +6,7 @@
   height: 100vh;
   background: linear-gradient(#08090d, #03091f); }
   .registerDisplay .main {
+    margin-top: 2vh;
     width: auto;
     max-width: 100%;
     height: auto;

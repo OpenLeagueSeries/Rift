@@ -12,6 +12,8 @@ import MobileRegister from './Routes/MobileRegister'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 
+import './App.css'
+
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
@@ -54,7 +56,7 @@ class App extends Component {
             <Route exact path='/' render={() => <Redirect to="/register" /> } />
             {/* WEB */}
             <MediaQuery minDeviceWidth={1224}>
-              <Nav />
+              <div className='navigationBar'><Nav /></div>
               {/* <Route path='/draft' component={Draft} /> */}
               <Route path='/players' component={RegisteredPlayers} />
               <Route path='/register' component={DesktopRegister} />

@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Tooltip from '@material-ui/core/Tooltip'
 import Snackbar from '@material-ui/core/Snackbar'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 import lolPittLogo from '../../src/assets/newestPittLogo.png'
 import ResetIcon from '@material-ui/icons/Clear'
@@ -45,6 +46,7 @@ class DesktopRegister extends Component {
     this.nameValidator = nameValidator.bind(this)
     this.ignValidator = ignValidator.bind(this)
     this.emailValidator = emailValidator.bind(this)
+    this.nameInputField = React.createRef()
   }
 
   handleField = inputType => event => {
@@ -65,22 +67,22 @@ class DesktopRegister extends Component {
 
   handleSubmit = (ev) => {
     ev.preventDefault()
-    if (this.state.NameHelperText === 'Looks good!' && this.state.IGNHelperText === 'Looks good!' && this.state.EmailHelperText === 'Looks good!') {
+    if (this.state.NameHelperText === 'Looks good!' && this.state.IGNHelperText === 'Looks good!' && this.state.EmailHelperText === 'Looks good!' && !this.state.submitted) {
       this.sendRegister()
-      this.setState(state => ({
-        submitted: true
-      }))
     } else {
       this.handleIncomplete()
-      setTimeout(this.handleContinue, 2000)
+      setTimeout(this.handleContinue, 2500)
     }
   }
 
-  handleClose = () => {
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
     this.setState(state => ({
       submitted: false
     }))
-    this.handleReset()
+    setTimeout(this.handleReset(), 2500)
   }
 
   handleReset = () => {
@@ -98,23 +100,24 @@ class DesktopRegister extends Component {
       submitted: false,
       message: ''
     }))
+    this.nameInputField.current.focus()
   }
 
   sendRegister = () => {
     this.req = new Request('/register', {name: this.state.name, ign: this.state.ign, email: this.state.email}, (result) => {
       if (result.success) {
         this.setState(state => ({
-          message: 'Your information was successfully submitted!'
+          message: 'Check your email for a magic login link!', submitted: true
         }))
       } else {
         if (result.data === 'Email already exists') {
           this.setState(state => ({
-            message: 'This email has already been registered!'
+            message: 'This email has already been registered!', submitted: true, inputEmailError: true, EmailHelperText: 'This email is already in our system!'
           }))
         }
         if (result.data === 'Server error') {
           this.setState(state => ({
-            message: 'Something went wrong with the server'
+            message: 'Something went wrong with the server D:', submitted: true
           }))
         }
       }
@@ -132,7 +135,7 @@ class DesktopRegister extends Component {
         inputIgnError: true, open: true, IGNHelperText: 'Check your IGN input!'
       }))
     }
-    if (this.state.EmailHelperText !== 'Looks good!' && this.state.inputEmailError === false) {
+    if (this.state.EmailHelperText !== 'Looks good!' && this.state.inputEmailError === false && this.state.message !== 'This email has already been registered!') {
       this.setState(state => ({
         inputEmailError: true, open: true, EmailHelperText: 'Check your email input!'
       }))
@@ -158,13 +161,14 @@ class DesktopRegister extends Component {
   }
 
   render() {
-    const disableButton = this.state.name === '' || this.state.ign === '' || this.state.email === '' || this.state.inputNameError || this.state.inputIgnError || this.state.inputEmailError || this.state.NameHelperText !== 'Looks good!' || this.state.IGNHelperText !== 'Looks good!' || this.state.EmailHelperText !== 'Looks good!'
+    const disableButton = this.state.name === '' || this.state.ign === '' || this.state.email === '' || this.state.inputNameError || this.state.inputIgnError || this.state.inputEmailError || this.state.NameHelperText !== 'Looks good!' || this.state.IGNHelperText !== 'Looks good!' || this.state.EmailHelperText !== 'Looks good!' || this.state.submitted
+
     return (
       <div className='desktopDisplay'>
         <div className='logoArea'>
           <img src={lolPittLogo} alt='lol@Pitt Logo' />
           <div className='caption'>
-            Official Activities Fair Registration 2018
+            Official OLS Registration 2018
           </div>
           <div className='join'>Join us at:</div>
           <div className='social'>
@@ -208,6 +212,7 @@ class DesktopRegister extends Component {
               </div>
               <div className='inputField'>
                 <NameField
+                  focusField={this.nameInputField}
                   handleChange={this.handleField('name')}
                   name={this.state.name}
                   helperText={this.state.NameHelperText}
@@ -264,40 +269,51 @@ class DesktopRegister extends Component {
                   <span className='buttonLabel'>Reset</span>
                   <ResetIcon className='resetIcon' />
                 </Button>
-                { disableButton ?
-                  <Tooltip title='Form is still incomplete!' open={this.state.open} onOpen={this.handleIncomplete} onClose={this.handleContinue} leaveDelay={500}>
-                    <div>
-                      <Button
-                        className='sendEmail'
-                        onClick={this.sendRegister}
-                        color='primary'
-                        variant='extendedFab'
-                        disabled={disableButton}>
-                        <span className='buttonLabel'>Send Email</span>
-                        <SendIcon className='sendIcon' />
-                      </Button>
-                    </div>
-                  </Tooltip> :
-                  <Button
-                    className='sendEmail'
-                    onClick={this.handleSubmit}
-                    color='primary'
-                    variant='extendedFab'
-                    disabled={disableButton}>
-                    <span className='buttonLabel'>Send Email</span>
-                    <SendIcon className='sendIcon' />
-                  </Button>
-                }
+                <div className='submitButton'>
+                  { disableButton ?
+                    <Tooltip title='Form is still incomplete!' open={this.state.open} onOpen={this.handleIncomplete} onClose={this.handleContinue} leaveDelay={500}>
+                      <div>
+                        <Button
+                          className='sendEmail'
+                          onClick={this.sendRegister}
+                          color='primary'
+                          variant='extendedFab'
+                          disabled={disableButton}>
+                          <span className='buttonLabel'>Send Email</span>
+                          <SendIcon className='sendIcon' />
+                        </Button>
+                      </div>
+                    </Tooltip> :
+                    <Button
+                      className='sendEmail'
+                      onClick={this.handleSubmit}
+                      color='primary'
+                      variant='extendedFab'
+                      disabled={disableButton}>
+                      <span className='buttonLabel'>Send Email</span>
+                      <SendIcon className='sendIcon' />
+                    </Button>
+                  }
+                  {this.state.submitted && <CircularProgress className='loading'/>}
+                </div>
               </div>
             </Paper>
           </div>
         </div>
-        <Snackbar
-          message={this.state.message}
-          open={this.state.submitted}
-          onClose={this.handleClose}
-          autoHideDuration={2500}
-        />
+        {this.state.message === 'This email has already been registered!' ?
+          <Snackbar
+            message={<div>{this.state.message}<br></br>We sent you another email!</div>}
+            open={this.state.submitted}
+            onClose={this.handleClose}
+            autoHideDuration={3500}
+          /> :
+          <Snackbar
+            message={this.state.message}
+            open={this.state.submitted}
+            onClose={this.handleClose}
+            autoHideDuration={2500}
+          />
+        }
       </div>
     )
   }

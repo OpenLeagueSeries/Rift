@@ -12,6 +12,7 @@ import StepContent from '@material-ui/core/StepContent'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Snackbar from '@material-ui/core/Snackbar'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 import lolPittLogo from '../../src/assets/newestPittLogo.png'
 import RedoIcon from 'mdi-material-ui/RedoVariant'
@@ -35,9 +36,8 @@ class MobileRegister extends Component {
     inputNameError: false,
     inputIgnError: false,
     inputEmailError: false,
-    nextForm: false,
-    reviewForm: false,
-    open: false
+    open: false,
+    message: ''
   }
 
   constructor(props) {
@@ -49,25 +49,24 @@ class MobileRegister extends Component {
 
   handleNext = (ev) => {
     ev.preventDefault()
-    if ((!this.state.inputNameError && this.state.nextForm) || (!this.state.inputIgnError && this.state.nextForm) || (!this.state.inputEmailError && this.state.nextForm)) {
-      if (this.state.reviewForm) {
-        this.setState(state => ({
-          activeStep: state.activeStep + 1,
-          nextForm: true
-        }))
-      } else {
-        this.setState(state => ({
-          activeStep: state.activeStep + 1,
-          nextForm: false
-        }))
-      }
+    if (this.state.activeStep === 0 && this.state.NameHelperText === 'Looks good!') {
+      this.setState(state => ({
+        activeStep: 1
+      }))
+    } else if (this.state.activeStep === 1 && this.state.IGNHelperText === 'Looks good!') {
+      this.setState(state => ({
+        activeStep: 2
+      }))
+    } else if (this.state.activeStep === 2 && this.state.EmailHelperText === 'Looks good!') {
+      this.setState(state => ({
+        activeStep: 3
+      }))
     }
   }
 
   handleBack = () => {
     this.setState(state => ({
-      activeStep: state.activeStep - 1,
-      nextForm: true
+      activeStep: state.activeStep - 1
     }))
   }
 
@@ -89,16 +88,18 @@ class MobileRegister extends Component {
 
   handleReview = () => {
     this.setState(state => ({
-      activeStep: 0,
-      nextForm: true
+      activeStep: 0
     }))
   }
 
-  handleClose = () => {
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
     this.setState(state => ({
       open: false
     }))
-    this.handleReset()
+    setTimeout(this.handleReset(), 2500)
   }
 
   handleReset = () => {
@@ -113,18 +114,30 @@ class MobileRegister extends Component {
       inputNameError: false,
       inputIgnError: false,
       inputEmailError: false,
-      nextForm: false,
-      reviewForm: false,
-      open: false
+      open: false,
+      message: ''
     }))
   }
 
   sendRegister = () => {
-    this.req = new Request('/register', {name: this.state.name, ign: this.state.ign, email: this.state.email}, (res) => {
+    this.req = new Request('/register', {name: this.state.name, ign: this.state.ign, email: this.state.email}, (result) => {
+      if (result.success) {
+        this.setState(state => ({
+          message: 'Check your email for a magic login link!', open: true
+        }))
+      } else {
+        if (result.data === 'Email already exists') {
+          this.setState(state => ({
+            message: 'This email has already been registered!', open: true, inputEmailError: true, EmailHelperText: 'This email is already in our system!'
+          }))
+        }
+        if (result.data === 'Server error') {
+          this.setState(state => ({
+            message: 'Something went wrong with the server D:', open: true
+          }))
+        }
+      }
     })
-    this.setState(state => ({
-      open: true
-    }))
   }
 
   render() {
@@ -202,8 +215,8 @@ class MobileRegister extends Component {
           </Stepper>
         </div>
         {activeStep === steps.length && (
-          <Paper square elevation={0}>
-            <div className='CompletionDisplay'>
+          <div className='CompletionDisplay'>
+            <Paper square elevation={0}>
               <div className='infoBox'>
                 <div className='textInfo'>Successfully completed -</div>
                 <div className='textInfo2'>Click to send your confirmation email!</div>
@@ -225,22 +238,32 @@ class MobileRegister extends Component {
               <div className='sendButton'>
                 <Button
                   className='sendEmail'
+                  disabled={this.state.open}
                   onClick={this.sendRegister}
                   color='primary'
                   variant='extendedFab'>
                   <span className='buttonLabel'>Send Email</span>
                   <SendIcon className='sendIcon' />
                 </Button>
+                {this.state.open && <CircularProgress className='loading'/>}
               </div>
-            </div>
-          </Paper>
+            </Paper>
+          </div>
         )}
-        <Snackbar
-          message={<div className='submitMsg'>Your information was successfully submitted!</div>}
-          open={this.state.open}
-          onClose={this.handleClose}
-          autoHideDuration={2500}
-        />
+        {this.state.message === 'This email has already been registered!' ?
+          <Snackbar
+            message={<div>{this.state.message}<br></br>We sent you another email!</div>}
+            open={this.state.open}
+            onClose={this.handleClose}
+            autoHideDuration={3500}
+          /> :
+          <Snackbar
+            message={this.state.message}
+            open={this.state.open}
+            onClose={this.handleClose}
+            autoHideDuration={2500}
+          />
+        }
       </div>
     )
   }

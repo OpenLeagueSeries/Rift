@@ -1,11 +1,13 @@
 .registerDisplay {
   display: flex;
   flex-direction: column;
-  justify-content: center; }
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(#08090d, #03091f); }
   .registerDisplay .main {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    align-self: center;
     width: 100vw;
     animation: bounce 1s both; }
 
@@ -37,10 +39,7 @@
     transform: scale(1);
     animation-timing-function: ease-out; } }
     .registerDisplay .main img {
-      margin-top: 0.5em;
-      margin-left: 0.05em;
-      width: 100vw;
-      object-fit: scale-down;
+      margin-top: -5em;
       animation: pulse 5s 1.5s ease-out infinite; }
 
 @keyframes pulse {
@@ -48,18 +47,9 @@
     opacity: 1; }
   70% {
     opacity: 0.5; } }
-  .registerDisplay .buttonLabel {
-    margin-top: 0em; }
-  .registerDisplay .textInfo {
-    width: 100%;
-    font-size: 12px;
-    margin-bottom: 0.75em;
-    color: #fff;
-    font-weight: 400;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    line-height: 1.46429em; }
   .registerDisplay .registrationSteps {
-    margin: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
     padding-top: 1em;
     padding-bottom: 1em;
     display: flex;
@@ -85,6 +75,12 @@
     .registerDisplay .registrationSteps form {
       width: 15em;
       margin-bottom: 1em; }
+    .registerDisplay .registrationSteps .emailInfo {
+      font-size: 12px;
+      margin-bottom: 0.75em;
+      color: #fff;
+      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+      line-height: 1.46429em; }
     .registerDisplay .registrationSteps .actionsContainer {
       margin-top: 1em; }
       .registerDisplay .registrationSteps .actionsContainer .disappear {
@@ -107,7 +103,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: -2em; }
+      margin-top: -1em; }
+      .registerDisplay .CompletionDisplay .infoBox .textInfo {
+        font-size: 12px;
+        margin-bottom: 0.75em;
+        color: #fff;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        line-height: 1.46429em; }
       .registerDisplay .CompletionDisplay .infoBox .textInfo2 {
         margin-top: -0.5em;
         color: #fff;
@@ -121,7 +123,9 @@
       .registerDisplay .CompletionDisplay .completeButtons .resetIcon {
         margin-left: 0.5em; }
     .registerDisplay .CompletionDisplay .sendButton {
-      align-self: flex-end;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
       margin-top: 1em;
       margin-right: 10%;
       animation: pulsate 2s ease-in-out infinite both; }
@@ -133,5 +137,7 @@
     transform: scale(0.95); }
   100% {
     transform: scale(1); } }
+      .registerDisplay .CompletionDisplay .sendButton .loading {
+        margin-left: -3.1em; }
       .registerDisplay .CompletionDisplay .sendButton .sendIcon {
         margin-left: 0.5em; }

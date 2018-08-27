@@ -40,7 +40,10 @@ const theme = createMuiTheme({
       root: { backgroundColor: 'transparent' }
     },
     MuiSnackbarContent: {
-      root: { backgroundColor: '#cdb87c' }
+      root: {
+        backgroundColor: '#cdb87c',
+        padding: '0 24px'
+      }
     }
   }
 })

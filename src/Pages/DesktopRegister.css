@@ -108,5 +108,8 @@
           margin-left: 0.5em; }
         .desktopDisplay .formSide .CompletionDisplay .buttonContainer .sendIcon {
           margin-left: 0.5em; }
-  .desktopDisplay .submitMsg {
-    color: black; }
+        .desktopDisplay .formSide .CompletionDisplay .buttonContainer .submitButton {
+          display: flex;
+          align-items: center; }
+          .desktopDisplay .formSide .CompletionDisplay .buttonContainer .submitButton .loading {
+            margin-left: -3.1em; }

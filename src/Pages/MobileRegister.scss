@@ -9,7 +9,9 @@
     display: flex;
     align-self: center;
     margin-top: -5em;
-    width: 100vw;
+    width: auto;
+    max-width: 100%;
+    height: auto;
     animation: bounce 1s both;
     @keyframes bounce {
       0% {

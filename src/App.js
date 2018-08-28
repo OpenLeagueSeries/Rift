@@ -63,7 +63,7 @@ class App extends Component {
               <Route exact path='/' render={() => <Redirect to="/register" /> } />
               {/* WEB */}
               <MediaQuery minDeviceWidth={1224}>
-                <div className='navigationBar'><Nav /></div>
+                <Nav />
                 {/* <Route path='/draft' component={Draft} /> */}
                 <Route path='/players' component={RegisteredPlayers} />
                 <Route path='/register' component={DesktopRegister} />
@@ -73,7 +73,7 @@ class App extends Component {
               {/* MOBILE */}
               <MediaQuery maxDeviceWidth={1224}>
                 {/* <MobileNav /> */}
-                <Route path="/register" component={MobileRegister} />
+                <Route path='/register' component={MobileRegister} />
                 <Route path='/confirmed' component={Confirmation} />
               </MediaQuery>
             </div>

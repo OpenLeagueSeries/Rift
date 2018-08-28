@@ -1,14 +1,15 @@
 .registerDisplay {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100vw;
   height: 100vh;
   background: linear-gradient(#08090d, #03091f); }
   .registerDisplay .main {
-    display: flex;
-    align-self: center;
-    width: 100vw;
+    margin-top: 2vh;
+    width: auto;
+    max-width: 100%;
+    height: auto;
     animation: bounce 1s both; }
 
 @keyframes bounce {
@@ -39,7 +40,10 @@
     transform: scale(1);
     animation-timing-function: ease-out; } }
     .registerDisplay .main img {
-      margin-top: -5em;
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
       animation: pulse 5s 1.5s ease-out infinite; }
 
 @keyframes pulse {

@@ -10,6 +10,7 @@ import User from './Pages/User'
 import Draft from './Draft/Draft'
 import DesktopRegister from './Pages/DesktopRegister'
 import MobileRegister from './Pages/MobileRegister'
+import Confirmation from './Pages/Confirmation'
 
 import './App.css'
 
@@ -72,12 +73,14 @@ class App extends Component {
                 <Route path="/user" component={User} />
                 <Route path="/draft" component={Draft} />
                 <Route path="/register" component={DesktopRegister} />
+                <Route path='/confirmed' component={Confirmation} />
               </MediaQuery>
 
               {/* MOBILE */}
               <MediaQuery maxDeviceWidth={1224}>
                 {/* <MobileNav /> */}
                 <Route path="/register" component={MobileRegister} />
+                <Route path='/confirmed' component={Confirmation} />
               </MediaQuery>
             </div>
           </BrowserRouter>

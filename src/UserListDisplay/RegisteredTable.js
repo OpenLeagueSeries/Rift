@@ -71,12 +71,14 @@ class RegisteredTable extends Component {
                   <CustomTableCell>Name</CustomTableCell>
                   <CustomTableCell>IGN</CustomTableCell>
                   <CustomTableCell>Email Address </CustomTableCell>
-                  <CustomTableCell>TBD(Prefered Roll) </CustomTableCell>
-                  <CustomTableCell>TBD(Self Description) </CustomTableCell>
-                  <CustomTableCell>TBD(Whatever Needed) </CustomTableCell>
+                  <CustomTableCell>Roles </CustomTableCell>
+                  <CustomTableCell>Notes </CustomTableCell>
+                  <CustomTableCell>I can captain </CustomTableCell>
                 </TableRow>
               </TableHead>
-              { this.state.data.map(users => <RegisteredRow users={users}/>) }
+              <TableBody>
+              { this.state.data.map(user => <RegisteredRow key={user} user={user}/>) }
+              </TableBody>
             </Table>
         </Paper>
       </div>

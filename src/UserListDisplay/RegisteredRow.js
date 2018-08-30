@@ -31,21 +31,40 @@ const styles = theme => ({
   },
 });
 
-function RegisteredRow(props) {
+class RegisteredRow extends Component {
 
-  return(
-  
+
+  constructor (props) {
+    super(props)
+    this.state = {data:[]}
+  }
+
+  componentDidMount() {
+    this.subscription = new Subscription(`/details/${this.props.user}`,
+    (info) => {
+      console.log(info)
+      this.setState({data:info[0]})
+
+    })
+  }
+
+  componentWillUnmount() {
+    this.subscription && this.subscription.end()
+  }
+
+  render() {
+    return(
+
         <TableRow>
-          <CustomTableCell>{props.users.name}</CustomTableCell>
+          <CustomTableCell>{this.state.data.name}</CustomTableCell>
           <CustomTableCell>{""}</CustomTableCell>
-          <CustomTableCell >{props.users.email}</CustomTableCell>
+          <CustomTableCell >{this.state.data.email}</CustomTableCell>
           <CustomTableCell>{""}</CustomTableCell>
           <CustomTableCell>{""}</CustomTableCell>
           <CustomTableCell>{""}</CustomTableCell>
         </TableRow>
-
-
-    )
+      )
+    }
   }
 
 

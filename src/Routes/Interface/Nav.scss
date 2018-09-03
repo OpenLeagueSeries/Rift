@@ -3,9 +3,25 @@
   right: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   height: 100vh;
-  .navLink {
-    font-size: 20px;
+  .navButton {
+    border-radius: 50%;
+    background-color: #020203;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 5vh;
+  }
+  .playerListIcon, .registerIcon {
+    color: #fff;
+    border: 2px solid #cdb87c;
+    border-radius: 50%;
+    padding: 2px;
+    width: 50px;
+    height: 50px;
+    &:hover {
+      color: #cdb87c;
+    }
   }
 }

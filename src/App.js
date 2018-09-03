@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom'
 import MediaQuery from 'react-responsive'
 
-import Nav from './Routes/Interface/Nav'
+// import Nav from './Routes/Interface/Nav'
 // import MobileNav from './Routes/Interface/MobileNav'
 // import Draft from './Draft/Draft'
 import RegisteredPlayers from './Routes/RegisteredPlayers'
@@ -63,7 +63,7 @@ class App extends Component {
               <Route exact path='/' render={() => <Redirect to="/register" /> } />
               {/* WEB */}
               <MediaQuery minDeviceWidth={1224}>
-                <Nav />
+                {/* <Nav /> */}
                 {/* <Route path='/draft' component={Draft} /> */}
                 <Route path='/players' component={RegisteredPlayers} />
                 <Route path='/register' component={DesktopRegister} />

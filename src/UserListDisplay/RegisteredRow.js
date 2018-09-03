@@ -43,7 +43,7 @@ class RegisteredRow extends Component {
     this.subscription = new Subscription(`/details/${this.props.user}`,
     (info) => {
       console.log(info)
-      this.setState({data:info[0]})
+      this.setState({data:info})
 
     })
   }
@@ -54,15 +54,14 @@ class RegisteredRow extends Component {
 
   render() {
     return(
-
         <TableRow>
             <CustomTableCell>{this.state.data.name}</CustomTableCell>
-            <CustomTableCell>{""}</CustomTableCell>
-            <CustomTableCell >{this.state.data.email}</CustomTableCell>
-            <CustomTableCell>{""}</CustomTableCell>
-            <CustomTableCell>{""}</CustomTableCell>
-            <CustomTableCell>{""}</CustomTableCell>
-            {this.props.me.role === "Admin"? <CustomTableCell>Captain?</CustomTableCell>:''}
+            <CustomTableCell>{this.state.data.ign}</CustomTableCell>
+            <CustomTableCell>{this.state.data.email}</CustomTableCell>
+            <CustomTableCell>{this.state.data.roles}</CustomTableCell>
+            <CustomTableCell>{this.state.data.notes}</CustomTableCell>
+            <CustomTableCell>{this.state.data.captainBool}</CustomTableCell>
+            {this.props.me.role === "Admin"? <CustomTableCell>Captain?</CustomTableCell>:<React.Fragment></React.Fragment>}
         </TableRow>
       )
     }

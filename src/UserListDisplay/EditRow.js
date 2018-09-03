@@ -38,25 +38,29 @@ class EditRow extends Component {
   constructor (props) {
     super(props)
     this.state = {data:[]}
+    this.subscription = {}
   }
 
   componentDidMount() {
     this.subscription = new Subscription(`/details/${this.props.user}`,
     (info) => {
       console.log(info);
-      this.setState({data:info[0]});
+      this.setState({data:info});
     })
-    this.subscription.end();
   }
 
   componentWillUnmount() {
     this.subscription && this.subscription.end()
   }
 
-  onEdit(ev) {
-    this.req = new Request('/details', {...this.state.data}, (res) => {
-      console.log('User update was sent!');
-      console.log(res);
+  onEdit = (target) => (ev) => {
+    const update = {};
+    update[target] = ev.target.value;
+    console.log(update);
+    console.log(this.state);
+    this.setState({data: { ...this.state.data, ...update}}, () => {
+      console.log(this.state);
+      this.req = this.subscription.request({...this.state.data});
     })
   }
 
@@ -64,13 +68,13 @@ class EditRow extends Component {
     return(
 
         <TableRow>
-            <CustomTableCell><TextField defaultValue={this.state.data.name} onChange={this.onEdit}></TextField></CustomTableCell>
-            <CustomTableCell><TextField defaultValue={this.state.data.ign} onChange={this.onEdit}></TextField></CustomTableCell>
-            <CustomTableCell >{this.state.data.email}</CustomTableCell>
-            <CustomTableCell><TextField defaultValue={this.state.data.roles} onChange={this.onEdit}></TextField></CustomTableCell>
-            <CustomTableCell><TextField defaultValue={this.state.data.notes} onChange={this.onEdit}></TextField></CustomTableCell>
-            <CustomTableCell><TextField defaultValue={this.state.data.captainBool} onChange={this.onEdit}></TextField></CustomTableCell>
-            {this.props.me.role === "Admin"? <CustomTableCell>Captain?</CustomTableCell>:''}
+            <CustomTableCell><TextField value={this.state.data.name} onChange={this.onEdit('name')}></TextField></CustomTableCell>
+            <CustomTableCell><TextField value={this.state.data.ign} onChange={this.onEdit('ign')}></TextField></CustomTableCell>
+            <CustomTableCell>{this.state.data.email}</CustomTableCell>
+            <CustomTableCell><TextField value={this.state.data.roles} onChange={this.onEdit('roles')}></TextField></CustomTableCell>
+            <CustomTableCell><TextField value={this.state.data.notes} onChange={this.onEdit('notes')}></TextField></CustomTableCell>
+            <CustomTableCell><TextField value={this.state.data.captainBool} onChange={this.onEdit('captainBool')}></TextField></CustomTableCell>
+            {this.props.me.role === "Admin"? <CustomTableCell>Captain?</CustomTableCell>:<React.Fragment></React.Fragment>}
         </TableRow>
       )
     }

@@ -84,7 +84,7 @@ class RegisteredTable extends Component {
                   <UserContext.Consumer key={user}>
                   { (me) => {
                     console.log(me);
-                    return user._key === me._key
+                    return user === me._key
                     ? <EditRow key={user} user={user} me={me} />
                     : <RegisteredRow key={user} user={user} me={me}/>
                     }

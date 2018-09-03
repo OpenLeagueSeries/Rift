@@ -54,9 +54,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.subscription = new Subscription(`/me/`,
+    this.subscription = new Subscription(`/me`,
     (info) => {
-      this.setState({me:info[0]})
+      this.setState({me:info})
     })
   }
 

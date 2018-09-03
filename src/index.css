@@ -4,5 +4,5 @@ body {
   padding: 0;
   background: linear-gradient(#03091f, #1c2957, #03091f);
   background-size: auto 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
 }

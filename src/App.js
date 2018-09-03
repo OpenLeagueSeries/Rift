@@ -4,6 +4,7 @@ import MediaQuery from 'react-responsive'
 
 // import Nav from './Pages/Interface/Nav'
 // import MobileNav from './Pages/Interface/MobileNav'
+import { Subscription } from './streamLib/stream.js'
 import Home from './Pages/Home'
 import Archive from './Pages/Archive'
 import User from './Pages/User'
@@ -43,11 +44,28 @@ const theme = createMuiTheme({
   }
 })
 
+export const UserContext = React.createContext({_key:''});
+
 class App extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {me: {_key: ''}}
+  }
+
+  componentDidMount() {
+    this.subscription = new Subscription(`/me/`,
+    (info) => {
+      this.setState({me:info[0]})
+    })
+  }
+
+
   render() {
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
+        <UserContext.Provider value={this.state.me}>
         <BrowserRouter>
           <div>
             {/* WEB */}
@@ -69,6 +87,7 @@ class App extends Component {
             </MediaQuery>
           </div>
         </BrowserRouter>
+        </UserContext.Provider>
       </MuiThemeProvider>
     )
   }

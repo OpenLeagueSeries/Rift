@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import { Subscription } from '../streamLib/stream.js'
+import { Subscription, Request } from '../streamLib/stream.js'
 import { withStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
+import TextField from '@material-ui/core/TextField'
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -31,7 +32,7 @@ const styles = theme => ({
   },
 });
 
-class RegisteredRow extends Component {
+class EditRow extends Component {
 
 
   constructor (props) {
@@ -42,26 +43,33 @@ class RegisteredRow extends Component {
   componentDidMount() {
     this.subscription = new Subscription(`/details/${this.props.user}`,
     (info) => {
-      console.log(info)
-      this.setState({data:info[0]})
-
+      console.log(info);
+      this.setState({data:info[0]});
     })
+    this.subscription.end();
   }
 
   componentWillUnmount() {
     this.subscription && this.subscription.end()
   }
 
+  onEdit(ev) {
+    this.req = new Request('/details', {...this.state.data}, (res) => {
+      console.log('User update was sent!');
+      console.log(res);
+    })
+  }
+
   render() {
     return(
 
         <TableRow>
-            <CustomTableCell>{this.state.data.name}</CustomTableCell>
-            <CustomTableCell>{""}</CustomTableCell>
+            <CustomTableCell><TextField defaultValue={this.state.data.name} onChange={this.onEdit}></TextField></CustomTableCell>
+            <CustomTableCell><TextField defaultValue={this.state.data.ign} onChange={this.onEdit}></TextField></CustomTableCell>
             <CustomTableCell >{this.state.data.email}</CustomTableCell>
-            <CustomTableCell>{""}</CustomTableCell>
-            <CustomTableCell>{""}</CustomTableCell>
-            <CustomTableCell>{""}</CustomTableCell>
+            <CustomTableCell><TextField defaultValue={this.state.data.roles} onChange={this.onEdit}></TextField></CustomTableCell>
+            <CustomTableCell><TextField defaultValue={this.state.data.notes} onChange={this.onEdit}></TextField></CustomTableCell>
+            <CustomTableCell><TextField defaultValue={this.state.data.captainBool} onChange={this.onEdit}></TextField></CustomTableCell>
             {this.props.me.role === "Admin"? <CustomTableCell>Captain?</CustomTableCell>:''}
         </TableRow>
       )
@@ -69,8 +77,8 @@ class RegisteredRow extends Component {
   }
 
 
-RegisteredRow.propTypes = {
+EditRow.propTypes = {
 classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(RegisteredRow);
+export default withStyles(styles)(EditRow);

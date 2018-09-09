@@ -4,6 +4,7 @@ import { Subscription } from '../streamLib/stream'
 
 import TextField from '@material-ui/core/TextField'
 
+import { PlayerInitials } from './Data/PlayerInitials'
 import CaptainIcon from 'mdi-material-ui/Crown'
 
 class EditTableContent extends Component {
@@ -38,9 +39,9 @@ class EditTableContent extends Component {
   render() {
     return(
       <tr>
-        <React.Fragment />
-        <React.Fragment />
-        <React.Fragment />
+        <span><PlayerInitials name={this.state.data.name}/></span>
+        <td>{this.state.data.name}</td>
+        <td>{this.state.data.ign}</td>
         <td><TextField value={this.state.data.roles} onChange={this.handleEdit('roles')}></TextField></td>
         <td><TextField value={this.state.data.notes} onChange={this.handleEdit('notes')}></TextField></td>
         <td><TextField value={this.state.data.captainBool} onChange={this.handleEdit('captainBool')}></TextField></td>

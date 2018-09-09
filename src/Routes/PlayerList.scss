@@ -18,14 +18,18 @@
       border-bottom: 3px solid #cdb87c;
     }
     th:first-child {
+      padding-top: 1em;
+      padding-bottom: 1em;
     }
-    th:not(:last-child), td:not(:last-child) {
+    th:not(:last-child), td:not(:first-child) {
       padding-right: 5vw;
     }
-    td {
+    td:not(:first-child) {
       border-top: 1px solid #cdb87c;
       border-bottom: 1px solid #cdb87c;
       margin-top: 2em;
+      padding-top: 1em;
+      padding-bottom: 1em;
     }
   }
 }

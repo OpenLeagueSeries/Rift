@@ -16,9 +16,14 @@
     .playerListDisplay .tableContainer th:not(:first-child) {
       font-size: 20px;
       border-bottom: 3px solid #cdb87c; }
-    .playerListDisplay .tableContainer th:not(:last-child), .playerListDisplay .tableContainer td:not(:last-child) {
+    .playerListDisplay .tableContainer th:first-child {
+      padding-top: 1em;
+      padding-bottom: 1em; }
+    .playerListDisplay .tableContainer th:not(:last-child), .playerListDisplay .tableContainer td:not(:first-child) {
       padding-right: 5vw; }
-    .playerListDisplay .tableContainer td {
+    .playerListDisplay .tableContainer td:not(:first-child) {
       border-top: 1px solid #cdb87c;
       border-bottom: 1px solid #cdb87c;
-      margin-top: 2em; }
+      margin-top: 2em;
+      padding-top: 1em;
+      padding-bottom: 1em; }

@@ -13,18 +13,15 @@
       align-items: center; }
       .confirmationDisplay .desktopConfirm .confirmMessage h1, .confirmationDisplay .desktopConfirm .confirmMessage h3, .confirmationDisplay .desktopConfirm .confirmMessage p, .desktopConfirm .desktopConfirm .confirmMessage h1, .desktopConfirm .desktopConfirm .confirmMessage h3, .desktopConfirm .desktopConfirm .confirmMessage p, .mobileConfirm .desktopConfirm .confirmMessage h1, .mobileConfirm .desktopConfirm .confirmMessage h3, .mobileConfirm .desktopConfirm .confirmMessage p {
         text-align: center; }
-      .confirmationDisplay .desktopConfirm .confirmMessage .NGE, .desktopConfirm .desktopConfirm .confirmMessage .NGE, .mobileConfirm .desktopConfirm .confirmMessage .NGE {
+      .confirmationDisplay .desktopConfirm .confirmMessage .NGE .shinji img, .desktopConfirm .desktopConfirm .confirmMessage .NGE .shinji img, .mobileConfirm .desktopConfirm .confirmMessage .NGE .shinji img {
+        display: flex; }
+      .confirmationDisplay .desktopConfirm .confirmMessage .NGE .cookie, .desktopConfirm .desktopConfirm .confirmMessage .NGE .cookie, .mobileConfirm .desktopConfirm .confirmMessage .NGE .cookie {
         display: flex;
-        flex-direction: column;
-        align-items: center; }
-        .confirmationDisplay .desktopConfirm .confirmMessage .NGE .shinji, .desktopConfirm .desktopConfirm .confirmMessage .NGE .shinji, .mobileConfirm .desktopConfirm .confirmMessage .NGE .shinji {
-          display: flex; }
-        .confirmationDisplay .desktopConfirm .confirmMessage .NGE .cookie, .desktopConfirm .desktopConfirm .confirmMessage .NGE .cookie, .mobileConfirm .desktopConfirm .confirmMessage .NGE .cookie {
-          display: flex;
-          width: 15%;
-          height: auto;
-          margin-top: -45%;
-          margin-left: 3%; }
+        margin-top: -45%;
+        margin-left: 45%; }
+        .confirmationDisplay .desktopConfirm .confirmMessage .NGE .cookie img, .desktopConfirm .desktopConfirm .confirmMessage .NGE .cookie img, .mobileConfirm .desktopConfirm .confirmMessage .NGE .cookie img {
+          width: 5vw;
+          height: 5vw; }
       .confirmationDisplay .desktopConfirm .confirmMessage .caption, .desktopConfirm .desktopConfirm .confirmMessage .caption, .mobileConfirm .desktopConfirm .confirmMessage .caption {
         margin-top: 30%; }
   .confirmationDisplay .mobileConfirm, .desktopConfirm .mobileConfirm, .mobileConfirm .mobileConfirm {
@@ -39,15 +36,15 @@
         display: flex;
         flex-direction: column;
         align-items: center; }
-        .confirmationDisplay .mobileConfirm .confirmMessage .NGE .shinji, .desktopConfirm .mobileConfirm .confirmMessage .NGE .shinji, .mobileConfirm .mobileConfirm .confirmMessage .NGE .shinji {
-          display: flex;
-          width: 90vw; }
+        .confirmationDisplay .mobileConfirm .confirmMessage .NGE .shinji img, .desktopConfirm .mobileConfirm .confirmMessage .NGE .shinji img, .mobileConfirm .mobileConfirm .confirmMessage .NGE .shinji img {
+          display: flex; }
         .confirmationDisplay .mobileConfirm .confirmMessage .NGE .cookie, .desktopConfirm .mobileConfirm .confirmMessage .NGE .cookie, .mobileConfirm .mobileConfirm .confirmMessage .NGE .cookie {
           display: flex;
-          width: 10%;
-          height: auto;
-          margin-top: -30%;
-          margin-left: 2%; }
+          margin-top: -45%;
+          margin-left: 3%; }
+          .confirmationDisplay .mobileConfirm .confirmMessage .NGE .cookie img, .desktopConfirm .mobileConfirm .confirmMessage .NGE .cookie img, .mobileConfirm .mobileConfirm .confirmMessage .NGE .cookie img {
+            width: 15vw;
+            height: 15vw; }
       .confirmationDisplay .mobileConfirm .confirmMessage .caption, .desktopConfirm .mobileConfirm .confirmMessage .caption, .mobileConfirm .mobileConfirm .confirmMessage .caption {
         margin-top: 30%;
         font-size: 12px; }

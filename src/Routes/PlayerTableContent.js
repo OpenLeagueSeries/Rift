@@ -3,8 +3,6 @@ import React, { Component } from 'react'
 import { PlayerInitials } from './Data/PlayerInitials'
 import { Subscription } from '../streamLib/stream'
 
-import Avatar from '@material-ui/core/Avatar'
-
 import CaptainIcon from 'mdi-material-ui/Crown'
 
 class PlayerTableContent extends Component {
@@ -29,7 +27,7 @@ class PlayerTableContent extends Component {
   render() {
     return(
       <tr>
-        <span><PlayerInitials name={this.state.data.name}/></span>
+        <td><PlayerInitials name={this.state.data.name}/></td>
         <td>{this.state.data.name}</td>
         <td>{this.state.data.ign}</td>
         <td>{this.state.data.roles}</td>

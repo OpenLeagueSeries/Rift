@@ -2,17 +2,14 @@ import React, { Component } from 'react'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom'
 import MediaQuery from 'react-responsive'
 
-// import Nav from './Pages/Interface/Nav'
-// import MobileNav from './Pages/Interface/MobileNav'
-import Home from './Pages/Home'
-import Archive from './Pages/Archive'
-import User from './Pages/User'
-import Draft from './Draft/Draft'
-import DesktopRegister from './Pages/DesktopRegister'
-import MobileRegister from './Pages/MobileRegister'
+// import Nav from './Routes/Interface/Nav'
+// import MobileNav from './Routes/Interface/MobileNav'
+// import Draft from './Draft/Draft'
+import { Subscription } from './streamLib/stream'
+import RegisteredPlayers from './Routes/RegisteredPlayers'
+import DesktopRegister from './Routes/DesktopRegister'
+import MobileRegister from './Routes/MobileRegister'
 import Confirmation from './Pages/Confirmation'
-
-import './App.css'
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -56,34 +53,49 @@ const theme = createMuiTheme({
 const generateClassName = createGenerateClassName()
 const jss = create(jssPreset())
 
+export const UserContext = React.createContext({_key:''})
+
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {me: {_key: ''}}
+  }
+
+  componentDidMount() {
+    this.subscription = new Subscription('/me',
+    (info) => {
+      this.setState({
+        me: info
+      })
+    })
+  }
+
   render() {
     return (
       <JssProvider jss={jss} generateClassName={generateClassName}>
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
+          <UserContext.Provider value={this.state.me}>
           <BrowserRouter>
             <div>
+              <Route exact path='/' render={() => <Redirect to="/register" /> } />
+              <Route path='/confirmed' component={Confirmation} />
               {/* WEB */}
-              <Route exact path="/" render={() => <Redirect to="/register" /> } />
               <MediaQuery minDeviceWidth={1224}>
                 {/* <Nav /> */}
-                <Route path="/home" component={Home} />
-                <Route path="/archive" component={Archive} />
-                <Route path="/user" component={User} />
-                <Route path="/draft" component={Draft} />
-                <Route path="/register" component={DesktopRegister} />
-                <Route path='/confirmed' component={Confirmation} />
+                {/* <Route path='/draft' component={Draft} /> */}
+                <Route path='/players' component={RegisteredPlayers} />
+                <Route path='/register' component={DesktopRegister} />
               </MediaQuery>
 
               {/* MOBILE */}
               <MediaQuery maxDeviceWidth={1224}>
                 {/* <MobileNav /> */}
-                <Route path="/register" component={MobileRegister} />
-                <Route path='/confirmed' component={Confirmation} />
+                <Route path='/register' component={MobileRegister} />
               </MediaQuery>
             </div>
           </BrowserRouter>
+          </UserContext.Provider>
         </MuiThemeProvider>
       </JssProvider>
     )

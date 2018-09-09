@@ -12,7 +12,7 @@
     align-items: center;
     font-size: 25px;
     font-family: "Verdana";
-    width: 50%; }
+    width: 650px; }
     .desktopDisplay .logoArea img {
       width: 90%;
       margin-bottom: 0.5em; }
@@ -59,7 +59,7 @@
   .desktopDisplay .formSide {
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 400px;
     margin-right: 15%;
     margin-top: 3em; }
     .desktopDisplay .formSide .signUpForm {

@@ -79,20 +79,19 @@ class App extends Component {
           <BrowserRouter>
             <div>
               <Route exact path='/' render={() => <Redirect to="/register" /> } />
+              <Route path='/confirmed' component={Confirmation} />
               {/* WEB */}
               <MediaQuery minDeviceWidth={1224}>
                 {/* <Nav /> */}
                 {/* <Route path='/draft' component={Draft} /> */}
                 <Route path='/players' component={RegisteredPlayers} />
                 <Route path='/register' component={DesktopRegister} />
-                <Route path='/confirmed' component={Confirmation} />
               </MediaQuery>
 
               {/* MOBILE */}
               <MediaQuery maxDeviceWidth={1224}>
                 {/* <MobileNav /> */}
                 <Route path='/register' component={MobileRegister} />
-                <Route path='/confirmed' component={Confirmation} />
               </MediaQuery>
             </div>
           </BrowserRouter>

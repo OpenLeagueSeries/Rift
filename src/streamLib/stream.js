@@ -1,6 +1,6 @@
 import http from 'stream-http'
 
-const host = 'localhost'
+const host = 'pitt.lol'
 const port = '4200'
 
 let isFunction = function(obj) {

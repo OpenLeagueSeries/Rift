@@ -2,4 +2,23 @@
   display: flex;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(#03091f, #1c2957, #03091f); }
+  background: linear-gradient(#03091f, #1c2957, #03091f);
+  color: #fff;
+  font-family: "Trebuchet MS";
+  justify-content: center; }
+  .playerListDisplay .tableContainer {
+    border-collapse: collapse;
+    margin-right: 5vw; }
+    .playerListDisplay .tableContainer .avatarColor {
+      background-color: #cdb87c; }
+    .playerListDisplay .tableContainer td, .playerListDisplay .tableContainer th {
+      text-align: center; }
+    .playerListDisplay .tableContainer th:not(:first-child) {
+      font-size: 20px;
+      border-bottom: 3px solid #cdb87c; }
+    .playerListDisplay .tableContainer th:not(:last-child), .playerListDisplay .tableContainer td:not(:last-child) {
+      padding-right: 5vw; }
+    .playerListDisplay .tableContainer td {
+      border-top: 1px solid #cdb87c;
+      border-bottom: 1px solid #cdb87c;
+      margin-top: 2em; }

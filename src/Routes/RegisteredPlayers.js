@@ -1,10 +1,29 @@
 import React, { Component } from 'react'
 
+import { Subscription } from '../streamLib/stream'
+import { UserContext } from '../App'
+import EditTableContent from './EditTableContent'
+import PlayerTableContent from './PlayerTableContent'
+
 import './PlayerList.css'
 
 class RegisteredPlayers extends Component {
-  state = {
+  constructor (props) {
+    super(props)
+    this.state = {data: []}
+  }
 
+  componentDidMount() {
+    this.subscription = new Subscription('/users',
+    (info) => {
+      this.setState({
+        data: info
+      })
+    })
+  }
+
+  componentWillUnmount() {
+    this.subscription && this.subscription.end()
   }
 
   render () {
@@ -22,12 +41,17 @@ class RegisteredPlayers extends Component {
             </tr>
           </thead>
           <tbody>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            {this.state.data.map((user) => {
+              return (
+                <UserContext.Consumer key={user}>
+                  {(me) => {
+                    return user === me._key
+                    ? <EditTableContent key={user} user={user} me={me} />
+                    : <PlayerTableContent key={user} user={user} me={me} />
+                  }}
+                </UserContext.Consumer>
+              )
+            })}
           </tbody>
         </table>
       </div>

@@ -1,10 +1,10 @@
 import http from 'stream-http'
 
-const host = 'pitt.lol'
+const host = 'localhost'
 const port = '4200'
 
 let isFunction = function(obj) {
-    return typeof obj === 'function' || false;
+  return typeof obj === 'function' || false;
 };
 
 class Subscription {
@@ -12,7 +12,7 @@ class Subscription {
     this.path =  url
     this.listeners = new Map();
     this.on('data', cb)
-    this.req = http.get('https://' + host + ':' + port + this.path, {withCredentials: true}, (res) => {
+    this.req = http.get({path: `https://${host}:${port}${this.path}`, withCredentials: true}, (res) => {
       res.on('data', (buf) => {
         const primedBuf = buf.toString().replace(/}{/g,'}}{{')
         primedBuf.split('}{').forEach((d) => {

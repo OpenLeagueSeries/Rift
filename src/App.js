@@ -5,6 +5,7 @@ import MediaQuery from 'react-responsive'
 // import Nav from './Routes/Interface/Nav'
 // import MobileNav from './Routes/Interface/MobileNav'
 // import Draft from './Draft/Draft'
+import { Subscription } from './streamLib/stream'
 import RegisteredPlayers from './Routes/RegisteredPlayers'
 import DesktopRegister from './Routes/DesktopRegister'
 import MobileRegister from './Routes/MobileRegister'
@@ -52,12 +53,29 @@ const theme = createMuiTheme({
 const generateClassName = createGenerateClassName()
 const jss = create(jssPreset())
 
+export const UserContext = React.createContext({_key:''})
+
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {me: {_key: ''}}
+  }
+
+  componentDidMount() {
+    this.subscription = new Subscription('/me',
+    (info) => {
+      this.setState({
+        me: info
+      })
+    })
+  }
+
   render() {
     return (
       <JssProvider jss={jss} generateClassName={generateClassName}>
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
+          <UserContext.Provider value={this.state.me}>
           <BrowserRouter>
             <div>
               <Route exact path='/' render={() => <Redirect to="/register" /> } />
@@ -78,6 +96,7 @@ class App extends Component {
               </MediaQuery>
             </div>
           </BrowserRouter>
+          </UserContext.Provider>
         </MuiThemeProvider>
       </JssProvider>
     )

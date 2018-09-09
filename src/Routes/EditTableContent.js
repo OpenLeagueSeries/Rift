@@ -20,6 +20,7 @@ class EditTableContent extends Component {
       this.setState({
         data: info
       })
+      this.subscription.end()
     })
   }
 
@@ -39,7 +40,7 @@ class EditTableContent extends Component {
   render() {
     return(
       <tr>
-        <span><PlayerInitials name={this.state.data.name}/></span>
+        <td><PlayerInitials name={this.state.data.name}/></td>
         <td>{this.state.data.name}</td>
         <td>{this.state.data.ign}</td>
         <td><TextField value={this.state.data.roles} onChange={this.handleEdit('roles')}></TextField></td>

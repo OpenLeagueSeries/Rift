@@ -42,7 +42,8 @@ class Subscription {
       headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(info)
-      }
+      },
+      withCredentials: true
     });
     req.write(JSON.stringify(info));
     req.end();

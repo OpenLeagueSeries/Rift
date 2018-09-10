@@ -80,11 +80,11 @@ class App extends Component {
             <div>
               <Route exact path='/' render={() => <Redirect to="/register" /> } />
               <Route path='/confirmed' component={Confirmation} />
+              <Route path='/players' component={RegisteredPlayers} />
               {/* WEB */}
               <MediaQuery minDeviceWidth={1224}>
                 {/* <Nav /> */}
                 {/* <Route path='/draft' component={Draft} /> */}
-                <Route path='/players' component={RegisteredPlayers} />
                 <Route path='/register' component={DesktopRegister} />
               </MediaQuery>
 

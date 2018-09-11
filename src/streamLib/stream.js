@@ -12,7 +12,7 @@ class Subscription {
     this.path =  url
     this.listeners = new Map();
     this.on('data', cb)
-    this.req = http.get({path: `https://${host}:${port}${this.path}`, withCredentials: true}, (res) => {
+    this.req = http.get({path: `https://${host}:${port}${this.path}`, withCredentials: true, requestTimeout: 9007199254740991}, (res) => {
       res.on('data', (buf) => {
         const primedBuf = buf.toString().replace(/}{/g,'}}{{')
         primedBuf.split('}{').forEach((d) => {

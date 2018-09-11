@@ -20,6 +20,8 @@ export function ignValidator (event) {
   this.setState({
     ign: event.target.value
   }, () => {
+    const IGNRegex = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
+
     if (this.state.ign === '' || this.state.ign.length < 3) {
       this.setState(state =>
         ({ IGNHelperText: defaultHelperText[0], inputIgnError: false, nextForm: false }))
@@ -28,7 +30,7 @@ export function ignValidator (event) {
       this.setState(state =>
         ({ IGNHelperText: 'Your IGN is longer than 16 characters', inputIgnError: true, nextForm: false }))
     }
-    if (!validator.matches(this.state.ign, /^[a-z0-9 ]+$/i) && this.state.ign !== '') {
+    if (!validator.matches(this.state.ign, IGNRegex) && this.state.ign !== '') {
       this.setState(state =>
         ({ IGNHelperText: 'Your IGN contains invalid character(s)', inputIgnError: true, nextForm: false }))
     }

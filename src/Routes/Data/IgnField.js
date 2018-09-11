@@ -20,7 +20,7 @@ export function ignValidator (event) {
   this.setState({
     ign: event.target.value
   }, () => {
-    const IGNRegex = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
+    const IGNRegex = /^[a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
 
     if (this.state.ign === '' || this.state.ign.length < 3) {
       this.setState(state =>
@@ -34,7 +34,7 @@ export function ignValidator (event) {
       this.setState(state =>
         ({ IGNHelperText: 'Your IGN contains invalid character(s)', inputIgnError: true, nextForm: false }))
     }
-    if (this.state.ign.length >= 3 && this.state.ign.length <= 16 && validator.matches(this.state.ign, /^[a-z0-9 ]+$/i)) {
+    if (this.state.ign.length >= 3 && this.state.ign.length <= 16 && validator.matches(this.state.ign, IGNRegex)) {
       this.setState(state =>
         ({ IGNHelperText: defaultHelperText[1], inputIgnError: false, nextForm: true, reviewForm: true }))
     }
@@ -42,7 +42,7 @@ export function ignValidator (event) {
 }
 
 export const IgnField = (props) => {
-  const disableButton = props.ign === '' || props.ign.length < 3 || props.ign.length > 16 || !validator.matches(props.ign, /^[a-z0-9 ]+$/i)
+  const disableButton = props.ign === '' || props.ign.length < 3 || props.ign.length > 16 || !validator.matches(props.ign, IGNRegex)
 
   return (
     <div>

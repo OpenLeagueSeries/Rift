@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 
 import { Subscription } from '../streamLib/stream'
+import { PlayerInitials } from './Data/PlayerInitials'
+import EditPlayerRole from './Data/EditPlayerRole'
 
 import TextField from '@material-ui/core/TextField'
 
-import { PlayerInitials } from './Data/PlayerInitials'
 import CaptainIcon from 'mdi-material-ui/Crown'
 
 class EditTableContent extends Component {
@@ -30,6 +31,8 @@ class EditTableContent extends Component {
 
   handleEdit = (target) => (ev) => {
     const update = {}
+    console.log(ev)
+    console.log(target)
     update[target] = ev.target.value
     this.setState({
       data: { ...this.state.data, ...update}}, () => {
@@ -38,12 +41,13 @@ class EditTableContent extends Component {
   }
 
   render() {
-    return(
+    console.log(this.state.data.selectedRoles)
+    return (
       <tr>
         <td><PlayerInitials name={this.state.data.name}/></td>
         <td>{this.state.data.name}</td>
         <td>{this.state.data.ign}</td>
-        <td><TextField value={this.state.data.roles} onChange={this.handleEdit('roles')}></TextField></td>
+        <td><EditPlayerRole handleRole={this.handleEdit} selectedRoles={this.state.data.selectedRoles || []}/></td>
         <td><TextField value={this.state.data.notes} onChange={this.handleEdit('notes')}></TextField></td>
         <td><TextField value={this.state.data.captainBool} onChange={this.handleEdit('captainBool')}></TextField></td>
         {this.props.me.role === 'Admin'

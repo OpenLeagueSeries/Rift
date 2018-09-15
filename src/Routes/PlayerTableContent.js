@@ -25,7 +25,7 @@ class PlayerTableContent extends Component {
   }
 
   render() {
-    return(
+    return (
       <tr>
         <td><PlayerInitials name={this.state.data.name}/></td>
         <td>{this.state.data.name}</td>

@@ -4,14 +4,15 @@
   height: auto;
   background: linear-gradient(#03091f, #1c2957, #03091f);
   color: #fff;
-  font-family: "Trebuchet MS";
+  font-family: 'Trebuchet MS';
   justify-content: center; }
   .playerListDisplay .tableContainer {
     border-collapse: collapse;
     margin-right: 5vw; }
     .playerListDisplay .tableContainer .avatarColor {
       background-color: #cdb87c; }
-    .playerListDisplay .tableContainer td, .playerListDisplay .tableContainer th {
+    .playerListDisplay .tableContainer td,
+    .playerListDisplay .tableContainer th {
       text-align: center; }
     .playerListDisplay .tableContainer th:not(:first-child) {
       font-size: 20px;
@@ -19,7 +20,8 @@
     .playerListDisplay .tableContainer th:first-child {
       padding-top: 1em;
       padding-bottom: 1em; }
-    .playerListDisplay .tableContainer th:not(:last-child), .playerListDisplay .tableContainer td:not(:first-child) {
+    .playerListDisplay .tableContainer th:not(:last-child),
+    .playerListDisplay .tableContainer td:not(:first-child) {
       padding-right: 5vw; }
     .playerListDisplay .tableContainer td:not(:first-child) {
       border-top: 1px solid #cdb87c;
@@ -27,3 +29,60 @@
       margin-top: 2em;
       padding-top: 1em;
       padding-bottom: 1em; }
+
+@media (max-width: 960px) {
+  .playerListDisplay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: auto;
+    background: linear-gradient(#03091f, #1c2957, #03091f);
+    color: #fff;
+    font-family: 'Trebuchet MS';
+    display: block; }
+    .playerListDisplay .tableContainer {
+      border-collapse: collapse;
+      margin-right: 0; }
+      .playerListDisplay .tableContainer .avatarColor {
+        background-color: #cdb87c; }
+      .playerListDisplay .tableContainer .avatar {
+        display: none; }
+      .playerListDisplay .tableContainer thead {
+        border-bottom: 1px solid #cdb87c;
+        padding-bottom: 5px; }
+      .playerListDisplay .tableContainer th:first-child {
+        display: none; }
+      .playerListDisplay .tableContainer tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.078); }
+      .playerListDisplay .tableContainer th:not(:first-child) {
+        font-size: 16px;
+        border-bottom: none; }
+      .playerListDisplay .tableContainer th:first-child {
+        padding-top: 0.5em;
+        padding-bottom: 0.5em; }
+      .playerListDisplay .tableContainer th:nth-child(2) {
+        text-align: left;
+        padding-left: 5px; }
+      .playerListDisplay .tableContainer th:not(:last-child),
+      .playerListDisplay .tableContainer td:not(:first-child) {
+        padding-right: 8px; }
+      .playerListDisplay .tableContainer td:not(:first-child) {
+        border-top: none;
+        border-bottom: none;
+        margin-top: 1em;
+        text-align: center;
+        padding: 2em 0; }
+      .playerListDisplay .tableContainer td:nth-child(2) {
+        text-align: left;
+        padding-left: 5px; }
+      .playerListDisplay .tableContainer td,
+      .playerListDisplay .tableContainer th {
+        text-align: center;
+        font-size: 14px;
+        padding: 2em 0; }
+      .playerListDisplay .tableContainer .notes {
+        margin: 0 1em !important;
+        text-align: left !important;
+        padding-left: 2em !important;
+        margin-right: 2em !important; } }

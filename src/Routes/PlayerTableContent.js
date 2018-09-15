@@ -1,45 +1,49 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import { PlayerInitials } from './Data/PlayerInitials'
-import { Subscription } from '../streamLib/stream'
+import { PlayerInitials } from './Data/PlayerInitials';
+import { Subscription } from '../streamLib/stream';
 
-import CaptainIcon from 'mdi-material-ui/Crown'
+import CaptainIcon from 'mdi-material-ui/Crown';
 
 class PlayerTableContent extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {data: []}
+  constructor(props) {
+    super(props);
+    this.state = { data: [] };
   }
 
   componentDidMount() {
-    this.subscription = new Subscription(`/details/${this.props.user}`,
-    (info) => {
+    this.subscription = new Subscription(`/details/${this.props.user}`, info => {
       this.setState({
         data: info
-      })
-    })
+      });
+    });
   }
 
   componentWillUnmount() {
-    this.subscription && this.subscription.end()
+    this.subscription && this.subscription.end();
   }
 
   render() {
     return (
       <tr>
-        <td><PlayerInitials name={this.state.data.name}/></td>
-        <td>{this.state.data.name}</td>
-        <td>{this.state.data.ign}</td>
+        <td className="avatar">
+          <PlayerInitials name={this.state.data.name} />
+        </td>
+        <td className="name">{this.state.data.name}</td>
+        <td className="ign">{this.state.data.ign}</td>
         <td>{this.state.data.roles}</td>
-        <td>{this.state.data.notes}</td>
+        <td class="notes">{this.state.data.notes}</td>
         <td>{this.state.data.captainBool}</td>
-        {this.props.me.role === 'Admin'
-          ? <td><CaptainIcon /></td>
-          : <React.Fragment />
-        }
+        {this.props.me.role === 'Admin' ? (
+          <td>
+            <CaptainIcon />
+          </td>
+        ) : (
+          <React.Fragment />
+        )}
       </tr>
-    )
+    );
   }
 }
 
-export default PlayerTableContent
+export default PlayerTableContent;

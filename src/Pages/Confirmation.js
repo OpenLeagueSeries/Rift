@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import MediaQuery from 'react-responsive'
 
 import Paper from '@material-ui/core/Paper'
@@ -18,10 +19,11 @@ class Home extends Component {
               <div>
                 <h1>Congratulations!</h1>
                 <h3>Your email was succesfully confirmed!</h3>
+                <h4>Click the cookie to see who's all registered!</h4>
               </div>
               <div className='NGE'>
                 <div className='shinji'><img src={Yeahyeah} alt='yeah: {yeah}' /></div>
-                <div className='cookie'><img src={Cookie} alt='OMMNOMNOMNOMNOMNOMNOM' /></div>
+                <Link to='/players' className='cookie'><img src={Cookie} alt='OMMNOMNOMNOMNOMNOMNOM' /></Link>
               </div>
               <div className='caption'>
                 <p>A cookie with your information was placed locally in your browser!</p>
@@ -39,10 +41,11 @@ class Home extends Component {
               <div>
                 <h1>Congratulations!</h1>
                 <h3>Your email was succesfully confirmed!</h3>
+                <h4>Click the cookie to see who's all registered!</h4>
               </div>
               <div className='NGE'>
                 <div className='shinji'><img src={Yeahyeah} alt='yeah: {yeah}' /></div>
-                <div className='cookie'><img src={Cookie} alt='OMMNOMNOMNOMNOMNOMNOM' /></div>
+                <Link to='/players' className='cookie'><img src={Cookie} alt='OMMNOMNOMNOMNOMNOMNOM' /></Link>
               </div>
               <div className='caption'>
                 <p>A cookie with your information was placed locally in your browser!</p>

@@ -1,0 +1,35 @@
+.playerListDisplay {
+  display: flex;
+  width: 100vw;
+  height: auto;
+  background: linear-gradient(#03091f, #1c2957, #03091f);
+  color: #fff;
+  font-family: "Trebuchet MS";
+  justify-content: center;
+  .tableContainer {
+    border-collapse: collapse;
+    margin-right: 5vw;
+    .avatarColor { background-color: #cdb87c; }
+    td, th {
+      text-align: center;
+    }
+    th:not(:first-child) {
+      font-size: 20px;
+      border-bottom: 3px solid #cdb87c;
+    }
+    th:first-child {
+      padding-top: 1em;
+      padding-bottom: 1em;
+    }
+    th:not(:last-child), td:not(:first-child) {
+      padding-right: 5vw;
+    }
+    td:not(:first-child) {
+      border-top: 1px solid #cdb87c;
+      border-bottom: 1px solid #cdb87c;
+      margin-top: 2em;
+      padding-top: 1em;
+      padding-bottom: 1em;
+    }
+  }
+}

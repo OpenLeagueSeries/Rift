@@ -11,6 +11,8 @@ import NextIcon from '@material-ui/icons/ExpandMore'
 
 import '../MobileRegister.css'
 
+const NameRegEx = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
+
 export function nameValidator (event) {
   const defaultHelperText = [
     'Your first and last name here',
@@ -21,7 +23,6 @@ export function nameValidator (event) {
     name: event.target.value
   }, () => {
     const NameSpace = this.state.name.split(' ')
-    const NameRegEx = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
 
     if (this.state.name === '' || NameSpace[1] === '' || NameSpace.length - 1 === 0) {
       this.setState(state =>
@@ -54,7 +55,6 @@ export function nameValidator (event) {
 
 export const NameField = (props) => {
   const NameSpace = props.name.split(' ')
-  const NameRegEx = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
   const disableButton = props.name === '' || NameSpace[NameSpace.length-1] === '' || NameSpace.length - 1 === 0 || !validator.matches(props.name, NameRegEx) || validator.matches(props.name, /[ ]{2,}/) || props.name.charAt(0) === ' '
 
   return (

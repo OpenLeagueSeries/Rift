@@ -4,7 +4,8 @@
   justify-content: flex-start;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(#08090d, #03091f); }
+  background: linear-gradient(#08090d, #03091f);
+  overflow-x: hidden; }
   .registerDisplay .main {
     margin-top: 2vh;
     width: auto;

@@ -171,7 +171,7 @@ class DesktopRegister extends Component {
             Official OLS Registration 2018
           </div>
           <div className='join'>Join us at:</div>
-          <div className='social'>
+            <div className='social'>
               <div className='facebook'>
                 <Tooltip title='Facebook'>
                   <a href='https://www.facebook.com/groups/LoLatPitt/' target='_blank' rel='noopener noreferrer'>
@@ -180,27 +180,27 @@ class DesktopRegister extends Component {
                   </a>
                 </Tooltip>
               </div>
-            <div className='teamspeak'>
-              <Tooltip title='TeamSpeak'>
-                <a href='https://www.teamspeak.com/en/downloads' target='_blank' rel='noopener noreferrer'>
-                  <div className='TSlogo'></div>
-                  <div className='TSinfo'>
-                    <div>Server: pitt.lol</div>
-                    <div>Password: pittlol</div>
-                  </div>
-                </a>
-              </Tooltip>
-            </div>
-            <div className='discord'>
-              <Tooltip title='Discord'>
-                <a href='https://discord.gg/n74BaQq' target='_blank' rel='noopener noreferrer'>
-                  <div className='DSlogo'><DiscIcon /></div>
-                  <div className='DSinfo'>discord.gg/n74BaQq</div>
-                </a>
-              </Tooltip>
+              <div className='teamspeak'>
+                <Tooltip title='TeamSpeak'>
+                  <a href='https://www.teamspeak.com/en/downloads' target='_blank' rel='noopener noreferrer'>
+                    <div className='TSlogo'></div>
+                    <div className='TSinfo'>
+                      <div>Server: pitt.lol</div>
+                      <div>Password: pittlol</div>
+                    </div>
+                  </a>
+                </Tooltip>
+              </div>
+              <div className='discord'>
+                <Tooltip title='Discord'>
+                  <a href='https://discord.gg/n74BaQq' target='_blank' rel='noopener noreferrer'>
+                    <div className='DSlogo'><DiscIcon /></div>
+                    <div className='DSinfo'>discord.gg/n74BaQq</div>
+                  </a>
+                </Tooltip>
+              </div>
             </div>
           </div>
-        </div>
         <div className='formSide'>
           <div className='signUpForm'>
             <div className='inputContainer'>

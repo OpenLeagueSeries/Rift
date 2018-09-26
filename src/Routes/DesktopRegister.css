@@ -12,7 +12,8 @@
     align-items: center;
     font-size: 25px;
     font-family: "Verdana";
-    width: 650px; }
+    width: 650px;
+    margin-left: -7.5%; }
     .desktopDisplay .logoArea img {
       width: 90%;
       margin-bottom: 0.5em; }

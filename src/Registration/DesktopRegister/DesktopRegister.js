@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 
-import { NameField, nameValidator } from './InputForms/NameField'
-import { IgnField, ignValidator } from './InputForms/IgnField'
-import { EmailField, emailValidator } from './InputForms/EmailField'
-import { Request } from '../streamLib/stream'
-import { Social } from '../Tiddlywinks/Social'
-import { withRegisterLogic } from './RegistrationLogic'
+import { NameField, nameValidator } from '../InputForms/NameField'
+import { IgnField, ignValidator } from '../InputForms/IgnField'
+import { EmailField, emailValidator } from '../InputForms/EmailField'
+import { Social } from '../../Utility/Social'
+import RegisterLogic from '../RegisterLogic'
 
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
@@ -13,7 +12,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Snackbar from '@material-ui/core/Snackbar'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
-import lolPittLogo from '../../src/assets/newestPittLogo.png'
+import lolPittLogo from '../../../src/assets/newestPittLogo.png'
 import ResetIcon from '@material-ui/icons/Clear'
 import SendIcon from '@material-ui/icons/Send'
 import NameIcon from '@material-ui/icons/AccountCircle'
@@ -26,6 +25,24 @@ import BlankIcon from 'mdi-material-ui/Help'
 import './DesktopRegister.css'
 
 class DesktopRegister extends Component {
+
+  state = RegisterLogic.state
+
+  constructor(props) {
+    super(props)
+    this.nameValidator = nameValidator.bind(this)
+    this.ignValidator = ignValidator.bind(this)
+    this.emailValidator = emailValidator.bind(this)
+    this.nameInputField = React.createRef()
+  }
+
+  handleField = RegisterLogic.handleField(this)
+  handleSubmit = RegisterLogic.handleSubmit(this)
+  handleClose = RegisterLogic.handleClose(this)
+  sendRegister = RegisterLogic.sendRegister(this)
+  handleIncomplete = RegisterLogic.handleIncomplete(this)
+  handleContinue = RegisterLogic.handleContinue(this)
+
   handleReset = () => {
     this.setState(state => ({
       name: '',
@@ -43,6 +60,7 @@ class DesktopRegister extends Component {
     }))
     this.nameInputField.current.focus()
   }
+
 
   render() {
     const disableButton = this.state.name === '' || this.state.ign === '' || this.state.email === '' || this.state.inputNameError || this.state.inputIgnError || this.state.inputEmailError || this.state.NameHelperText !== 'Looks good!' || this.state.IGNHelperText !== 'Looks good!' || this.state.EmailHelperText !== 'Looks good!' || this.state.submitted

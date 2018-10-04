@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-import { NameField, nameValidator } from './InputForms/NameField'
-import { IgnField, ignValidator } from './InputForms/IgnField'
-import { EmailField, emailValidator } from './InputForms/EmailField'
-import { Request } from '../streamLib/stream'
+import { NameField, nameValidator } from '../InputForms/NameField'
+import { IgnField, ignValidator } from '../InputForms/IgnField'
+import { EmailField, emailValidator } from '../InputForms/EmailField'
+import RegisterLogic from '../RegisterLogic'
 
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
@@ -14,7 +14,7 @@ import Paper from '@material-ui/core/Paper'
 import Snackbar from '@material-ui/core/Snackbar'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
-import lolPittLogo from '../../src/assets/newestPittLogo.png'
+import lolPittLogo from '../../../src/assets/newestPittLogo.png'
 import RedoIcon from 'mdi-material-ui/RedoVariant'
 import ResetIcon from '@material-ui/icons/Clear'
 import SendIcon from '@material-ui/icons/Send'
@@ -47,6 +47,13 @@ class MobileRegister extends Component {
     this.emailValidator = emailValidator.bind(this)
   }
 
+  handleField = RegisterLogic.handleField(this)
+  handleSubmit = RegisterLogic.handleSubmit(this)
+  handleClose = RegisterLogic.handleClose(this)
+  sendRegister = RegisterLogic.sendRegister(this)
+  handleIncomplete = RegisterLogic.handleIncomplete(this)
+  handleContinue = RegisterLogic.handleContinue(this)
+
   handleNext = (ev) => {
     ev.preventDefault()
     if (this.state.activeStep === 0 && this.state.NameHelperText === 'Looks good!') {
@@ -70,36 +77,10 @@ class MobileRegister extends Component {
     }))
   }
 
-  handleField = inputType => event => {
-    switch (inputType) {
-      case 'name':
-        this.nameValidator(event)
-        break
-      case 'ign':
-        this.ignValidator(event)
-        break
-      case 'email':
-        this.emailValidator(event)
-        break
-      default:
-        return null
-    }
-  }
-
   handleReview = () => {
     this.setState(state => ({
       activeStep: 0
     }))
-  }
-
-  handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return
-    }
-    this.setState(state => ({
-      open: false
-    }))
-    setTimeout(this.handleReset(), 2500)
   }
 
   handleReset = () => {
@@ -117,27 +98,6 @@ class MobileRegister extends Component {
       open: false,
       message: ''
     }))
-  }
-
-  sendRegister = () => {
-    this.req = new Request('/register', {name: this.state.name, ign: this.state.ign, email: this.state.email}, (result) => {
-      if (result.success) {
-        this.setState(state => ({
-          message: 'Check your email for a magic login link!', open: true
-        }))
-      } else {
-        if (result.data === 'Email already exists') {
-          this.setState(state => ({
-            message: 'This email has already been registered!', open: true, inputEmailError: true, EmailHelperText: 'This email is already in our system!'
-          }))
-        }
-        if (result.data === 'Server error') {
-          this.setState(state => ({
-            message: 'Something went wrong with the server D:', open: true
-          }))
-        }
-      }
-    })
   }
 
   render() {

@@ -4,8 +4,8 @@ import MediaQuery from 'react-responsive'
 
 import Paper from '@material-ui/core/Paper'
 
-import Yeahyeah from '../../src/assets/yeah-yeah.gif'
-import Cookie from '../../src/assets/cookie.png'
+import Yeahyeah from '../../../src/assets/yeah-yeah.gif'
+import Cookie from '../../../src/assets/cookie.png'
 
 import './confirm.css'
 

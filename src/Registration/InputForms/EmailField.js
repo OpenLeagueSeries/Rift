@@ -40,23 +40,12 @@ export const EmailField = (props) => {
   return (
     <div>
       <form onSubmit={props.nextStep}>
-        <MediaQuery minDeviceWidth={1224}>
-          <TextField
-            error={props.inputEmailError}
-            className='emailForm'
-            label='Email Address'
-            placeholder='Imaqtpielol@gmail.com'
-            helperText={props.helperText}
-            value={props.email}
-            onChange={props.handleChange}
-            fullWidth
-          />
-        </MediaQuery>
-        <MediaQuery maxDeviceWidth={1224}>
-          <div className='emailInfo'>
-            This email will be used to confirm your
-            registration!
-          </div>
+          <MediaQuery maxDeviceWidth={1224}>
+            <div className='emailInfo'>
+              This email will be used to confirm your
+              registration!
+            </div>
+          </MediaQuery>
           <TextField
             autoFocus
             className='emailForm'
@@ -67,7 +56,6 @@ export const EmailField = (props) => {
             onChange={props.handleChange}
             fullWidth
           />
-        </MediaQuery>
       </form>
       <MediaQuery maxDeviceWidth={1224}>
         <div className='actionsContainer'>

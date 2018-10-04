@@ -48,7 +48,6 @@ export const IgnField = (props) => {
   return (
     <div>
       <form onSubmit={props.nextStep}>
-        <MediaQuery minDeviceWidth={1224}>
           <TextField
             error={props.inputIgnError}
             className='ignForm'
@@ -59,20 +58,6 @@ export const IgnField = (props) => {
             onChange={props.handleChange}
             fullWidth
           />
-        </MediaQuery>
-        <MediaQuery maxDeviceWidth={1224}>
-          <TextField
-            autoFocus
-            error={props.inputIgnError}
-            className='ignForm'
-            label='Summoner Name'
-            placeholder='Imaqtpie'
-            helperText={props.helperText}
-            value={props.ign}
-            onChange={props.handleChange}
-            fullWidth
-          />
-        </MediaQuery>
       </form>
       <MediaQuery maxDeviceWidth={1224}>
         <div className='actionsContainer'>

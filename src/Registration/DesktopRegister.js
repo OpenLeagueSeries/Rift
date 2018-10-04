@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 
-import { NameField, nameValidator } from './Data/NameField'
-import { IgnField, ignValidator } from './Data/IgnField'
-import { EmailField, emailValidator } from './Data/EmailField'
+import { NameField, nameValidator } from './InputForms/NameField'
+import { IgnField, ignValidator } from './InputForms/IgnField'
+import { EmailField, emailValidator } from './InputForms/EmailField'
 import { Request } from '../streamLib/stream'
+import { Social } from '../Tiddlywinks/Social'
+import { withRegisterLogic } from './RegistrationLogic'
 
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
@@ -20,71 +22,10 @@ import EmailIcon from 'mdi-material-ui/Email'
 import DoneIcon from '@material-ui/icons/Done'
 import ErrorIcon from 'mdi-material-ui/Exclamation'
 import BlankIcon from 'mdi-material-ui/Help'
-import FBIcon from 'mdi-material-ui/FacebookBox'
-import DiscIcon from 'mdi-material-ui/Discord'
 
 import './DesktopRegister.css'
 
 class DesktopRegister extends Component {
-  state = {
-    name: '',
-    NameHelperText: 'Your first and last name here',
-    ign: '',
-    IGNHelperText: 'Your IGN is at least 3 characters',
-    email: '',
-    EmailHelperText: 'Preferred Email',
-    inputNameError: false,
-    inputIgnError: false,
-    inputEmailError: false,
-    open: false,
-    submitted: false,
-    message: ''
-  }
-
-  constructor(props) {
-    super(props)
-    this.nameValidator = nameValidator.bind(this)
-    this.ignValidator = ignValidator.bind(this)
-    this.emailValidator = emailValidator.bind(this)
-    this.nameInputField = React.createRef()
-  }
-
-  handleField = inputType => event => {
-    switch (inputType) {
-      case 'name':
-        this.nameValidator(event)
-        break
-      case 'ign':
-        this.ignValidator(event)
-        break
-      case 'email':
-        this.emailValidator(event)
-        break
-      default:
-        return null
-    }
-  }
-
-  handleSubmit = (ev) => {
-    ev.preventDefault()
-    if (this.state.NameHelperText === 'Looks good!' && this.state.IGNHelperText === 'Looks good!' && this.state.EmailHelperText === 'Looks good!' && !this.state.submitted) {
-      this.sendRegister()
-    } else {
-      this.handleIncomplete()
-      setTimeout(this.handleContinue, 2500)
-    }
-  }
-
-  handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return
-    }
-    this.setState(state => ({
-      submitted: false
-    }))
-    setTimeout(this.handleReset(), 2500)
-  }
-
   handleReset = () => {
     this.setState(state => ({
       name: '',
@@ -103,63 +44,6 @@ class DesktopRegister extends Component {
     this.nameInputField.current.focus()
   }
 
-  sendRegister = () => {
-    this.req = new Request('/register', {name: this.state.name, ign: this.state.ign, email: this.state.email}, (result) => {
-      if (result.success) {
-        this.setState(state => ({
-          message: 'Check your email for a magic login link!', submitted: true
-        }))
-      } else {
-        if (result.data === 'Email already exists') {
-          this.setState(state => ({
-            message: 'This email has already been registered!', submitted: true, inputEmailError: true, EmailHelperText: 'This email is already in our system!'
-          }))
-        }
-        if (result.data === 'Server error') {
-          this.setState(state => ({
-            message: 'Something went wrong with the server D:', submitted: true
-          }))
-        }
-      }
-    })
-  }
-
-  handleIncomplete = () => {
-    if (this.state.NameHelperText !== 'Looks good!' && this.state.inputNameError === false) {
-      this.setState(state => ({
-        inputNameError: true, open: true, NameHelperText: 'Check your name input!'
-      }))
-    }
-    if (this.state.IGNHelperText !== 'Looks good!' && this.state.inputIgnError === false) {
-      this.setState(state => ({
-        inputIgnError: true, open: true, IGNHelperText: 'Check your IGN input!'
-      }))
-    }
-    if (this.state.EmailHelperText !== 'Looks good!' && this.state.inputEmailError === false && this.state.message !== 'This email has already been registered!') {
-      this.setState(state => ({
-        inputEmailError: true, open: true, EmailHelperText: 'Check your email input!'
-      }))
-    }
-  }
-
-  handleContinue = () => {
-    if (this.state.NameHelperText !== 'Looks good!' && this.state.inputNameError === true) {
-      this.setState(state => ({
-        inputNameError: false, open: false, NameHelperText: 'Your first and last name here'
-      }))
-    }
-    if (this.state.IGNHelperText !== 'Looks good!' && this.state.inputIgnError === true) {
-      this.setState(state => ({
-        inputIgnError: false, open: false, IGNHelperText: 'Your IGN is at least 3 characters'
-      }))
-    }
-    if (this.state.EmailHelperText !== 'Looks good!' && this.state.inputEmailError === true) {
-      this.setState(state => ({
-        inputEmailError: false, open: false, EmailHelperText: 'Preferred Email'
-      }))
-    }
-  }
-
   render() {
     const disableButton = this.state.name === '' || this.state.ign === '' || this.state.email === '' || this.state.inputNameError || this.state.inputIgnError || this.state.inputEmailError || this.state.NameHelperText !== 'Looks good!' || this.state.IGNHelperText !== 'Looks good!' || this.state.EmailHelperText !== 'Looks good!' || this.state.submitted
 
@@ -171,35 +55,7 @@ class DesktopRegister extends Component {
             Official OLS Registration 2018
           </div>
           <div className='join'>Join us at:</div>
-            <div className='social'>
-              <div className='facebook'>
-                <Tooltip title='Facebook'>
-                  <a href='https://www.facebook.com/groups/LoLatPitt/' target='_blank' rel='noopener noreferrer'>
-                    <FBIcon className='fbIcon'/>
-                    <div className='FBinfo'>LoL@Pitt</div>
-                  </a>
-                </Tooltip>
-              </div>
-              <div className='teamspeak'>
-                <Tooltip title='TeamSpeak'>
-                  <a href='https://www.teamspeak.com/en/downloads' target='_blank' rel='noopener noreferrer'>
-                    <div className='TSlogo'></div>
-                    <div className='TSinfo'>
-                      <div>Server: pitt.lol</div>
-                      <div>Password: pittlol</div>
-                    </div>
-                  </a>
-                </Tooltip>
-              </div>
-              <div className='discord'>
-                <Tooltip title='Discord'>
-                  <a href='https://discord.gg/n74BaQq' target='_blank' rel='noopener noreferrer'>
-                    <div className='DSlogo'><DiscIcon /></div>
-                    <div className='DSinfo'>discord.gg/n74BaQq</div>
-                  </a>
-                </Tooltip>
-              </div>
-            </div>
+            <Social />
           </div>
         <div className='formSide'>
           <div className='signUpForm'>

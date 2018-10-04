@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
-import { NameField, nameValidator } from './Data/NameField'
-import { IgnField, ignValidator } from './Data/IgnField'
-import { EmailField, emailValidator } from './Data/EmailField'
+import { NameField, nameValidator } from './InputForms/NameField'
+import { IgnField, ignValidator } from './InputForms/IgnField'
+import { EmailField, emailValidator } from './InputForms/EmailField'
 import { Request } from '../streamLib/stream'
 
 import Stepper from '@material-ui/core/Stepper'

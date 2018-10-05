@@ -61,7 +61,7 @@ export const NameField = (props) => {
         <TextField
           autoFocus
           inputRef={props.focusField}
-          error={props.inputNameError}
+          error={props.inputError}
           className='nameForm'
           label='Name IRL'
           placeholder='Michael Santana'

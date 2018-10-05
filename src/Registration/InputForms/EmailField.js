@@ -57,7 +57,7 @@ export const EmailField = (props) => {
       </form>
       <MediaQuery maxDeviceWidth={1224}>
         <div className='actionsContainer'>
-          <Button color='secondary' onClick={props.prevStep} disabled={props.inputEmailError}>
+          <Button color='secondary' onClick={props.prevStep} disabled={props.inputError}>
             <BackIcon />
             <span className='buttonLabel'>Back</span>
           </Button>

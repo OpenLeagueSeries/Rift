@@ -59,7 +59,7 @@ export const IgnField = (props) => {
       </form>
       <MediaQuery maxDeviceWidth={1224}>
         <div className='actionsContainer'>
-          <Button color='secondary' onClick={props.prevStep} disabled={props.inputIgnError}>
+          <Button color='secondary' onClick={props.prevStep} disabled={props.inputError}>
             <BackIcon />
             <span className='buttonLabel'>Back</span>
           </Button>

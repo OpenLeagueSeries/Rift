@@ -5,7 +5,6 @@ import Paper from '@material-ui/core/Paper'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Tooltip from '@material-ui/core/Tooltip'
 
-import RedoIcon from 'mdi-material-ui/RedoVariant'
 import ResetIcon from '@material-ui/icons/Clear'
 import SendIcon from '@material-ui/icons/Send'
 

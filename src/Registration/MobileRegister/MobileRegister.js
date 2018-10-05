@@ -10,15 +10,9 @@ import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
 import StepContent from '@material-ui/core/StepContent'
-import Button from '@material-ui/core/Button'
-import Paper from '@material-ui/core/Paper'
 import Snackbar from '@material-ui/core/Snackbar'
-import CircularProgress from '@material-ui/core/CircularProgress'
 
 import lolPittLogo from '../../../src/assets/newestPittLogo.png'
-import RedoIcon from 'mdi-material-ui/RedoVariant'
-import ResetIcon from '@material-ui/icons/Clear'
-import SendIcon from '@material-ui/icons/Send'
 import NameIcon from '@material-ui/icons/AccountCircle'
 import IgnIcon from 'mdi-material-ui/GamepadVariant'
 import EmailIcon from 'mdi-material-ui/Email'
@@ -44,7 +38,7 @@ class MobileRegister extends Component {
   sendRegister = RegisterLogic.sendRegister(this)
   handleIncomplete = RegisterLogic.handleIncomplete(this)
   handleContinue = RegisterLogic.handleContinue(this)
-
+  
   handleNext = (ev) => {
     ev.preventDefault()
     if (this.state.activeStep === 0 && this.state.NameHelperText === 'Looks good!') {
@@ -77,17 +71,7 @@ class MobileRegister extends Component {
   handleReset = () => {
     this.setState(state => ({
       activeStep: 0,
-      name: '',
-      NameHelperText: 'Your first and last name here',
-      ign: '',
-      IGNHelperText: 'Your IGN is at least 3 characters',
-      email: '',
-      EmailHelperText: 'Preferred Email',
-      inputNameError: false,
-      inputIgnError: false,
-      inputEmailError: false,
-      open: false,
-      message: ''
+      ...RegisterLogic.state
     }))
   }
 

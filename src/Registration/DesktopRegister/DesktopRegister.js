@@ -89,7 +89,6 @@ class DesktopRegister extends Component {
             </div>
           </div>
           <CompletionDisplay
-            handleReview={this.handleReview}
             handleReset={this.handleReset}
             handleIncomplete={this.handleIncomplete}
             handleContinue={this.handleContinue}

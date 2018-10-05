@@ -47,6 +47,7 @@ export const IgnField = (props) => {
     <div>
       <form onSubmit={props.nextStep}>
           <TextField
+            autoFocus={window.matchMedia("(max-width: 1224px)").matches}
             error={props.inputError}
             className='ignForm'
             label='Summoner Name'

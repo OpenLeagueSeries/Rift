@@ -45,7 +45,8 @@ export const EmailField = (props) => {
             </div>
           </MediaQuery>
           <TextField
-            autoFocus
+            autoFocus={window.matchMedia("(max-width: 1224px)").matches}
+            error={props.inputError}
             className='emailForm'
             label='Email Address'
             placeholder='Imaqtpielol@gmail.com'

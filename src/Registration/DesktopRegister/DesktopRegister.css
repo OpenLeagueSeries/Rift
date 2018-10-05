@@ -35,7 +35,7 @@
       .desktopDisplay .logoArea .social a:hover {
         color: #cdb87c; }
         .desktopDisplay .logoArea .social a:hover .TSlogo {
-          background: url("../../src/assets/TSIconHover.svg") no-repeat; }
+          background: url("../../../src/assets/TSIconHover.svg") no-repeat; }
       .desktopDisplay .logoArea .social .FBinfo {
         margin-left: 0.5em;
         margin-right: 1em;
@@ -50,7 +50,7 @@
           width: 24px;
           margin-left: 1em;
           margin-right: 0.5em;
-          background: url("../../src/assets/TSIcon.svg") no-repeat; }
+          background: url("../../../src/assets/TSIcon.svg") no-repeat; }
       .desktopDisplay .logoArea .social .TSinfo {
         margin-right: 1em; }
       .desktopDisplay .logoArea .social .DSlogo {

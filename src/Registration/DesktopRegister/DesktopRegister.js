@@ -98,20 +98,12 @@ class DesktopRegister extends Component {
             sendRegister={this.sendRegister}
           />
         </div>
-        {this.state.message === 'This email has already been registered!' ?
-          <Snackbar
-            message={<div>{this.state.message}<br></br>We sent you another email!</div>}
-            open={this.state.submitted}
-            onClose={this.handleClose}
-            autoHideDuration={3500}
-          /> :
-          <Snackbar
-            message={this.state.message}
-            open={this.state.submitted}
-            onClose={this.handleClose}
-            autoHideDuration={2500}
-          />
-        }
+        <Snackbar
+          message={<div>{this.state.message}<br />{this.state.message === 'This email has already been registered!' ? 'We sent you another email!' : ''}</div>}
+          open={this.state.open}
+          onClose={this.handleClose}
+          autoHideDuration={3500}
+        />
       </div>
     )
   }

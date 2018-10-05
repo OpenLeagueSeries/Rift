@@ -47,7 +47,7 @@ export const IgnField = (props) => {
     <div>
       <form onSubmit={props.nextStep}>
           <TextField
-            error={props.inputIgnError}
+            error={props.inputError}
             className='ignForm'
             label='Summoner Name'
             placeholder='Imaqtpie'

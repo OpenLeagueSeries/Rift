@@ -100,7 +100,7 @@ class DesktopRegister extends Component {
         </div>
         <Snackbar
           message={<div>{this.state.message}<br />{this.state.message === 'This email has already been registered!' ? 'We sent you another email!' : ''}</div>}
-          open={this.state.open}
+          open={this.state.submitted}
           onClose={this.handleClose}
           autoHideDuration={3500}
         />

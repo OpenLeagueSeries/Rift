@@ -4,6 +4,7 @@ import { NameField, nameValidator } from '../InputForms/NameField'
 import { IgnField, ignValidator } from '../InputForms/IgnField'
 import { EmailField, emailValidator } from '../InputForms/EmailField'
 import RegisterLogic from '../RegisterLogic'
+import { CompletionDisplay } from './CompletionDisplay'
 
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
@@ -27,17 +28,7 @@ import './MobileRegister.css'
 class MobileRegister extends Component {
   state = {
     activeStep: 0,
-    name: '',
-    NameHelperText: 'Your first and last name here',
-    ign: '',
-    IGNHelperText: 'Your IGN is at least 3 characters',
-    email: '',
-    EmailHelperText: 'Preferred Email',
-    inputNameError: false,
-    inputIgnError: false,
-    inputEmailError: false,
-    open: false,
-    message: ''
+    ...RegisterLogic.state
   }
 
   constructor(props) {
@@ -125,8 +116,8 @@ class MobileRegister extends Component {
                       handleChange={this.handleField('name')}
                       name={this.state.name}
                       helperText={this.state.NameHelperText}
-                      nextStep={this.handleNext}
                       inputNameError={this.state.inputNameError}
+                      nextStep={this.handleNext}
                       nextForm={this.state.nextForm}
                     />
                   )
@@ -138,9 +129,9 @@ class MobileRegister extends Component {
                       handleChange={this.handleField('ign')}
                       ign={this.state.ign}
                       helperText={this.state.IGNHelperText}
+                      inputIgnError={this.state.inputIgnError}
                       nextStep={this.handleNext}
                       prevStep={this.handleBack}
-                      inputIgnError={this.state.inputIgnError}
                       nextForm={this.state.nextForm}
                     />
                   )
@@ -152,9 +143,9 @@ class MobileRegister extends Component {
                       handleChange={this.handleField('email')}
                       email={this.state.email}
                       helperText={this.state.EmailHelperText}
+                      inputEmailError={this.state.inputEmailError}
                       nextStep={this.handleNext}
                       prevStep={this.handleBack}
-                      inputEmailError={this.state.inputEmailError}
                       nextForm={this.state.nextForm}
                     />
                   )
@@ -175,55 +166,19 @@ class MobileRegister extends Component {
           </Stepper>
         </div>
         {activeStep === steps.length && (
-          <div className='CompletionDisplay'>
-            <Paper square elevation={0}>
-              <div className='infoBox'>
-                <div className='textInfo'>Successfully completed -</div>
-                <div className='textInfo2'>Click to send your confirmation email!</div>
-              </div>
-              <div className='completeButtons'>
-                <Button
-                  onClick={this.handleReview}
-                  color='secondary'>
-                  <RedoIcon className='redoIcon' />
-                  <span className='buttonLabel'>Edit Information</span>
-                </Button>
-                <Button
-                  onClick={this.handleReset}
-                  color='secondary'>
-                  <span className='buttonLabel'>Reset</span>
-                  <ResetIcon className='resetIcon' />
-                </Button>
-              </div>
-              <div className='sendButton'>
-                <Button
-                  className='sendEmail'
-                  disabled={this.state.open}
-                  onClick={this.sendRegister}
-                  color='primary'
-                  variant='extendedFab'>
-                  <span className='buttonLabel'>Send Email</span>
-                  <SendIcon className='sendIcon' />
-                </Button>
-                {this.state.open && <CircularProgress className='loading'/>}
-              </div>
-            </Paper>
-          </div>
+          <CompletionDisplay
+            handleReview={this.handleReview}
+            handleReset={this.handleReset}
+            open={this.state.open}
+            sendRegister={this.sendRegister}
+          />
         )}
-        {this.state.message === 'This email has already been registered!' ?
           <Snackbar
-            message={<div>{this.state.message}<br></br>We sent you another email!</div>}
+            message={<div>{this.state.message}<br />{this.state.message === 'This email has already been registered!' ? 'We sent you another email!' : ''}</div>}
             open={this.state.open}
             onClose={this.handleClose}
             autoHideDuration={3500}
-          /> :
-          <Snackbar
-            message={this.state.message}
-            open={this.state.open}
-            onClose={this.handleClose}
-            autoHideDuration={2500}
           />
-        }
       </div>
     )
   }

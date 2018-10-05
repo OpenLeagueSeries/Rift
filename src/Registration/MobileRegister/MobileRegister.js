@@ -38,7 +38,7 @@ class MobileRegister extends Component {
   sendRegister = RegisterLogic.sendRegister(this)
   handleIncomplete = RegisterLogic.handleIncomplete(this)
   handleContinue = RegisterLogic.handleContinue(this)
-  
+
   handleNext = (ev) => {
     ev.preventDefault()
     if (this.state.activeStep === 0 && this.state.NameHelperText === 'Looks good!') {
@@ -100,7 +100,7 @@ class MobileRegister extends Component {
                       handleChange={this.handleField('name')}
                       name={this.state.name}
                       helperText={this.state.NameHelperText}
-                      inputNameError={this.state.inputNameError}
+                      inputError={this.state.inputNameError}
                       nextStep={this.handleNext}
                       nextForm={this.state.nextForm}
                     />
@@ -113,7 +113,7 @@ class MobileRegister extends Component {
                       handleChange={this.handleField('ign')}
                       ign={this.state.ign}
                       helperText={this.state.IGNHelperText}
-                      inputIgnError={this.state.inputIgnError}
+                      inputError={this.state.inputIgnError}
                       nextStep={this.handleNext}
                       prevStep={this.handleBack}
                       nextForm={this.state.nextForm}
@@ -127,7 +127,7 @@ class MobileRegister extends Component {
                       handleChange={this.handleField('email')}
                       email={this.state.email}
                       helperText={this.state.EmailHelperText}
-                      inputEmailError={this.state.inputEmailError}
+                      inputError={this.state.inputEmailError}
                       nextStep={this.handleNext}
                       prevStep={this.handleBack}
                       nextForm={this.state.nextForm}

@@ -4,6 +4,7 @@ import { NameField, nameValidator } from '../InputForms/NameField'
 import { IgnField, ignValidator } from '../InputForms/IgnField'
 import { EmailField, emailValidator } from '../InputForms/EmailField'
 import { Social } from '../../Utility/Social'
+import { CompletionDisplay } from './CompletionDisplay'
 import RegisterLogic from '../RegisterLogic'
 
 import Button from '@material-ui/core/Button'
@@ -134,45 +135,15 @@ class DesktopRegister extends Component {
               registration!
             </div>
           </div>
-          <div className='CompletionDisplay'>
-            <Paper square elevation={0}>
-              <div className='buttonContainer'>
-                <Button
-                  onClick={this.handleReset}
-                  color='secondary'>
-                  <span className='buttonLabel'>Reset</span>
-                  <ResetIcon className='resetIcon' />
-                </Button>
-                <div className='submitButton'>
-                  { disableButton ?
-                    <Tooltip title='Form is still incomplete!' open={this.state.open} onOpen={this.handleIncomplete} onClose={this.handleContinue} leaveDelay={500}>
-                      <div>
-                        <Button
-                          className='sendEmail'
-                          onClick={this.sendRegister}
-                          color='primary'
-                          variant='extendedFab'
-                          disabled={disableButton}>
-                          <span className='buttonLabel'>Send Email</span>
-                          <SendIcon className='sendIcon' />
-                        </Button>
-                      </div>
-                    </Tooltip> :
-                    <Button
-                      className='sendEmail'
-                      onClick={this.handleSubmit}
-                      color='primary'
-                      variant='extendedFab'
-                      disabled={disableButton}>
-                      <span className='buttonLabel'>Send Email</span>
-                      <SendIcon className='sendIcon' />
-                    </Button>
-                  }
-                  {this.state.submitted && <CircularProgress className='loading'/>}
-                </div>
-              </div>
-            </Paper>
-          </div>
+          <CompletionDisplay
+            handleReview={this.handleReview}
+            handleReset={this.handleReset}
+            handleIncomplete={this.handleIncomplete}
+            handleContinue={this.handleContinue}
+            disableButton={disableButton}
+            open={this.state.open}
+            sendRegister={this.sendRegister}
+          />
         </div>
         {this.state.message === 'This email has already been registered!' ?
           <Snackbar

@@ -38,6 +38,9 @@ const theme = createMuiTheme({
         paddingTop: '10px'
       }
     },
+    MuiPaper: {
+      root: { backgroundColor: '#10193c' }
+    },
     MuiSnackbarContent: {
       root: {
         backgroundColor: '#cdb87c',
@@ -73,25 +76,25 @@ class App extends Component {
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
           <UserContext.Provider value={this.state.me}>
-          <BrowserRouter>
-            <div>
-              <Route exact path='/' render={() => <Redirect to="/register" /> } />
-              <Route path='/confirmed' component={Confirmation} />
-              <Route path='/players' component={RegisteredPlayers} />
-              {/* WEB */}
-              <MediaQuery minDeviceWidth={1224}>
-                {/* <Nav /> */}
-                {/* <Route path='/draft' component={Draft} /> */}
-                <Route path='/register' component={DesktopRegister} />
-              </MediaQuery>
+            <BrowserRouter>
+              <div>
+                <Route exact path='/' render={() => <Redirect to="/register" /> } />
+                <Route path='/confirmed' component={Confirmation} />
+                <Route path='/players' component={RegisteredPlayers} />
+                {/* WEB */}
+                <MediaQuery minDeviceWidth={1224}>
+                  {/* <Nav /> */}
+                  {/* <Route path='/draft' component={Draft} /> */}
+                  <Route path='/register' component={DesktopRegister} />
+                </MediaQuery>
 
-              {/* MOBILE */}
-              <MediaQuery maxDeviceWidth={1224}>
-                {/* <MobileNav /> */}
-                <Route path='/register' component={MobileRegister} />
-              </MediaQuery>
-            </div>
-          </BrowserRouter>
+                {/* MOBILE */}
+                <MediaQuery maxDeviceWidth={1224}>
+                  {/* <MobileNav /> */}
+                  <Route path='/register' component={MobileRegister} />
+                </MediaQuery>
+              </div>
+            </BrowserRouter>
           </UserContext.Provider>
         </MuiThemeProvider>
       </JssProvider>

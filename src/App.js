@@ -38,9 +38,6 @@ const theme = createMuiTheme({
         paddingTop: '10px'
       }
     },
-    MuiPaper: {
-      root: { backgroundColor: 'transparent' }
-    },
     MuiSnackbarContent: {
       root: {
         backgroundColor: '#cdb87c',

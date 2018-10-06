@@ -44,7 +44,7 @@ export const CompletionDisplay = (props) => {
                 <SendIcon className='sendIcon' />
               </Button>
             }
-            {props.submitted && <CircularProgress className='loading'/>}
+            {props.open && <CircularProgress className='loading'/>}
           </div>
         </div>
       </Paper>

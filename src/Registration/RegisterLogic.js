@@ -53,17 +53,17 @@ export default {
       that.req = new Request('/register', {name: that.state.name, ign: that.state.ign, email: that.state.email}, (result) => {
         if (result.success) {
           that.setState(state => ({
-            message: 'Check your email for a magic login link!', submitted: true
+            message: 'Check your email for a magic login link!', submitted: true, open: true
           }))
         } else {
           if (result.data === 'Email already exists') {
             that.setState(state => ({
-              message: 'That email has already been registered!', submitted: true, inputEmailError: true, EmailHelperText: 'That email is already in our system!'
+              message: 'That email has already been registered!', submitted: true, inputEmailError: true, EmailHelperText: 'That email is already in our system!', open: true
             }))
           }
           if (result.data === 'Server error') {
             that.setState(state => ({
-              message: 'Something went wrong with the server D:', submitted: true
+              message: 'Something went wrong with the server D:', submitted: true, open: true
             }))
           }
         }

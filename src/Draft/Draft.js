@@ -1,24 +1,31 @@
 import React, { Component } from 'react'
 import { Subscription } from '../streamLib/stream.js'
 
+import { UserContext } from '../App'
+import MyTeam from './MyTeam/MyTeam'
+import PlayerList from './PlayerList/PlayerList'
+import TeamList from './TeamList/TeamList'
+import CurrentBid from './CurrentBid'
+
 class Draft extends Component {
 
   constructor (props) {
     super(props)
-    this.state = {value: 0, history: []}
+    this.state = {teams: [], players: [], myTeam: null}
   }
 
   componentDidMount() {
     this.subscription = new Subscription('/draft',
     (data) => {
-      this.setState({value: data.number, history: [ ...this.state.history, 'server sent: ' + data.number]})
-      if (data.number > 1) {
-        const collatz = (data.number%2 === 1 ? 3 * data.number + 1: data.number/2)
-        this.subscription.request({number: collatz})
-        this.setState({history: [ ...this.state.history, 'client sent: ' + collatz]})
-      }
+      this.setState({
+        myTeam: data.teams.find((team) => {
+          return team.roster.find((p)=> p._key === this.props.user._key)
+        }),
+        teams: data.teams,
+        players: data.players})
     })
   }
+
   componentWillUnmount() {
     this.subscription && this.subscription.end()
   }
@@ -26,15 +33,30 @@ class Draft extends Component {
   render () {
     return (
       <div style={{color: 'white'}}>
-        {this.state.value}
-        <input onChange={(ev) => {this.subscription.request({number: Number(ev.target.value)})}}></input>
-        {this.state.history.map((h)=> {
-          return (<p>{h}</p>)
-        } )}
+          {this.state.myTeam ?
+            <MyTeam
+              user={this.props.user}
+              team={this.state.myTeam} /> : ''}
+          <MediaQuery minDeviceWidth={1224}>
+            <TeamList
+              user={this.props.user}
+              teams={this.state.teams} />
+          </MediaQuery>
+          <CurrentBid
+            user={this.props.user} />
+          <PlayerList
+            user={this.props.user}
+            players={this.state.players} />
       </div>
     )
   }
 }
 
 
-export default Draft
+export default props => (
+  <UserContext.Consumer>
+  {user => (
+    <Draft {...props} user={user} />
+  )}
+</UserContext.Consumer>
+)

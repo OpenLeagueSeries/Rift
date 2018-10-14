@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { Subscription } from '../streamLib/stream.js'
 
-import RosterSlot from '../RosterSlot'
+import RosterPlayer from '../RosterPlayer'
 
+/* Captain will have ability to drag and drop
+ / Chat window is a separate subscription, optional for delivery
+*/
 class MyTeam extends Component {
 
   constructor(props) {
@@ -24,20 +27,21 @@ class MyTeam extends Component {
   }
 
   render() {
+    const team = props.team;
     return (
       <div>
         <h3 class='teamName'>{team.name}</h3>
         <span>{team.pointsLeft}</span>
         <div class='teamRoster'>
-            <span class='role'>Top</span><RosterSlot player={team.roster.find((p) => p.role === 'Top')} />
-            <span class='role'>Jungle</span><RosterSlot player={team.roster.find((p) => p.role === 'Jungle')} />
-            <span class='role'>Mid</span><RosterSlot player={team.roster.find((p) => p.role === 'Mid')} />
-            <span class='role'>Bot</span><RosterSlot player={team.roster.find((p) => p.role === 'Bot')} />
-            <span class='role'>Support</span><RosterSlot player={team.roster.find((p) => p.role === 'Support')} />
+            <span class='role'>Top</span><RosterPlayer player={team.roster.find((p) => p.role === 'Top')} />
+            <span class='role'>Jungle</span><RosterPlayer player={team.roster.find((p) => p.role === 'Jungle')} />
+            <span class='role'>Mid</span><RosterPlayer player={team.roster.find((p) => p.role === 'Mid')} />
+            <span class='role'>Bot</span><RosterPlayer player={team.roster.find((p) => p.role === 'Bot')} />
+            <span class='role'>Support</span><RosterPlayer player={team.roster.find((p) => p.role === 'Support')} />
             {unassigned.length > 0 ?
-              <div>
+              <div class='unassigned'>
                 <h4>Unassigned Players</h4>
-                {unassigned.map((p)=> <RosterSlot player={p} />)}
+                  {unassigned.map((p)=> <RosterPlayer player={p} />)}
               </div>
             : ''}
         </div>

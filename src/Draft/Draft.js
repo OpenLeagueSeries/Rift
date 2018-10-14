@@ -5,7 +5,7 @@ import { UserContext } from '../App'
 import MyTeam from './MyTeam/MyTeam'
 import PlayerList from './PlayerList/PlayerList'
 import TeamList from './TeamList/TeamList'
-import CurrentBid from './CurrentBid'
+import CurrentBid from './PlayerList/CurrentBid'
 
 class Draft extends Component {
 
@@ -55,8 +55,8 @@ class Draft extends Component {
 
 export default props => (
   <UserContext.Consumer>
-  {user => (
-    <Draft {...props} user={user} />
-  )}
-</UserContext.Consumer>
+    {user => (
+      <Draft {...props} user={user} />
+    )}
+  </UserContext.Consumer>
 )

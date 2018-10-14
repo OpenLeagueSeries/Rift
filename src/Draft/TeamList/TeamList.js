@@ -1,6 +1,6 @@
 import React from 'react'
 
-import RosterSlot from '../RosterSlot'
+import RosterPlayer from '../RosterPlayer'
 
 export default const TeamList = (props) => {
     return (
@@ -14,6 +14,7 @@ export default const TeamList = (props) => {
             return (
               <div>
                 <h3 class="teamName">{team.name}</h3>
+                <h5 class="captainName">{team.captainName}</h5>
                 <span>{team.pointsLeft}</span>
                 {team.players.map((p)=> {
                   return(

@@ -18,7 +18,7 @@ class MyTeam extends Component {
   componentDidMount() {
     this.subscription = new Subscription('/teamChat',
     (newChat) => {
-      this.setState({chat: this.state.chat.push(newChat)})
+      this.setState({chat: [...this.state.chat, newChat]})
     }
   }
 

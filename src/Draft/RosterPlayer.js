@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default const RosterList = ({player: {
+const RosterList = ({player: {
     ign,
     eloShield,
     elo,
@@ -22,3 +22,5 @@ export default const RosterList = ({player: {
     </div>
   )
 }
+
+export default RosterList

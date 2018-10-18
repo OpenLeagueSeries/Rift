@@ -4,7 +4,7 @@ import MediaQuery from 'react-responsive'
 
 // import Nav from './Routes/Interface/Nav'
 // import MobileNav from './Routes/Interface/MobileNav'
-// import Draft from './Draft/Draft'
+import Draft from './Draft/Draft'
 import { Subscription } from './streamLib/stream'
 import RegisteredPlayers from './PreDraft/RegisteredPlayers'
 import DesktopRegister from './Registration/DesktopRegister/DesktopRegister'
@@ -81,6 +81,7 @@ class App extends Component {
                 <Route exact path='/' render={() => <Redirect to="/register" /> } />
                 <Route path='/confirmed' component={Confirmation} />
                 <Route path='/players' component={RegisteredPlayers} />
+                <Route path='/draft' component={Draft} />
                 {/* WEB */}
                 <MediaQuery minDeviceWidth={1224}>
                   {/* <Nav /> */}

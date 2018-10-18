@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Subscription } from '../streamLib/stream.js'
+import { Subscription } from '../../streamLib/stream.js'
 
 import RosterPlayer from '../RosterPlayer'
 
@@ -19,7 +19,7 @@ class MyTeam extends Component {
     this.subscription = new Subscription('/teamChat',
     (newChat) => {
       this.setState({chat: [...this.state.chat, newChat]})
-    }
+    })
   }
 
   componentWillUnmount() {

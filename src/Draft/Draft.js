@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Subscription } from '../streamLib/stream.js'
+import MediaQuery from 'react-responsive'
 
 import { UserContext } from '../App'
 import MyTeam from './MyTeam/MyTeam'

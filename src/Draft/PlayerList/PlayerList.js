@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default const PlayerList = (props) => {
+const PlayerList = (props) => {
   return (
     <div className='playerList'>
       {props.players.map((player) => {
@@ -24,3 +24,5 @@ export default const PlayerList = (props) => {
     </div>
   )
 }
+
+export default PlayerList

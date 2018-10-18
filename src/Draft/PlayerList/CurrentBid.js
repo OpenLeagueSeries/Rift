@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Subscription } from '../../streamLib/stream.js'
 
 class CurrentBid extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class CurrentBid extends Component {
     this.subscription = new Subscription('/draftBid',
     (bidding) => {
       this.setState(bidding)
-    }
+    })
   }
 
   componentWillUnmount() {
@@ -40,3 +40,5 @@ class CurrentBid extends Component {
     )
   }
 }
+
+export default CurrentBid

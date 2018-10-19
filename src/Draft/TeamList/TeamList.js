@@ -16,11 +16,11 @@ const TeamList = (props) => {
                 <h3 class="teamName">{team.name}</h3>
                 <h5 class="captainName">{team.captainName}</h5>
                 <span>{team.pointsLeft}</span>
-                {{team.players.map((p)=> {
+                {team.players.map((p)=> {
                   return(
                     <RosterPlayer player={p} />
                   )
-                })}}
+                })}
               </div>
             )
         })}

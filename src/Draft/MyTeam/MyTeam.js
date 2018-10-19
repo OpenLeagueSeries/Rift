@@ -27,7 +27,7 @@ class MyTeam extends Component {
   }
 
   render() {
-    const team = props.team;
+    const team = this.props.team;
     return (
       <div>
         <h3 class='teamName'>{team.name}</h3>
@@ -38,10 +38,10 @@ class MyTeam extends Component {
             <span class='role'>Mid</span><RosterPlayer player={team.roster.find((p) => p.role === 'Mid')} />
             <span class='role'>Bot</span><RosterPlayer player={team.roster.find((p) => p.role === 'Bot')} />
             <span class='role'>Support</span><RosterPlayer player={team.roster.find((p) => p.role === 'Support')} />
-            {unassigned.length > 0 ?
+            {team.unassigned.length > 0 ?
               <div class='unassigned'>
                 <h4>Unassigned Players</h4>
-                  {unassigned.map((p)=> <RosterPlayer player={p} />)}
+                  {team.unassigned.map((p)=> <RosterPlayer player={p} />)}
               </div>
             : ''}
         </div>

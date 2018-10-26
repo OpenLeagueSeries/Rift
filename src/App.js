@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import { Route, Redirect } from 'react-router-dom'
-import MediaQuery from 'react-responsive'
-import Draft from './Draft/Draft'
-import RegisteredPlayers from './PreDraft/RegisteredPlayers'
-import DesktopRegister from './Registration/DesktopRegister/DesktopRegister'
-import MobileRegister from './Registration/MobileRegister/MobileRegister'
-import Confirmation from './Registration/Confirmation/Confirmation'
+import React, { Component } from 'react';
+import { Route, Redirect } from 'react-router-dom';
+import MediaQuery from 'react-responsive';
+import Draft from './Draft/Draft';
+import RegisteredPlayers from './PreDraft/RegisteredPlayers';
+import DesktopRegister from './Registration/DesktopRegister/DesktopRegister';
+import MobileRegister from './Registration/MobileRegister/MobileRegister';
+import Confirmation from './Registration/Confirmation/Confirmation';
 
 export default function App() {
   return (
@@ -27,5 +27,5 @@ export default function App() {
         <Route path="/register" component={MobileRegister} />
       </MediaQuery>
     </div>
-  )
+  );
 }

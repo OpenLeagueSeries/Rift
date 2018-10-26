@@ -1,39 +1,39 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import { Subscription } from '../streamLib/stream';
-import { withUserContext } from '../Contexts/UserContext';
-import EditTableContent from './EditTableContent';
-import PlayerTableContent from './PlayerTableContent';
+import { Subscription } from '../streamLib/stream'
+import { withUserContext } from '../Contexts/UserContext'
+import EditTableContent from './EditTableContent'
+import PlayerTableContent from './PlayerTableContent'
 
-import './PlayerList.css';
+import './PlayerList.css'
 
 class RegisteredPlayers extends Component {
   constructor(props) {
-    super(props);
-    this.state = { data: [] };
+    super(props)
+    this.state = { data: [] }
   }
 
   componentDidMount() {
     this.subscription = new Subscription('/users', info => {
       this.setState({
         data: info
-      });
-    });
+      })
+    })
   }
 
   componentWillUnmount() {
-    this.subscription && this.subscription.end();
+    this.subscription && this.subscription.end()
   }
 
   render() {
-    const { me } = this.props;
+    const { me } = this.props
     const playersList = this.state.data.map(user => {
       if (user === me) {
-        return <EditTableContent key={user} user={user} me={me} />;
+        return <EditTableContent key={user} user={user} me={me} />
       } else {
-        return <PlayerTableContent key={user} user={user} me={me} />;
+        return <PlayerTableContent key={user} user={user} me={me} />
       }
-    });
+    })
     return (
       <div className="playerListDisplay">
         <table className="tableContainer">
@@ -50,8 +50,8 @@ class RegisteredPlayers extends Component {
           <tbody>{playersList}</tbody>
         </table>
       </div>
-    );
+    )
   }
 }
 
-export default withUserContext(RegisteredPlayers);
+export default withUserContext(RegisteredPlayers)

@@ -1,21 +1,20 @@
 import React, { Component } from 'react'
 
 import { Subscription } from '../streamLib/stream'
-import { UserContext } from '../App'
+import { withUserContext } from '../Contexts/UserContext'
 import EditTableContent from './EditTableContent'
 import PlayerTableContent from './PlayerTableContent'
 
 import './PlayerList.css'
 
 class RegisteredPlayers extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
-    this.state = {data: []}
+    this.state = { data: [] }
   }
 
   componentDidMount() {
-    this.subscription = new Subscription('/users',
-    (info) => {
+    this.subscription = new Subscription('/users', info => {
       this.setState({
         data: info
       })
@@ -26,13 +25,21 @@ class RegisteredPlayers extends Component {
     this.subscription && this.subscription.end()
   }
 
-  render () {
+  render() {
+    const { me } = this.props
+    const playersList = this.state.data.map(user => {
+      if (user === me._key) {
+        return <EditTableContent key={user} user={user} me={me} />
+      } else {
+        return <PlayerTableContent key={user} user={user} me={me} />
+      }
+    })
     return (
-      <div className='playerListDisplay'>
-        <table className='tableContainer'>
+      <div className="playerListDisplay">
+        <table className="tableContainer">
           <thead>
             <tr>
-              <th></th>
+              <th />
               <th>Player Name</th>
               <th>Summoner Name</th>
               <th>Roles</th>
@@ -40,23 +47,11 @@ class RegisteredPlayers extends Component {
               <th>Captain</th>
             </tr>
           </thead>
-          <tbody>
-            {this.state.data.map((user) => {
-              return (
-                <UserContext.Consumer key={user}>
-                  {(me) => {
-                    return user === me._key
-                    ? <EditTableContent key={user} user={user} me={me} />
-                    : <PlayerTableContent key={user} user={user} me={me} />
-                  }}
-                </UserContext.Consumer>
-              )
-            })}
-          </tbody>
+          <tbody>{playersList}</tbody>
         </table>
       </div>
     )
   }
 }
 
-export default RegisteredPlayers
+export default withUserContext(RegisteredPlayers)

@@ -16,8 +16,8 @@ class Draft extends Component {
         {
           ign: 'PwnNarbs',
           eloShield: '',
-          elo: '',
-          champions: []
+          elo: '4500',
+          champions: [{icon: '', name: 'Malzahar',winrate: .5, kda: '4/2/3'}]
         },
         {
           ign: 'zStinkLoser',
@@ -31,15 +31,15 @@ class Draft extends Component {
   }
 
   componentDidMount() {
-    this.subscription = new Subscription('/draft', data => {
-      this.setState({
-        myTeam: data.teams.find(team => {
-          return team.roster.find(p => p._key === this.props.user._key)
-        }),
-        teams: data.teams,
-        players: data.players
-      })
-    })
+    // this.subscription = new Subscription('/draft', data => {
+    //   this.setState({
+    //     myTeam: data.teams.find(team => {
+    //       return team.roster.find(p => p._key === this.props.user._key)
+    //     }),
+    //     teams: data.teams,
+    //     players: data.players
+    //   })
+    // })
   }
 
   componentWillUnmount() {

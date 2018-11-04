@@ -12,23 +12,23 @@ const PlayerList = (props) => {
   const { classes } = props;
 
   return (
-
-
-
     <div className='playerList'>
       {props.players.map((player) => {
         return (
           <div className='player'>
-
             <Card style = {{margin: '10px', width: '40vw', padding: '0px'}}>
               <CardContent>
                 <h2>{player.ign}</h2>
                 <div>{player.notes}</div>
-                <span class='elo'> <img src={player.eloShield}/> {player.elo} </span>
+                <div className='eloDisplay'>
+                  <span class='eloSolo'> <img src={player.eloSoloShield}/> {player.eloSolo} </span>
+                  <span class='eloFlex'> <img src={player.eloFlexShield}/> {player.eloFlex} </span>
+                </div>
                 <span class='championsList'>
                   {player.champions.map((champ) =>
                     <div class="champion">
                       <img src={champ.icon} />
+                      <span>{champ.name}</span>
                       <div>{champ.winrate}</div>
                       <div>{champ.kda}</div>
                     </div>

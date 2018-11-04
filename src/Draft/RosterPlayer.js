@@ -1,5 +1,7 @@
 import React from 'react'
 
+// A player that has been bid
+
 const RosterList = ({player: {
     ign,
     eloShield,

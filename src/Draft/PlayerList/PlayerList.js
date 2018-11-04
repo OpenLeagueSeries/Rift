@@ -3,30 +3,27 @@ import React from 'react'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import { withStyles } from '@material-ui/core/styles'
-import PropTypes from 'prop-types'
 
 // import './DraftPlayerList.css'
 
 const PlayerList = (props) => {
 
-  const { classes } = props;
-
   return (
     <div className='playerList'>
       {props.players.map((player) => {
         return (
-          <div className='player'>
+          <div className='player' key={player.ign}>
             <Card style = {{margin: '10px', width: '40vw', padding: '0px'}}>
               <CardContent>
                 <h2>{player.ign}</h2>
                 <div>{player.notes}</div>
                 <div className='eloDisplay'>
-                  <span class='eloSolo'> <img src={player.eloSoloShield}/> {player.eloSolo} </span>
-                  <span class='eloFlex'> <img src={player.eloFlexShield}/> {player.eloFlex} </span>
+                  <span className='eloSolo'> <img src={player.eloSoloShield}/> {player.eloSolo} </span>
+                  <span className='eloFlex'> <img src={player.eloFlexShield}/> {player.eloFlex} </span>
                 </div>
-                <span class='championsList'>
+                <span className='championsList'>
                   {player.champions.map((champ) =>
-                    <div class="champion">
+                    <div className="champion" key={champ.name}>
                       <img src={champ.icon} />
                       <span>{champ.name}</span>
                       <div>{champ.winrate}</div>

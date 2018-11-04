@@ -4,7 +4,7 @@ import RosterPlayer from '../RosterPlayer'
 
 const TeamList = (props) => {
     return (
-      <div class="TeamList">
+      <div className="TeamList">
         {props.teams
           .sort((teamA, teamB) => {
               return teamB.pointsLeft - teamA.pointsLeft
@@ -13,8 +13,8 @@ const TeamList = (props) => {
           .map((team) => {
             return (
               <div>
-                <h3 class="teamName">{team.name}</h3>
-                <h5 class="captainName">{team.captainName}</h5>
+                <h3 className="teamName">{team.name}</h3>
+                <h5 className="captainName">{team.captainName}</h5>
                 <span>{team.pointsLeft}</span>
                 {team.players.map((p)=> {
                   return(

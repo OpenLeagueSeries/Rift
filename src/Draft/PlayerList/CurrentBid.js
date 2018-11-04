@@ -28,12 +28,12 @@ class CurrentBid extends Component {
     return (
       <div>
         current Bidding is at: {this.state.bid}
-        Enter your Bid here:<input value = '0' />
-        <span class='elo'> <img src={player.eloShield}/> {player.elo} </span>
-        <span class='ign'>{player.ign}</span>
-        <span class='championsList'>
+        Enter your Bid here:<input defaultValue = '0' />
+        <span className='elo'> <img src={player.eloShield}/> {player.elo} </span>
+        <span className='ign'>{player.ign}</span>
+        <span className='championsList'>
           {player.champions.map((champ) =>
-            <div class="champion">
+            <div className="champion">
               <img src={champ.icon} />
               <div>{champ.winrate}</div>
               <div>{champ.kda}</div>

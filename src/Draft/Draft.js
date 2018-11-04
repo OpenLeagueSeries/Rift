@@ -6,6 +6,7 @@ import MyTeam from './MyTeam/MyTeam'
 import PlayerList from './PlayerList/PlayerList'
 import TeamList from './TeamList/TeamList'
 import CurrentBid from './PlayerList/CurrentBid'
+import eloDiamond from '../assets/tier-icons/diamond_iii.png'
 
 class Draft extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class Draft extends Component {
       players: [
         {
           ign: 'PwnNarbs',
-          eloShield: '',
+          eloShield: eloDiamond,
           elo: '4500',
           champions: [{icon: '', name: 'Malzahar',winrate: .5, kda: '4/2/3'}]
         },

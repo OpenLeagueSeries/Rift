@@ -17,15 +17,23 @@ class Draft extends Component {
       players: [
         {
           ign: 'PwnNarbs',
+          notes: 'I like to play Mid Lane',
           eloSoloShield: eloDiamond,
           eloFlexShield: eloDiamond,
-          elo: '4500',
-          champions: [{icon: aatrox, name: 'Malzahar',winrate: .5, kda: '4/2/3'}]
+          eloSolo: 'D3 56 LP',
+          eloFlex: 'D3 21 LP',
+          champions: [
+            {icon: aatrox, name: 'Malzahar',winrate: .5, kda: '4/2/3'},
+            {icon: aatrox, name: 'Sion', winrate: .7, kda: '6/3/8'},
+            {icon: aatrox, name: 'Aatrox',winrate: .3, kda: '4/2/0'}
+          ]
         },
         {
           ign: 'zStinkLoser',
-          eloShield: '',
-          elo: '3456',
+          eloSoloShield: '',
+          eloFlexShield: '',
+          eloSolo: 'S3 25 LP',
+          eloFlex: 'S2 45 LP',
           champions: []
         }
       ],

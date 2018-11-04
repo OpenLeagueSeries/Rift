@@ -15,19 +15,19 @@ const PlayerList = (props) => {
           <div className='player' key={player.ign}>
             <Card style = {{margin: '10px', width: '40vw', padding: '0px'}}>
               <CardContent>
-                <h2>{player.ign}</h2>
-                <div>{player.notes}</div>
+                <h2 className='ign'>{player.ign}</h2>
+                <div className='notes'>{player.notes}</div>
                 <div className='eloDisplay'>
                   <span className='eloSolo'> <img src={player.eloSoloShield}/> {player.eloSolo} </span>
                   <span className='eloFlex'> <img src={player.eloFlexShield}/> {player.eloFlex} </span>
                 </div>
                 <span className='championsList'>
                   {player.champions.map((champ) =>
-                    <div className="champion" key={champ.name}>
-                      <img src={champ.icon} />
-                      <span>{champ.name}</span>
-                      <div>{champ.winrate}</div>
-                      <div>{champ.kda}</div>
+                    <div className='champion' key={champ.name}>
+                      <img className='champIcon' src={champ.icon} />
+                      <span className='champName'>{champ.name}</span>
+                      <div className='champWinrate'>{champ.winrate}</div>
+                      <div className='champKDA'>{champ.kda}</div>
                     </div>
                   )}
                 </span>

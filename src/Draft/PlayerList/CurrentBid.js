@@ -4,7 +4,12 @@ import { Subscription } from '../../streamLib/stream.js'
 class CurrentBid extends Component {
   constructor(props) {
     super(props)
-    this.state = { bid: 0, player: {}}
+    this.state = {
+      bid: 0,
+      player: {
+        champions: []
+      },
+    }
   }
 
   componentDidMount() {
@@ -23,7 +28,7 @@ class CurrentBid extends Component {
     return (
       <div>
         current Bidding is at: {this.state.bid}
-        Enter your Bid here:<input>0</input>
+        Enter your Bid here:<input value = '0' />
         <span class='elo'> <img src={player.eloShield}/> {player.elo} </span>
         <span class='ign'>{player.ign}</span>
         <span class='championsList'>

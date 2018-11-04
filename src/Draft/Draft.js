@@ -12,7 +12,24 @@ class Draft extends Component {
 
   constructor (props) {
     super(props)
-    this.state = {teams: [], players: [], myTeam: null}
+    this.state = {
+      teams: [],
+      players: [
+        {
+          ign: 'PwnNarbs',
+          eloShield: '',
+          elo: '',
+          champions: []
+        },
+        {
+          ign: 'zStinkLoser',
+          eloShield: '',
+          elo: '3456',
+          champions: []
+        }
+      ],
+      myTeam: null
+    }
   }
 
   componentDidMount() {

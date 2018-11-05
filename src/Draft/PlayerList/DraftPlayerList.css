@@ -1,0 +1,33 @@
+.playerList .player {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; }
+  .playerList .player > div {
+    flex: 1 100%;
+    display: flex;
+    justify-content: space-between; }
+  .playerList .player .ign {
+    flex: 1;
+    margin-top: -3px; }
+  .playerList .player .notes {
+    flex: 1; }
+  .playerList .player .eloDisplay {
+    display: flex;
+    flex-direction: column; }
+    .playerList .player .eloDisplay h4 {
+      text-align: center; }
+    .playerList .player .eloDisplay img {
+      width: 60px;
+      height: 60px; }
+    .playerList .player .eloDisplay .eloFlex {
+      flex: 1; }
+    .playerList .player .eloDisplay .eloSolo {
+      flex: 1; }
+  .playerList .player .championsList {
+    display: flex;
+    flex-direction: row; }
+    .playerList .player .championsList .champion {
+      flex: 1;
+      margin-right: 15px; }
+    .playerList .player .championsList .champIcon {
+      width: 100%; }

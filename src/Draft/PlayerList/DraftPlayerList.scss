@@ -1,22 +1,47 @@
 .playerList {
   .player {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    & > div {
+      flex: 1 100%;
+      display: flex;
+      justify-content: space-between;
+    }
     .ign {
-
+      flex: 1;
+      margin-top: -3px;
     }
     .notes {
-
+      flex: 1;
     }
     .eloDisplay {
+      display: flex;
+      flex-direction: column;
+      h4 {
+        text-align: center;
+      }
+      img {
+        width: 60px;
+        height: 60px;
+      }
       .eloFlex {
+        flex: 1;
 
       }
       .eloSolo {
-
+        flex: 1;
       }
     }
     .championsList {
+      display: flex;
+      flex-direction: row;
+      .champion {
+        flex: 1;
+        margin-right:15px;
+      }
       .champIcon {
-
+        width: 100%;
       }
       .champName {
 

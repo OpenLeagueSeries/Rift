@@ -18,13 +18,12 @@ const Wrapper = styled.div`
   height: 100%;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-auto-rows: minmax(40px, auto);
+  grid-auto-rows: minmax(80px, auto);
   grid-template-areas:
-    'cb    av    name  name  name  op    champ'
-    'cb    sh    ign   ign   elo   role  champ'
-    'notes notes notes notes notes notes champ';
+    'sh  name  name  name  role  at    cb'
+    'elo ign   ign   ign   champ champ cb'
+    'op notes notes notes notes notes cb';
   border-bottom: 1px solid #fff;
-  padding: 1em;
   & .avatar {
     justify-self: center;
     align-self: center;
@@ -62,6 +61,12 @@ const Wrapper = styled.div`
     grid-area: elo;
     align-self: center;
     justify-self: center;
+    p {
+      margin: 0;
+      padding: 0;
+      font-size: 0.7em;
+      display: inline;
+    }
   }
   .shield {
     grid-area: sh;
@@ -72,30 +77,33 @@ const Wrapper = styled.div`
   }
   .role {
     grid-area: role;
-    justify-self: center;
+    justify-self: start;
     align-self: center;
   }
   .notes {
     grid-area: notes;
     align-self: center;
+    padding-bottom: 1em;
   }
   .champSection {
     grid-area: champ;
+    align-self: center;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
     text-align: right;
   }
   .currentBid {
     grid-area: cb;
+    align-self: center;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 2em;
     border: 2px solid white;
-    margin: 0 0.5em 1em 0.5em;
+    margin: 0 0.5em 1em 4em;
+    height: 50%;
   }
 `;
 const CurrentPlayer = ({ player }) => {
@@ -115,12 +123,15 @@ const CurrentPlayer = ({ player }) => {
         <h1>Bid:</h1>
         <h1>14pts</h1>
       </div>
-      <Avatar className="avatar">{player.initials}</Avatar>
+      {/* <Avatar className="avatar">{player.initials}</Avatar> */}
       <h1>{player.name}</h1>
       <a href={`http://na.op.gg/summoner/userName=${player.ign}`}>op.gg</a>
       <h1 className="ign">{player.ign}</h1>
       <img src={player.shield} alt="" className="shield" />
-      <h2 className="elo">{player.elo}</h2>
+      <h2 className="elo">
+        <p>ELO: </p>
+        {player.elo}
+      </h2>
       <h2 className="role">{player.role}</h2>
       <h4 className="notes">{player.notes}</h4>
       <div className="champSection">

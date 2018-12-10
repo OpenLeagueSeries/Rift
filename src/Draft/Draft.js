@@ -32,7 +32,7 @@ const MidGrid = styled(Grid)({
   overflow: 'hidden',
   display: 'flex',
   justifyContent: 'space-between',
-  padding: '1em 3em'
+  padding: '1em 2em'
 });
 
 class Draft extends Component {

@@ -1,46 +1,127 @@
-import React, { Component } from 'react'
-import { Subscription } from '../streamLib/stream.js'
-import { withUserContext } from '../Contexts/UserContext'
-import MediaQuery from 'react-responsive'
-import MyTeam from './MyTeam/MyTeam'
-import PlayerList from './PlayerList/PlayerList'
-import TeamList from './TeamList/TeamList'
-import CurrentBid from './PlayerList/CurrentBid'
+import React, { Component } from 'react';
+import { Subscription } from '../streamLib/stream.js';
+import { withUserContext } from '../Contexts/UserContext';
+import MediaQuery from 'react-responsive';
+import MyTeam from './MyTeam/MyTeam';
+import PlayerList from './PlayerList/PlayerList';
+import TeamList from './TeamList/TeamList';
+import CurrentBid from './PlayerList/CurrentBid';
+import CurrentPlayer from './PlayerList/CurrentPlayer';
+
+import { styled } from '@material-ui/styles';
+import Grid from '@material-ui/core/Grid';
+import List from '@material-ui/core/List';
+import { Hidden } from '@material-ui/core';
+
+const GridContainer = styled(Grid)({
+  height: '100vh',
+  width: '100vw',
+  color: '#fff',
+  padding: '1em'
+});
+
+const AllTeamsContainer = styled(Grid)({
+  height: '100%',
+  width: '100%',
+  overflow: 'hidden'
+});
+
+const MidGrid = styled(Grid)({
+  height: '100%',
+  width: '100%',
+  overflow: 'hidden',
+  display: 'flex',
+  justifyContent: 'space-between',
+  padding: '1em 3em'
+});
 
 class Draft extends Component {
   constructor(props) {
-    super(props)
-    this.state = { teams: [], players: [], myTeam: null }
+    super(props);
+    this.state = {
+      teams: [
+        'team1',
+        'team2',
+        'team3',
+        'team4',
+        'team5',
+        'team6',
+        'team7',
+        'team8',
+        'team9',
+        'team10',
+        'team11',
+        'team12'
+      ],
+      players: [],
+      myTeam: null,
+      currentPick: 0
+    };
   }
 
   componentDidMount() {
-    this.subscription = new Subscription('/draft', data => {
-      this.setState({
-        myTeam: data.teams.find(team => {
-          return team.roster.find(p => p._key === this.props.user._key)
-        }),
-        teams: data.teams,
-        players: data.players
-      })
-    })
+    // this.subscription = new Subscription('/draft', data => {
+    //   this.setState({
+    //     myTeam: data.teams.find(team => {
+    //       return team.roster.find(p => p._key === this.props.user._key)
+    //     }),
+    //     teams: data.teams,
+    //     players: data.players
+    //   })
+    // })
   }
 
-  componentWillUnmount() {
-    this.subscription && this.subscription.end()
-  }
+  // componentWillUnmount() {
+  //   this.subscription && this.subscription.end()
+  // }
 
   render() {
+    // return (
+    //   <div style={{ color: 'white' }}>
+    //     {this.state.myTeam ? <MyTeam user={this.props.user} team={this.state.myTeam} /> : ''}
+    //     <MediaQuery minDeviceWidth={1224}>
+    //       <TeamList user={this.props.user} teams={this.state.teams} />
+    //     </MediaQuery>
+    //     <CurrentBid user={this.props.user} />
+    //     <PlayerList user={this.props.user} players={this.state.players} />
+    //   </div>
+    // )
     return (
-      <div style={{ color: 'white' }}>
-        {this.state.myTeam ? <MyTeam user={this.props.user} team={this.state.myTeam} /> : ''}
-        <MediaQuery minDeviceWidth={1224}>
-          <TeamList user={this.props.user} teams={this.state.teams} />
-        </MediaQuery>
-        <CurrentBid user={this.props.user} />
-        <PlayerList user={this.props.user} players={this.state.players} />
-      </div>
-    )
+      <GridContainer className="container" container spacing={8}>
+        <AllTeamsContainer className="allTeams" item xs={2}>
+          <h1>All Teams</h1>
+          <List component="div" className="teamsList">
+            <TeamList
+              teams={this.state.teams}
+              currentPick={this.state.currentPick}
+            />
+          </List>
+          <Grid item spacing={0}>
+            this could be a chatbox or the timer if the chat box goes in main
+            window.
+          </Grid>
+        </AllTeamsContainer>
+        <Grid className="playerView" item xs={7}>
+          <MidGrid container spacing={16}>
+            <Grid className="playerStats" item xs={12}>
+              <CurrentPlayer />
+            </Grid>
+            <Grid className="allPlayers" style={{ height: '70%' }} item xs={12}>
+              this is where all the players and the order in which they will be
+              drafted will be displayed with minimal stat display like mmr and
+              role.
+            </Grid>
+            <Grid className="chatBox" item xs={12}>
+              this is where the chat could go if decided to go here
+            </Grid>
+          </MidGrid>
+        </Grid>
+        <Grid className="yourTeam" item xs={3}>
+          this is where it shows your team. your pointes, your player, etc
+        </Grid>
+      </GridContainer>
+    );
   }
 }
 
-export default withUserContext(Draft)
+export default withUserContext(Draft);

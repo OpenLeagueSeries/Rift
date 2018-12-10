@@ -1,31 +1,16 @@
-import React from 'react'
+import React from 'react';
+import Team from './Team';
+import ListItem from '@material-ui/core/ListItem';
 
-import RosterPlayer from '../RosterPlayer'
+import RosterPlayer from '../RosterPlayer';
 
-const TeamList = (props) => {
-    return (
-      <div class="TeamList">
-        {props.teams
-          .sort((teamA, teamB) => {
-              return teamB.pointsLeft - teamA.pointsLeft
-            }
-          )
-          .map((team) => {
-            return (
-              <div>
-                <h3 class="teamName">{team.name}</h3>
-                <h5 class="captainName">{team.captainName}</h5>
-                <span>{team.pointsLeft}</span>
-                {team.players.map((p)=> {
-                  return(
-                    <RosterPlayer player={p} />
-                  )
-                })}
-              </div>
-            )
-        })}
-      </div>
-    )
-}
+const TeamList = ({ teams, currentPick }) => {
+  const teamElements = teams.map((team, i) => (
+    <ListItem style={{ padding: 0 }} divider button>
+      <Team team={team} isCurrent={currentPick === i} />
+    </ListItem>
+  ));
+  return <div class="TeamList">{teamElements}</div>;
+};
 
-export default TeamList
+export default TeamList;

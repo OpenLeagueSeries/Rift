@@ -102,18 +102,19 @@ const Wrapper = styled.div`
     flex-direction: column;
     padding: 2em;
     border: 2px solid white;
-    margin: 0 0.5em 1em 4em;
+    margin: 0 0 1em 4em;
     height: 50%;
   }
 `;
 const CurrentPlayer = ({ player }) => {
+  //temporary but set up for player to be a prop
   player = {
     name: 'Anthony Agnone',
     initials: 'AA',
     ign: 'WindowPane',
     notes:
       "Washed up scuffed don't make a captain etc etc etc Washed up scuffed don't make a captain etc etc etc Washed up scuffed don't make a captain etc etc etc. Also as a note to me. I don't like this. This needs a lot of work. But it gets the basic idea done.",
-    elo: 1100,
+    elo: 1500,
     shield: goldIV,
     role: 'jg / supp'
   };

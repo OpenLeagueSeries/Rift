@@ -1,30 +1,30 @@
-import React, { Component } from 'react';
-import { Subscription } from '../streamLib/stream.js';
-import { withUserContext } from '../Contexts/UserContext';
-import MediaQuery from 'react-responsive';
-import MyTeam from './MyTeam/MyTeam';
-import PlayerList from './PlayerList/PlayerList';
-import TeamList from './TeamList/TeamList';
-import CurrentBid from './PlayerList/CurrentBid';
-import CurrentPlayer from './PlayerList/CurrentPlayer';
+import React, { Component } from 'react'
+import { Subscription } from '../streamLib/stream.js'
+import { withUserContext } from '../Contexts/UserContext'
+import MediaQuery from 'react-responsive'
+import MyTeam from './MyTeam/MyTeam'
+import PlayerList from './PlayerList/PlayerList'
+import TeamList from './TeamList/TeamList'
+import CurrentBid from './PlayerList/CurrentBid'
+import CurrentPlayer from './PlayerList/CurrentPlayer'
 
-import { styled } from '@material-ui/styles';
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import { Hidden } from '@material-ui/core';
+import { styled } from '@material-ui/styles'
+import Grid from '@material-ui/core/Grid'
+
+import { Hidden } from '@material-ui/core'
 
 const GridContainer = styled(Grid)({
   height: '100vh',
   width: '100vw',
   color: '#fff',
   padding: '1em'
-});
+})
 
 const AllTeamsContainer = styled(Grid)({
   height: '100%',
   width: '100%',
   overflow: 'hidden'
-});
+})
 
 const MidGrid = styled(Grid)({
   height: '100%',
@@ -33,11 +33,11 @@ const MidGrid = styled(Grid)({
   display: 'flex',
   justifyContent: 'space-between',
   padding: '1em 1em 1em 2em'
-});
+})
 
 class Draft extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       teams: [
         'team1',
@@ -56,7 +56,7 @@ class Draft extends Component {
       players: [],
       myTeam: null,
       currentPick: 0
-    };
+    }
   }
 
   componentDidMount() {
@@ -76,29 +76,13 @@ class Draft extends Component {
   // }
 
   render() {
-    // return (
-    //   <div style={{ color: 'white' }}>
-    //     {this.state.myTeam ? <MyTeam user={this.props.user} team={this.state.myTeam} /> : ''}
-    //     <MediaQuery minDeviceWidth={1224}>
-    //       <TeamList user={this.props.user} teams={this.state.teams} />
-    //     </MediaQuery>
-    //     <CurrentBid user={this.props.user} />
-    //     <PlayerList user={this.props.user} players={this.state.players} />
-    //   </div>
-    // )
     return (
       <GridContainer className="container" container spacing={8}>
         <AllTeamsContainer className="allTeams" item xs={2}>
           <h1>All Teams</h1>
-          <List component="div" className="teamsList">
-            <TeamList
-              teams={this.state.teams}
-              currentPick={this.state.currentPick}
-            />
-          </List>
+          <TeamList teams={this.state.teams} currentPick={this.state.currentPick} />
           <Grid item spacing={0}>
-            this could be a chatbox or the timer if the chat box goes in main
-            window.
+            this could be a chatbox or the timer if the chat box goes in main window.
           </Grid>
         </AllTeamsContainer>
         <Grid className="playerView" item xs={7}>
@@ -107,9 +91,8 @@ class Draft extends Component {
               <CurrentPlayer />
             </Grid>
             <Grid className="allPlayers" style={{ height: '70%' }} item xs={12}>
-              this is where all the players and the order in which they will be
-              drafted will be displayed with minimal stat display like mmr and
-              role.
+              this is where all the players and the order in which they will be drafted will be displayed with minimal
+              stat display like mmr and role.
             </Grid>
             <Grid className="chatBox" item xs={12}>
               this is where the chat could go if decided to go here
@@ -120,8 +103,8 @@ class Draft extends Component {
           this is where it shows your team. your pointes, your player, etc
         </Grid>
       </GridContainer>
-    );
+    )
   }
 }
 
-export default withUserContext(Draft);
+export default withUserContext(Draft)

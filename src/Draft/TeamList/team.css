@@ -1,0 +1,13 @@
+.team-wrapper {
+  padding: 0.1em 1em;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%; }
+  .team-wrapper .info {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center; }

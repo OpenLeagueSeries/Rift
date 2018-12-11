@@ -7,6 +7,7 @@ import PlayerList from './PlayerList/PlayerList'
 import TeamList from './TeamList/TeamList'
 import CurrentBid from './PlayerList/CurrentBid'
 import CurrentPlayer from './PlayerList/CurrentPlayer'
+import PositionField from './MyTeam/PositionField'
 
 import { styled } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
@@ -78,14 +79,14 @@ class Draft extends Component {
   render() {
     return (
       <GridContainer className="container" container spacing={8}>
-        <AllTeamsContainer className="allTeams" item xs={2}>
+        <AllTeamsContainer className="allTeams" item xs={12} lg={2}>
           <h1>All Teams</h1>
           <TeamList teams={this.state.teams} currentPick={this.state.currentPick} />
           <Grid item spacing={0}>
             this could be a chatbox or the timer if the chat box goes in main window.
           </Grid>
         </AllTeamsContainer>
-        <Grid className="playerView" item xs={7}>
+        <Grid className="playerView" item xs={12} lg={7}>
           <MidGrid container spacing={16}>
             <Grid className="playerStats" item xs={12}>
               <CurrentPlayer />
@@ -99,8 +100,8 @@ class Draft extends Component {
             </Grid>
           </MidGrid>
         </Grid>
-        <Grid className="yourTeam" item xs={3}>
-          this is where it shows your team. your pointes, your player, etc
+        <Grid className="yourTeam" item xs={12} lg={3} style={{ height: '100%' }}>
+          <MyTeam />
         </Grid>
       </GridContainer>
     )

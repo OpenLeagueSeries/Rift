@@ -54,26 +54,49 @@ class Draft extends Component {
         'team12'
       ],
       players: [],
-      myTeam: null,
-      currentPick: 0
+      bid: {}
     }
   }
 
   componentDidMount() {
-    // this.subscription = new Subscription('/draft', data => {
-    //   this.setState({
-    //     myTeam: data.teams.find(team => {
-    //       return team.roster.find(p => p._key === this.props.user._key)
-    //     }),
-    //     teams: data.teams,
-    //     players: data.players
-    //   })
-    // })
-  }
+    this.sub = new EventSource(`https://localhost:4200/draftt`);
+    // state update
+    this.sub.onmessage((data) => {
+      this.setState({teams: data.teams, players: data.players, bid: data.bid})
+    });
+    // new draft created
+    this.sub.addEventListener('new', (ev) => {
 
-  // componentWillUnmount() {
-  //   this.subscription && this.subscription.end()
-  // }
+    });
+    // a player has been won
+    this.sub.addEventListener('playerWon', (ev) => {
+
+    });
+    // a new player is up for bid
+    this.sub.addEventListener('nextBid', (ev) => {
+
+    });
+    // waiting for a confirmation before proceeding
+    this.sub.addEventListener('waitingConfirmation', (ev) => {
+
+    });
+    // a new bid has come in
+    this.sub.addEventListener('bid', (ev) => {
+
+    });
+    // end of draft
+    this.sub.addEventListener('end' , (ev) => {
+
+    });
+    // pause the draft
+    this.sub.addEventListener('pause', (ev) => {
+
+    });
+    // resume the draft
+    this.sub.addEventListener('resume', (ev) => {
+
+    });
+  }
 
   render() {
     return (
@@ -93,9 +116,6 @@ class Draft extends Component {
             <Grid className="allPlayers" style={{ height: '70%' }} item xs={12}>
               this is where all the players and the order in which they will be drafted will be displayed with minimal
               stat display like mmr and role.
-            </Grid>
-            <Grid className="chatBox" item xs={12}>
-              this is where the chat could go if decided to go here
             </Grid>
           </MidGrid>
         </Grid>

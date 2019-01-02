@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Subscription } from '../streamLib/stream.js'
 import { withUserContext } from '../Contexts/UserContext'
 import MediaQuery from 'react-responsive'
 import MyTeam from './MyTeam/MyTeam'
@@ -61,9 +60,10 @@ class Draft extends Component {
   componentDidMount() {
     this.sub = new EventSource(`https://localhost:4200/draftt`);
     // state update
-    this.sub.onmessage((data) => {
+    this.sub.onmessage = (res) => {
+      const data = JSON.parse(res.data)
       this.setState({teams: data.teams, players: data.players, bid: data.bid})
-    });
+    };
     // new draft created
     this.sub.addEventListener('new', (ev) => {
 

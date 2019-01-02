@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 import { PlayerInitials } from './Data/PlayerInitials'
-import { Subscription } from '../streamLib/stream'
 
 import CaptainIcon from 'mdi-material-ui/Crown'
 
@@ -12,16 +11,16 @@ class PlayerTableContent extends Component {
   }
 
   componentDidMount() {
-    this.subscription = new Subscription(`/details/${this.props.user}`,
-    (info) => {
+    this.sub = new EventSource(`https://localhost:4200/details/${this.props.user}`)
+    this.sub.onmessage = (info) => {
       this.setState({
-        data: info
+        data: JSON.parse(info.data)[0]
       })
-    })
+    }
   }
 
   componentWillUnmount() {
-    this.subscription && this.subscription.end()
+    this.sub && this.sub.close()
   }
 
   render() {

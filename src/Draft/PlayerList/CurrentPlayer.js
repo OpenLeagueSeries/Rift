@@ -13,7 +13,7 @@ const CurrentPlayer = ({ player }) => {
     initials: 'AA',
     ign: 'WindowPane',
     notes:
-      "Washed up scuffed don't make a captain etc etc etc Washed up scuffed don't make a captain etc etc etc Washed up scuffed don't make a captain etc etc etc. Also as a note to me. I don't like this. This needs a lot of work. But it gets the basic idea done.",
+      "Washed up scuffed don't make a captain etc etc etc. Also as a note to me. I don't like this. This needs a lot of work. But it gets the basic idea done.",
     elo: 1500,
     shield: goldIV,
     role: 'jg / supp',
@@ -35,6 +35,7 @@ const CurrentPlayer = ({ player }) => {
       }
     ]
   }
+
   const championList = player.champions.map(champion => (
     <champ>
       <p>{champion.name}</p>
@@ -42,6 +43,7 @@ const CurrentPlayer = ({ player }) => {
       <p>kda: {champion.kda}</p>
     </champ>
   ))
+
   return (
     <div className="current-player-wrapper">
       <div className="currentBid">

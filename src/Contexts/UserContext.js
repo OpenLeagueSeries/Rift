@@ -1,5 +1,4 @@
 import React, { Component, createContext } from 'react'
-import { Subscription } from '../streamLib/stream'
 
 const { Consumer, Provider } = createContext()
 
@@ -15,11 +14,12 @@ export default class UserContext extends Component {
   }
 
   componentDidMount() {
-    this.subscription = new Subscription('/me', info => {
+    this.sub = new EventSource('https://localhost:4200/me', {withCredentials: true})
+    this.sub.onmessage = (data) => {
       this.setState({
-        me: info
+        me: data
       })
-    })
+    }
   }
 
   render() {

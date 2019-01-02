@@ -12,21 +12,30 @@ import theme from './assets/muiTheme'
 import JssProvider from 'react-jss/lib/JssProvider'
 import { create } from 'jss'
 import UserProvider from './Contexts/UserContext'
+import TeamProvider from './Contexts/MyTeamContext'
+
+import { DragDropContextProvider } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
+
 const jss = create(jssPreset())
 const generateClassName = createGenerateClassName()
 
 ReactDOM.render(
-  <UserProvider>
-    <BrowserRouter>
-      <JssProvider jss={jss} generateClassName={generateClassName}>
-        <MuiThemeProvider theme={theme}>
-          <CssBaseline>
-            <App />
-          </CssBaseline>
-        </MuiThemeProvider>
-      </JssProvider>
-    </BrowserRouter>
-  </UserProvider>,
+  <DragDropContextProvider backend={HTML5Backend}>
+    <UserProvider>
+      <TeamProvider>
+        <BrowserRouter>
+          <JssProvider jss={jss} generateClassName={generateClassName}>
+            <MuiThemeProvider theme={theme}>
+              <CssBaseline>
+                <App />
+              </CssBaseline>
+            </MuiThemeProvider>
+          </JssProvider>
+        </BrowserRouter>
+      </TeamProvider>
+    </UserProvider>
+  </DragDropContextProvider>,
   document.getElementById('root')
 )
 unregister()

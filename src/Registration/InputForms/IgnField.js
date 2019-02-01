@@ -9,8 +9,6 @@ import validator from 'validator'
 import BackIcon from '@material-ui/icons/ExpandLess'
 import NextIcon from '@material-ui/icons/ExpandMore'
 
-import '../MobileRegister.css'
-
 const IGNRegex = /^[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzªµºÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿĄąĆćĘęıŁłŃńŒœŚśŠšŸŹźŻżŽžƒˆˇˉμﬁﬂ ]+$/u
 
 export function ignValidator (event) {
@@ -48,9 +46,9 @@ export const IgnField = (props) => {
   return (
     <div>
       <form onSubmit={props.nextStep}>
-        <MediaQuery minDeviceWidth={1224}>
           <TextField
-            error={props.inputIgnError}
+            autoFocus={window.matchMedia("(max-width: 1224px)").matches}
+            error={props.inputError}
             className='ignForm'
             label='Summoner Name'
             placeholder='Imaqtpie'
@@ -59,24 +57,10 @@ export const IgnField = (props) => {
             onChange={props.handleChange}
             fullWidth
           />
-        </MediaQuery>
-        <MediaQuery maxDeviceWidth={1224}>
-          <TextField
-            autoFocus
-            error={props.inputIgnError}
-            className='ignForm'
-            label='Summoner Name'
-            placeholder='Imaqtpie'
-            helperText={props.helperText}
-            value={props.ign}
-            onChange={props.handleChange}
-            fullWidth
-          />
-        </MediaQuery>
       </form>
       <MediaQuery maxDeviceWidth={1224}>
         <div className='actionsContainer'>
-          <Button color='secondary' onClick={props.prevStep} disabled={props.inputIgnError}>
+          <Button color='secondary' onClick={props.prevStep} disabled={props.inputError}>
             <BackIcon />
             <span className='buttonLabel'>Back</span>
           </Button>

@@ -9,8 +9,6 @@ import validator from 'validator'
 import BackIcon from '@material-ui/icons/ExpandLess'
 import NextIcon from '@material-ui/icons/ExpandMore'
 
-import '../MobileRegister.css'
-
 export function emailValidator (event) {
   const defaultHelperText = [
     'Preferred Email',
@@ -40,9 +38,15 @@ export const EmailField = (props) => {
   return (
     <div>
       <form onSubmit={props.nextStep}>
-        <MediaQuery minDeviceWidth={1224}>
+          <MediaQuery maxDeviceWidth={1224}>
+            <div className='emailInfo'>
+              This email will be used to confirm your
+              registration!
+            </div>
+          </MediaQuery>
           <TextField
-            error={props.inputEmailError}
+            autoFocus={window.matchMedia("(max-width: 1224px)").matches}
+            error={props.inputError}
             className='emailForm'
             label='Email Address'
             placeholder='Imaqtpielol@gmail.com'
@@ -51,27 +55,10 @@ export const EmailField = (props) => {
             onChange={props.handleChange}
             fullWidth
           />
-        </MediaQuery>
-        <MediaQuery maxDeviceWidth={1224}>
-          <div className='emailInfo'>
-            This email will be used to confirm your
-            registration!
-          </div>
-          <TextField
-            autoFocus
-            className='emailForm'
-            label='Email Address'
-            placeholder='Imaqtpielol@gmail.com'
-            helperText={props.helperText}
-            value={props.email}
-            onChange={props.handleChange}
-            fullWidth
-          />
-        </MediaQuery>
       </form>
       <MediaQuery maxDeviceWidth={1224}>
         <div className='actionsContainer'>
-          <Button color='secondary' onClick={props.prevStep} disabled={props.inputEmailError}>
+          <Button color='secondary' onClick={props.prevStep} disabled={props.inputError}>
             <BackIcon />
             <span className='buttonLabel'>Back</span>
           </Button>

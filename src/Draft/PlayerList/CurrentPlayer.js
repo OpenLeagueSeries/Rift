@@ -1,7 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
-import Avatar from '@material-ui/core/Avatar'
-
 import goldIV from '../../assets/gold_4.png'
 
 import './current-player.css'
@@ -24,12 +21,12 @@ const CurrentPlayer = ({ player }) => {
         kda: '10'
       },
       {
-        name: 'Ivern',
+        name: 'Aatrox',
         wr: '100%',
         kda: '10'
       },
       {
-        name: 'Ivern',
+        name: 'Ahri',
         wr: '100%',
         kda: '10'
       }
@@ -37,11 +34,11 @@ const CurrentPlayer = ({ player }) => {
   }
 
   const championList = player.champions.map(champion => (
-    <champ>
+    <div key={champion.name}>
       <p>{champion.name}</p>
       <p>w/r: {champion.wr}</p>
       <p>kda: {champion.kda}</p>
-    </champ>
+    </div>
   ))
 
   return (

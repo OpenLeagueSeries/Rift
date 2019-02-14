@@ -8,11 +8,11 @@ const PlayerList = (props) => {
           <div className='player'>
             <h4>{player.ign}</h4>
             <div>{player.notes}</div>
-              <span class='elo'> <img src={player.eloShield}/> {player.elo} </span>
+              <span class='elo'> <img src={player.eloShield} alt=''/> {player.elo} </span>
               <span class='championsList'>
                 {player.champions.map((champ) =>
                   <div class="champion">
-                    <img src={champ.icon} />
+                    <img src={champ.icon} alt=''/>
                     <div>{champ.winrate}</div>
                     <div>{champ.kda}</div>
                   </div>

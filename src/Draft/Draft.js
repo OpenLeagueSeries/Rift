@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
 import { withUserContext } from '../Contexts/UserContext'
-import MediaQuery from 'react-responsive'
-import MyTeam from './MyTeam/MyTeam'
-import PlayerList from './PlayerList/PlayerList'
 import TeamList from './TeamList/TeamList'
-import CurrentBid from './PlayerList/CurrentBid'
 import CurrentPlayer from './PlayerList/CurrentPlayer'
 
 import { styled } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
 
-import { Hidden } from '@material-ui/core'
+
+const url = 'https://localhost:4200/draft';
 
 const GridContainer = styled(Grid)({
   height: '100vh',
@@ -33,6 +30,24 @@ const MidGrid = styled(Grid)({
   justifyContent: 'space-between',
   padding: '1em 1em 1em 2em'
 })
+
+const postData = (data) => {
+  fetch(url, {
+    method: 'POST',
+    mode: 'cors',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    redirect: 'follow',
+    referrer: 'no-referrer',
+    body: JSON.stringify(data)
+  }).then((response) => {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+  });
+}
 
 class Draft extends Component {
   constructor(props) {
@@ -58,15 +73,21 @@ class Draft extends Component {
   }
 
   componentDidMount() {
-    this.sub = new EventSource(`https://localhost:4200/draftt`);
+    this.sub = new EventSource(url);
     // state update
     this.sub.onmessage = (res) => {
       const data = JSON.parse(res.data)
-      this.setState({teams: data.teams, players: data.players, bid: data.bid})
+      console.log(data);
+      if (data.started) {
+        this.setState({teams: data.teams, players: data.players, bid: data.bid})
+      } else {
+        this.setState({teams: [], players: [], bid: {}})
+      }
+
     };
     // new draft created
     this.sub.addEventListener('new', (ev) => {
-
+      console.log(ev);
     });
     // a player has been won
     this.sub.addEventListener('playerWon', (ev) => {
@@ -104,7 +125,7 @@ class Draft extends Component {
         <AllTeamsContainer className="allTeams" item xs={2}>
           <h1>All Teams</h1>
           <TeamList teams={this.state.teams} currentPick={this.state.currentPick} />
-          <Grid item spacing={0}>
+          <Grid item>
             this could be a chatbox or the timer if the chat box goes in main window.
           </Grid>
         </AllTeamsContainer>
@@ -122,6 +143,12 @@ class Draft extends Component {
         <Grid className="yourTeam" item xs={3}>
           this is where it shows your team. your pointes, your player, etc
         </Grid>
+        <button onClick={(ev) => postData({
+          event: 'create',
+          players: [],
+          captains: [],
+          admins: []
+        })} > click it</button>
       </GridContainer>
     )
   }

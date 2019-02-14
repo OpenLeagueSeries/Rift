@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
+import { withTeam } from '../../Contexts/MyTeamContext'
+import styled from 'styled-components'
+import { Button, TextField } from '@material-ui/core'
+import PositionField from './PositionField'
+import { Subscription } from '../../streamLib/stream.js'
 
 import RosterPlayer from '../RosterPlayer'
 
-/* Captain will have ability to drag and drop
- / Chat window is a separate subscription, optional for delivery
-*/
+const Wrapper = styled.div``
 class MyTeam extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
-      chat:[]
+      chat: []
     }
   }
 
@@ -23,33 +25,31 @@ class MyTeam extends Component {
   }
 
   render() {
-    const team = this.props.team;
+    const currentBid = 70
     return (
-      <div>
-        <h3 class='teamName'>{team.name}</h3>
-        <span>{team.pointsLeft}</span>
-        <div class='teamRoster'>
-            <span class='role'>Top</span><RosterPlayer player={team.roster.find((p) => p.role === 'Top')} />
-            <span class='role'>Jungle</span><RosterPlayer player={team.roster.find((p) => p.role === 'Jungle')} />
-            <span class='role'>Mid</span><RosterPlayer player={team.roster.find((p) => p.role === 'Mid')} />
-            <span class='role'>Bot</span><RosterPlayer player={team.roster.find((p) => p.role === 'Bot')} />
-            <span class='role'>Support</span><RosterPlayer player={team.roster.find((p) => p.role === 'Support')} />
-            {team.unassigned.length > 0 ?
-              <div class='unassigned'>
-                <h4>Unassigned Players</h4>
-                  {team.unassigned.map((p)=> <RosterPlayer player={p} />)}
-              </div>
-            : ''}
+      <div className="team-wrapper">
+        <div className="header">
+          <h1 class="teamName">{this.props.name}</h1>
+          <h1>
+            Points: {this.props.pointsLeft} / {this.props.pointsOriginal}
+          </h1>
         </div>
-        <div class='chat'>
-          {this.state.chat.map((msg)=> {
-            return (<div>{msg.sender}{msg.message}</div>)
-          })}
-          <input />
+        <div className="teamRoster">
+          <h1>Roster</h1>
+          <PositionField n={5} />
+        </div>
+        <div className="controls">
+          <h1>Submit your Bid</h1>
+          <form>
+            <TextField type="number" value={currentBid + 1} />
+            <Button component="button" color="secondary">
+              Submit Bid
+            </Button>
+          </form>
         </div>
       </div>
     )
   }
 }
 
-export default MyTeam
+export default withTeam(MyTeam)

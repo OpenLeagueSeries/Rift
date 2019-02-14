@@ -1,5 +1,4 @@
 import React, { Component, createContext } from 'react'
-import { Subscription } from '../streamLib/stream'
 
 const { Consumer, Provider } = createContext()
 

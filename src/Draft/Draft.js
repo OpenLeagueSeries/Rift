@@ -3,6 +3,7 @@ import { withUserContext } from '../Contexts/UserContext'
 import TeamList from './TeamList/TeamList'
 import CurrentPlayer from './PlayerList/CurrentPlayer'
 import PositionField from './MyTeam/PositionField'
+import MyTeam from './MyTeam/MyTeam'
 
 
 import { styled } from '@material-ui/styles'

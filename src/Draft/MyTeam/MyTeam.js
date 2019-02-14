@@ -3,7 +3,6 @@ import { withTeam } from '../../Contexts/MyTeamContext'
 import styled from 'styled-components'
 import { Button, TextField } from '@material-ui/core'
 import PositionField from './PositionField'
-import { Subscription } from '../../streamLib/stream.js'
 
 import RosterPlayer from '../RosterPlayer'
 

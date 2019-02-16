@@ -3,7 +3,6 @@ import { withTeam } from '../../Contexts/MyTeamContext'
 import styled from 'styled-components'
 import { Button, TextField } from '@material-ui/core'
 import PositionField from './PositionField'
-import { Subscription } from '../../streamLib/stream.js'
 
 import RosterPlayer from '../RosterPlayer'
 
@@ -16,16 +15,13 @@ class MyTeam extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   this.subscription = new Subscription('/teamChat',
-  //   (newChat) => {
-  //     this.setState({chat: [...this.state.chat, newChat]})
-  //   })
-  // }
+  componentDidMount() {
+    this.sub = new EventSource('https://localhost:4200/teamChat');
+  }
 
-  // componentWillUnmount() {
-  //   this.subscription && this.subscription.end()
-  // }
+  componentWillUnmount() {
+    this.sub && this.sub.close()
+  }
 
   render() {
     const currentBid = 70

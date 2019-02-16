@@ -1,7 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
-import Avatar from '@material-ui/core/Avatar'
-
 import goldIV from '../../assets/gold_4.png'
 
 import './current-player.css'
@@ -13,7 +10,7 @@ const CurrentPlayer = ({ player }) => {
     initials: 'AA',
     ign: 'WindowPane',
     notes:
-      "Washed up scuffed don't make a captain etc etc etc Washed up scuffed don't make a captain etc etc etc Washed up scuffed don't make a captain etc etc etc. Also as a note to me. I don't like this. This needs a lot of work. But it gets the basic idea done.",
+      "Washed up scuffed don't make a captain etc etc etc. Also as a note to me. I don't like this. This needs a lot of work. But it gets the basic idea done.",
     elo: 1500,
     shield: goldIV,
     role: 'jg / supp',
@@ -24,24 +21,26 @@ const CurrentPlayer = ({ player }) => {
         kda: '10'
       },
       {
-        name: 'Ivern',
+        name: 'Aatrox',
         wr: '100%',
         kda: '10'
       },
       {
-        name: 'Ivern',
+        name: 'Ahri',
         wr: '100%',
         kda: '10'
       }
     ]
   }
+
   const championList = player.champions.map(champion => (
-    <champ>
+    <div key={champion.name}>
       <p>{champion.name}</p>
       <p>w/r: {champion.wr}</p>
       <p>kda: {champion.kda}</p>
-    </champ>
+    </div>
   ))
+
   return (
     <div className="current-player-wrapper">
       <div className="currentBid">

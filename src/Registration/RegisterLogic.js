@@ -1,5 +1,3 @@
-import { Request } from '../streamLib/stream'
-
 export default {
     state :{
       name: '',
@@ -48,9 +46,12 @@ export default {
       }))
       setTimeout(that.handleReset(), 2500)
     },
-
     sendRegister: that => () => {
-      that.req = new Request('/register', {name: that.state.name, ign: that.state.ign, email: that.state.email}, (result) => {
+      that.req = fetch('https://localhost:4200/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({name: that.state.name, ign: that.state.ign, email: that.state.email})
+      }).then((result) => {
         if (result.success) {
           that.setState(state => ({
             message: 'Check your email for a magic login link!', submitted: true, open: true
@@ -69,7 +70,6 @@ export default {
         }
       })
     },
-
     handleIncomplete: that => () => {
       if (that.state.NameHelperText !== 'Looks good!' && that.state.inputNameError === false) {
         that.setState(state => ({

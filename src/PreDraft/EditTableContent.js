@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import { Subscription } from '../streamLib/stream'
 import { PlayerInitials } from './Data/PlayerInitials'
 import EditPlayerRole from './Data/EditPlayerRole'
 
@@ -12,27 +11,25 @@ class EditTableContent extends Component {
   constructor (props) {
     super(props)
     this.state = {data: []}
-    this.subscription = {}
+    this.sub = {}
   }
 
   componentDidMount() {
-    this.subscription = new Subscription(`/details/${this.props.user}`,
-    (info) => {
+    this.sub = new EventSource(`https://localhost:4200/details/${this.props.user}`)
+    this.sub.onmessage = (info) => {
       this.setState({
-        data: info
+        data: JSON.parse(info.data)
       })
-      this.subscription.end()
-    })
+      this.sub.close()
+    }
   }
 
   componentWillUnmount() {
-    this.subscription && this.subscription.end()
+    this.sub && this.sub.close()
   }
 
   handleEdit = (target) => (ev) => {
     const update = {}
-    console.log(ev)
-    console.log(target)
     update[target] = ev.target.value
     this.setState({
       data: { ...this.state.data, ...update}}, () => {

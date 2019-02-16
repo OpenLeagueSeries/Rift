@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import { Subscription } from '../streamLib/stream'
 import { withUserContext } from '../Contexts/UserContext'
 import EditTableContent from './EditTableContent'
 import PlayerTableContent from './PlayerTableContent'
@@ -14,15 +13,16 @@ class RegisteredPlayers extends Component {
   }
 
   componentDidMount() {
-    this.subscription = new Subscription('/users', info => {
+    this.sub = new EventSource('https://localhost:4200/users')
+    this.sub.onmessage = info => {
       this.setState({
-        data: info
+        data: JSON.parse(info.data)
       })
-    })
+    }
   }
 
   componentWillUnmount() {
-    this.subscription && this.subscription.end()
+    this.sub && this.sub.close()
   }
 
   render() {

@@ -6,8 +6,6 @@ import List from '@material-ui/core/List'
 import ListSubheader from '@material-ui/core/ListSubheader'
 import AddIcon from '@material-ui/icons/Add'
 
-import RosterPlayer from '../RosterPlayer'
-
 import './team.css'
 
 const Wrapper = styled.div`
@@ -40,7 +38,7 @@ export default class Team extends Component {
   render() {
     //replace with getting players filtered by team name
     const playerElements = this.state.currentPlayers.map((player, i) => (
-      <ListItem>
+      <ListItem key={player.name}>
         <ListItemText primary={`Player ${i + 1}: ${player.name} - Points: ${player.points}`} />
       </ListItem>
     ))

@@ -1,19 +1,16 @@
 import React, { Component } from 'react'
-import { Subscription } from '../streamLib/stream.js'
 import { withUserContext } from '../Contexts/UserContext'
-import MediaQuery from 'react-responsive'
-import MyTeam from './MyTeam/MyTeam'
-import PlayerList from './PlayerList/PlayerList'
 import TeamList from './TeamList/TeamList'
-import CurrentBid from './PlayerList/CurrentBid'
 import CurrentPlayer from './PlayerList/CurrentPlayer'
 import PositionField from './MyTeam/PositionField'
+import MyTeam from './MyTeam/MyTeam'
 
 
 import { styled } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
 
-import { Hidden } from '@material-ui/core'
+
+const url = 'https://localhost:4200/draft';
 
 const GridContainer = styled(Grid)({
   height: '100vh',
@@ -37,6 +34,24 @@ const MidGrid = styled(Grid)({
   padding: '1em 1em 1em 2em'
 })
 
+const postData = (data) => {
+  fetch(url, {
+    method: 'POST',
+    mode: 'cors',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    redirect: 'follow',
+    referrer: 'no-referrer',
+    body: JSON.stringify(data)
+  }).then((response) => {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+  });
+}
+
 class Draft extends Component {
   constructor(props) {
     super(props)
@@ -56,26 +71,56 @@ class Draft extends Component {
         'team12'
       ],
       players: [],
-      myTeam: null,
-      currentPick: 0
+      bid: {}
     }
   }
 
   componentDidMount() {
-    // this.subscription = new Subscription('/draft', data => {
-    //   this.setState({
-    //     myTeam: data.teams.find(team => {
-    //       return team.roster.find(p => p._key === this.props.user._key)
-    //     }),
-    //     teams: data.teams,
-    //     players: data.players
-    //   })
-    // })
-  }
+    this.sub = new EventSource(url);
+    // state update
+    this.sub.onmessage = (res) => {
+      const data = JSON.parse(res.data)
+      console.log(data);
+      if (data.started) {
+        this.setState({teams: data.teams, players: data.players, bid: data.bid})
+      } else {
+        this.setState({teams: [], players: [], bid: {}})
+      }
 
-  // componentWillUnmount() {
-  //   this.subscription && this.subscription.end()
-  // }
+    };
+    // new draft created
+    this.sub.addEventListener('new', (ev) => {
+      console.log(ev);
+    });
+    // a player has been won
+    this.sub.addEventListener('playerWon', (ev) => {
+
+    });
+    // a new player is up for bid
+    this.sub.addEventListener('nextBid', (ev) => {
+
+    });
+    // waiting for a confirmation before proceeding
+    this.sub.addEventListener('waitingConfirmation', (ev) => {
+
+    });
+    // a new bid has come in
+    this.sub.addEventListener('bid', (ev) => {
+
+    });
+    // end of draft
+    this.sub.addEventListener('end' , (ev) => {
+
+    });
+    // pause the draft
+    this.sub.addEventListener('pause', (ev) => {
+
+    });
+    // resume the draft
+    this.sub.addEventListener('resume', (ev) => {
+
+    });
+  }
 
   render() {
     return (
@@ -84,7 +129,7 @@ class Draft extends Component {
 
           <h1>All Teams</h1>
           <TeamList teams={this.state.teams} currentPick={this.state.currentPick} />
-          <Grid item spacing={0}>
+          <Grid item>
             this could be a chatbox or the timer if the chat box goes in main window.
           </Grid>
         </AllTeamsContainer>
@@ -97,15 +142,18 @@ class Draft extends Component {
               this is where all the players and the order in which they will be drafted will be displayed with minimal
               stat display like mmr and role.
             </Grid>
-            <Grid className="chatBox" item xs={12}>
-              this is where the chat could go if decided to go here
-            </Grid>
           </MidGrid>
         </Grid>
         <Grid className="yourTeam" item xs={12} lg={3} style={{ height: '100%' }}>
           <MyTeam />
           this is where it shows your team. your pointes, your player, etc
         </Grid>
+        <button onClick={(ev) => postData({
+          event: 'create',
+          players: [],
+          captains: [],
+          admins: []
+        })} > click it</button>
       </GridContainer>
     )
   }

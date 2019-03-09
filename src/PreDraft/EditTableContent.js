@@ -18,7 +18,7 @@ class EditTableContent extends Component {
     this.sub = new EventSource(`https://localhost:4200/details/${this.props.user}`)
     this.sub.onmessage = (info) => {
       this.setState({
-        data: JSON.parse(info.data)
+        data: JSON.parse(info.data)[0]
       })
       this.sub.close()
     }
@@ -33,7 +33,12 @@ class EditTableContent extends Component {
     update[target] = ev.target.value
     this.setState({
       data: { ...this.state.data, ...update}}, () => {
-      this.req = this.subscription.request({...this.state.data})
+      this.req = fetch(`https://localhost:4200/edit/${this.props.user}`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({ ...this.state.data, ...update})
+      })
     })
   }
 

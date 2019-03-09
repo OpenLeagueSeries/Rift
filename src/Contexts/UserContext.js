@@ -15,9 +15,9 @@ export default class UserContext extends Component {
 
   componentDidMount() {
     this.sub = new EventSource('https://localhost:4200/me', {withCredentials: true})
-    this.sub.onmessage = (data) => {
+    this.sub.onmessage = (msg) => {
       this.setState({
-        me: data
+        me: JSON.parse(msg.data)[0]
       })
     }
   }

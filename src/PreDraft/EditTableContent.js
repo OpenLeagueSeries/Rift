@@ -18,7 +18,7 @@ class EditTableContent extends Component {
     this.sub = new EventSource(`https://localhost:4200/details/${this.props.user}`)
     this.sub.onmessage = (info) => {
       this.setState({
-        data: JSON.parse(info.data)
+        data: JSON.parse(info.data)[0]
       })
       this.sub.close()
     }

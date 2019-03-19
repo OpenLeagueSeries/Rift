@@ -6,6 +6,13 @@
   color: #fff;
   font-family: "Trebuchet MS";
   justify-content: center;
+  button {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 30px;
+    z-index: 10;
+  }
   .tableContainer {
     border-collapse: collapse;
     margin-right: 5vw;

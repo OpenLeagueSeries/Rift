@@ -25,6 +25,10 @@ class RegisteredPlayers extends Component {
     this.sub && this.sub.close()
   }
 
+  start() {
+    
+  }
+
   render() {
     const { me } = this.props
     const playersList = this.state.data.map(user => {
@@ -36,6 +40,7 @@ class RegisteredPlayers extends Component {
     })
     return (
       <div className="playerListDisplay">
+        {me.role === 'admin' ? <button onClick={this.start}> Start the draft with these players </button>: ''}
         <table className="tableContainer">
           <thead>
             <tr>

@@ -50,7 +50,8 @@
         background-color: #070912;
         z-index: 5;
         position: relative;
-        cursor: pointer; }
+        cursor: pointer;
+        transition: all 0.3s ease; }
   .team-wrapper .controls {
     width: 100%;
     text-align: center; }

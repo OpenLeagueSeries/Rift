@@ -26,11 +26,13 @@ class RegisteredPlayers extends Component {
   }
 
   start() {
-    
+
   }
 
   render() {
     const { me } = this.props
+    console.log(me)
+    console.log(this.props)
     const playersList = this.state.data.map(user => {
       if (user === me._key || me.role === 'admin') {
         return <EditTableContent key={user} user={user} me={me} />

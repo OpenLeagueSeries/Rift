@@ -42,6 +42,14 @@ class EditTableContent extends Component {
     })
   }
 
+  handleRemove = () => {
+    this.req = fetch(`https://localhost:4200/remove/${this.props.user}`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json'}
+    })
+  }
+
   render() {
     console.log(this.state.data.selectedRoles)
     return (
@@ -56,6 +64,7 @@ class EditTableContent extends Component {
           ? <td><Checkbox checked={this.state.data.captainBool || false} onChange={this.handleEdit('captainBool')}> </Checkbox></td>
           : <React.Fragment />
         }
+        <td onClick={this.handleRemove}>X</td>
       </tr>
     )
   }

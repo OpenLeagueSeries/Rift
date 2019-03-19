@@ -40,7 +40,7 @@ class RegisteredPlayers extends Component {
     })
     return (
       <div className="playerListDisplay">
-        {me.role === 'admin' ? <button onClick={this.start}> Start the draft with these players </button>: ''}
+        {me.role === 'admin' ? <button onClick={this.start} disabled={playersList%5 != 0}> Start the draft with these players </button>: ''}
         <table className="tableContainer">
           <thead>
             <tr>

@@ -5,12 +5,12 @@ import EditPlayerRole from './Data/EditPlayerRole'
 
 import TextField from '@material-ui/core/TextField'
 
-import CaptainIcon from 'mdi-material-ui/Crown'
+import Checkbox from '@material-ui/core/Checkbox'
 
 class EditTableContent extends Component {
   constructor (props) {
     super(props)
-    this.state = {data: []}
+    this.state = {data: {name: '', ign: '', selectedRoles: [], notes: '', captainNote: '', captainBool: false}}
     this.sub = {}
   }
 
@@ -30,7 +30,7 @@ class EditTableContent extends Component {
 
   handleEdit = (target) => (ev) => {
     const update = {}
-    update[target] = ev.target.value
+    update[target] = ev.target.value || ev.target.checked
     this.setState({
       data: { ...this.state.data, ...update}}, () => {
       this.req = fetch(`https://localhost:4200/edit/${this.props.user}`, {
@@ -42,6 +42,14 @@ class EditTableContent extends Component {
     })
   }
 
+  handleRemove = () => {
+    this.req = fetch(`https://localhost:4200/remove/${this.props.user}`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json'}
+    })
+  }
+
   render() {
     console.log(this.state.data.selectedRoles)
     return (
@@ -50,12 +58,13 @@ class EditTableContent extends Component {
         <td>{this.state.data.name}</td>
         <td>{this.state.data.ign}</td>
         <td><EditPlayerRole handleRole={this.handleEdit} selectedRoles={this.state.data.selectedRoles || []}/></td>
-        <td><TextField value={this.state.data.notes} onChange={this.handleEdit('notes')}></TextField></td>
-        <td><TextField value={this.state.data.captainBool} onChange={this.handleEdit('captainBool')}></TextField></td>
-        {this.props.me.role === 'Admin'
-          ? <td><CaptainIcon /></td>
+        <td><TextField value={this.state.data.notes || ''} onChange={this.handleEdit('notes')}></TextField></td>
+        <td><TextField value={this.state.data.captainNote || ''} onChange={this.handleEdit('captainNote')}></TextField></td>
+        {this.props.me.role === 'admin'
+          ? <td><Checkbox checked={this.state.data.captainBool || false} onChange={this.handleEdit('captainBool')}> </Checkbox></td>
           : <React.Fragment />
         }
+        <td onClick={this.handleRemove}>X</td>
       </tr>
     )
   }

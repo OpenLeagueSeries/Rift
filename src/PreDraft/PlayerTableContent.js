@@ -7,7 +7,7 @@ import CaptainIcon from 'mdi-material-ui/Crown'
 class PlayerTableContent extends Component {
   constructor (props) {
     super(props)
-    this.state = {data: []}
+    this.state = {data: {name: '', ign: '', selectedRoles: [], notes: '', captainBool: false}}
   }
 
   componentDidMount() {
@@ -29,13 +29,14 @@ class PlayerTableContent extends Component {
         <td><PlayerInitials name={this.state.data.name}/></td>
         <td>{this.state.data.name}</td>
         <td>{this.state.data.ign}</td>
-        <td>{this.state.data.roles}</td>
+        <td>{(this.state.data.selectedRoles || []).join(', ')}</td>
         <td>{this.state.data.notes}</td>
-        <td>{this.state.data.captainBool}</td>
-        {this.props.me.role === 'Admin'
-          ? <td><CaptainIcon /></td>
+        <td>
+        {this.state.data.captainBool
+          ? <CaptainIcon />
           : <React.Fragment />
         }
+        </td>
       </tr>
     )
   }

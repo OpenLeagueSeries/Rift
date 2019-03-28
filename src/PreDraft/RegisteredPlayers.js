@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 import { withUserContext } from '../Contexts/UserContext'
 import EditTableContent from './EditTableContent'
@@ -49,7 +49,8 @@ class RegisteredPlayers extends Component {
               <th>Summoner Name</th>
               <th>Roles</th>
               <th>Notes</th>
-              <th>Captain</th>
+              <th>Captain {me.role === 'admin' ? 'Note' : ''}</th>
+              {me.role === 'admin' ? <Fragment><th>Captain?</th> <th>Delete</th></Fragment> : ''}
             </tr>
           </thead>
           <tbody>{playersList}</tbody>
